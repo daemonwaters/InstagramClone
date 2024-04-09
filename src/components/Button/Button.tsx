@@ -4,7 +4,7 @@ import styles from "./Button.module.scss";
 type ButtonProps = {
   variant: Required<"primary" | "secondary" | "ghost">;
   title: Required<string>;
-  extraStyles: Object;
+  extraStyles?: Object;
   onClick? : ()=> void
 };
 

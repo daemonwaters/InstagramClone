@@ -10,7 +10,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test-storybook" : "test-storybook --watchAll"
+    "test" : "test-storybook --watchAll"
   },
   "dependencies": {
     "axios": "^1.6.8",

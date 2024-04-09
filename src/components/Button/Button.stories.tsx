@@ -1,6 +1,6 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import Button from "./Button";
-import { within, expect } from "@storybook/test";
+import { within, expect , fn } from "@storybook/test";
 
 const meta: Meta<typeof Button> = {
   title: "Atoms/Button",
@@ -31,9 +31,9 @@ const meta: Meta<typeof Button> = {
       description: "A function that gets passed to the button event listener",
     },
   },
-  play: ({ canvasElement }) => {
+  play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    expect(canvas.getByRole("button")).toBeInTheDocument();
+    await expect(canvas.getByRole("button")).toBeInTheDocument();
   },
 };
 
@@ -44,6 +44,7 @@ export const Primary: Story = {
   args: {
     variant: "primary",
     title: "Button",
+    onClick : fn()
   },
 };
 

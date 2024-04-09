@@ -1,0 +1,125 @@
+@use "../../StyleGuides" as guide;
+
+.signIn_wrapper {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signIn_content {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.phones {
+  width: 337px;
+  height: 557px;
+  margin-top: 2rem;
+}
+
+.form_wrapper {
+  text-align: center;
+  width: 350px;
+  height: 468px;
+  border: solid 1px guide.$clr-border;
+}
+
+.insta_logo {
+  margin: 2rem 0;
+  width: 182px;
+  height: 70px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  button {
+    width: 238px;
+  }
+}
+
+.or {
+  margin: 1rem 0;
+  display: inline-block;
+  position: relative;
+  color: guide.$clr-or-text;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 140%;
+    width: 106px;
+    height: 1px;
+    background: guide.$clr-light-gray;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 140%;
+    width: 106px;
+    height: 1px;
+    background: guide.$clr-light-gray;
+  }
+}
+
+.login_facebook {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.2rem;
+  color: #375085;
+  font-weight: guide.$fw-extra-bold;
+}
+
+.forgotten_password {
+  color: #375085;
+  margin-top: 1rem;
+}
+
+.report {
+  font-size: 10.5px;
+  width: 65%;
+  margin: 3rem auto;
+  color: #737373;
+  span {
+    color: #375085;
+  }
+}
+
+.signUp_box {
+  width: 350px;
+  height: 63px;
+  border: solid 1px guide.$clr-border;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  margin-top: 0.3rem;
+  p {
+    font-size: 12px;
+  }
+  button {
+    padding: 0;
+  }
+}
+
+.get_app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.8rem;
+  gap: 0.8rem;
+  span {
+    font-size: 12.5px;
+  }
+  div img {
+    margin: 0 0.2rem;
+    cursor: pointer;
+  }
+}
