@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from "@storybook/react";
-import { within, expect } from "@storybook/test";
+import { within, expect, userEvent } from "@storybook/test";
 import Input from "./Input";
 
 const meta: Meta<typeof Input> = {
@@ -43,12 +43,31 @@ export const Text: Story = {
     type: "text",
     placeholder: "Phone number,username or email address",
   },
+  play: async ({ canvasElement, step, args }) => {
+    const canvas = within(canvasElement);
+    const username = canvas.getByPlaceholderText(args.placeholder);
+
+    expect(username).toBeInTheDocument();
+
+    step("The user types in his/her username", async () => {
+      userEvent.type(username, "Some Random Username");
+    });
+  },
 };
 
 export const Password: Story = {
   args: {
     type: "password",
     placeholder: "Password",
+  },
+  play: ({ canvasElement, args, step }) => {
+    const canvas = within(canvasElement);
+    const password = canvas.getByPlaceholderText(args.placeholder);
+    expect(password).toBeInTheDocument();
+
+    step("The user types in his/her password", async () => {
+      userEvent.type(password, "AAAAAAA");
+    });
   },
 };
 
