@@ -1,0 +1,26 @@
+@use '../../StyleGuides' as guide;
+
+.button {
+    outline: none;
+    border: none;
+    border-radius: 7px;
+    display: grid;
+    place-items: center;
+    padding: 0.5rem 1.6rem;
+    font-size: guide.$fs-heading2;
+    color: #fff;
+    font-weight: guide.$fw-bold;
+}
+
+#primary {
+    background: guide.$clr-accent;
+}
+
+#secondary {
+    background: guide.$bg-secondary-btn;
+}
+
+#ghost {
+    background: transparent;
+    border: solid 1px guide.$clr-accent;
+}

@@ -1,0 +1,14 @@
+@use "../../StyleGuides" as guide;
+
+input {
+  width: 238px;
+  height: 38px;
+  outline: none;
+  background: guide.$bg-input;
+  border: solid 1px guide.$clr-input-border;
+  padding-left: 0.4rem;
+  &::placeholder {
+    font-size: guide.$fs-heading3;
+    color: guide.$clr-input-placeholder;
+  }
+}
