@@ -1,6 +1,7 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import ListItem from "./ListItem";
 import MockIcon from "../../assets/svgs/home.svg";
+import AvatarMock from "../../assets/svgs/avatarmock.svg";
 
 const meta: Meta<typeof ListItem> = {
   title: "Atoms/ListItem",
@@ -23,6 +24,13 @@ const meta: Meta<typeof ListItem> = {
     children: {
       description:
         "Jsx elements or React nodes passed down to the component via props",
+    },
+    extraStyles: {
+      control: "object",
+      description: "Any extra styling that list item should have",
+    },
+    hasAvatar: {
+      description: "Specifies if the list item has an Avatar instead of icon",
     },
   },
   parameters: {
@@ -55,9 +63,40 @@ export const DefaultHoverState: Story = {
 
 export const IconOnlyHoverState: Story = {
   args: {
-    ...Default.args,
-    variant: "icon-only",
+    ...IconOnly.args,
     extraStyles: { width: "fit-content", background: "#1A1A1A" },
+  },
+};
+
+export const DefaultWithAvatar: Story = {
+  args: {
+    variant: "default",
+    icon: AvatarMock,
+    title: "Profile",
+    hasAvatar: true,
+  },
+};
+
+export const DefaultWithAvatarHoverState: Story = {
+  args: {
+    ...DefaultWithAvatar.args,
+    extraStyles: { background: "#1A1A1A" },
+  },
+};
+
+export const IconOnlyWithAvatar: Story = {
+  args: {
+    ...IconOnly.args,
+    icon: AvatarMock,
+    title: "Profile",
+    hasAvatar: true,
+  },
+};
+
+export const IconOnlyWithAvatarHoverState: Story = {
+  args: {
+    ...IconOnlyWithAvatar.args,
+    extraStyles: { background: "#1A1A1A", width: "fit-content" },
   },
 };
 

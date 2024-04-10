@@ -22,8 +22,8 @@ function Avatar({ src, variant }: AvatarProps) {
   };
 
   return (
-    <div style={style} className={styles.avatar}>
-      <img src={src} alt="user avatar" />
+    <div className={styles.avatar}>
+      <img src={src} style={style} alt="user avatar" />
     </div>
   );
 }
