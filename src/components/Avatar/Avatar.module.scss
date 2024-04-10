@@ -1,0 +1,15 @@
+.avatar {
+    border-radius: 50%;
+    img {
+        width: 100%;
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        object-position: top;
+    }
+}
+
+#story{
+    // border: solid 1px #333;
+    // outline: red 1px solid ;
+    outline: solid 1px linear-gradiant(right ,red,blue);
+}
