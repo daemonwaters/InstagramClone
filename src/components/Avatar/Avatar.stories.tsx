@@ -4,7 +4,11 @@ import { Variants } from "./Avatar";
 import AvatarMock from "../../assets/svgs/avatarmock.svg";
 
 const withFlex: Decorator = (story) => {
-  return <div style={{ display: "flex" , alignItems:'center' , gap:'1rem' }}> {story()} </div>;
+  return (
+    <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+      {story()}
+    </div>
+  );
 };
 
 const meta: Meta<typeof Avatar> = {

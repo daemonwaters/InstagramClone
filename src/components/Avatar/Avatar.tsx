@@ -7,7 +7,7 @@ export enum Variants {
   userPreview = "42",
   inboxRow = "56",
   inboxHeader = "44",
-  msg = "28",
+  msg = "28"
 }
 
 type AvatarProps = {

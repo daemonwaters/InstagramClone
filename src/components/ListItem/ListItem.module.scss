@@ -1,0 +1,20 @@
+@use "../../StyleGuides" as guide;
+.listItem {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 220px;
+  height: 48px;
+  font-size: guide.$fs-heading2;
+  font-weight: guide.$fw-extra-bold;
+  background: guide.$clr-primary;
+  color: #fff;
+  padding: 0 1rem;
+  border-radius: 7px;
+  cursor: pointer;
+  position: relative;
+}
+
+.listItem:hover {
+  background: guide.$bg-navigation-hover;
+}
