@@ -1,15 +1,4 @@
-import React from "react";
 import styles from "./Avatar.module.scss";
-
-//  export enum Variants {
-//     navigation = "navigation",
-//     profile = "profile",
-//     story = "story",
-//     userPreview = "user-preview",
-//     inboxRow = "inbox-row",
-//     inboxHeader = "inbox-header",
-//     msg = "msg"
-// }
 
 export enum Variants {
   navigation = "24",
@@ -33,7 +22,7 @@ function Avatar({ src, variant }: AvatarProps) {
   };
 
   return (
-    <div style={style} id={styles["story"]} className={styles.avatar}>
+    <div style={style} className={styles.avatar}>
       <img src={src} alt="user avatar" />
     </div>
   );
