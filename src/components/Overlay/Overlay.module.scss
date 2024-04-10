@@ -1,0 +1,39 @@
+@use "../../StyleGuides" as guide;
+
+.overlay {
+  width: 260px;
+  height: 446px;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.4rem 0;
+  gap: 0.3rem;
+  background: guide.$bg-more-options-nav;
+  overflow: hidden;
+  li {
+    width: 250px;
+    height: 50px;
+    border-radius: 9px;
+    background: transparent;
+    font-size: guide.$fs-heading2;
+    font-weight: guide.$fw-bold;
+
+    &:nth-child(6) {
+      position: relative;
+      &::before {
+        position: absolute;
+        content: "";
+        left: -2%;
+        bottom: -8%;
+        width: 104%;
+        height: 3px;
+        background: #737373;
+      }
+    }
+
+    &:hover {
+      background: guide.$bg-more-options-nav-hover;
+    }
+  }
+}

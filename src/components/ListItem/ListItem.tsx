@@ -21,7 +21,11 @@ function ListItem({
 }: ListItemProps) {
   return (
     <li style={extraStyles} className={styles.listItem}>
-      {variant !== "title-only" && !hasAvatar  ? <img src={icon} alt={title} /> : <></>}
+      {variant !== "title-only" && !hasAvatar ? (
+        <img src={icon} alt={title} />
+      ) : (
+        <></>
+      )}
       {hasAvatar ? <Avatar src={icon} variant={Variants.msg} /> : <></>}
       {variant !== "icon-only" ? <span> {title}</span> : <></>}
       {children}
