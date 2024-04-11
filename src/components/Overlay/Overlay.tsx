@@ -1,6 +1,5 @@
-import React from "react";
-import styles from "./Overlay.module.scss";
-import { overlayData } from "./Overlay";
+import styles from './Overlay.module.scss';
+import { overlayData } from "./OverlayData";
 import ListItem from "../ListItem/ListItem";
 
 function Overlay() {

@@ -1,4 +1,3 @@
-import ListItem from "../ListItem/ListItem";
 import Settings from "../../assets/svgs/settings.svg";
 import Activity from "../../assets/svgs/activity.svg";
 import Bookmark from "../../assets/svgs/bookmark.svg";
@@ -6,7 +5,7 @@ import Moon from "../../assets/svgs/problem-report.svg";
 import ProblemReport from "../../assets/svgs/settings.svg";
 import Threads from "../../assets/svgs/threads.svg";
 
-const overlayData = [
+export const overlayData = [
   {
     variant: "default" as const,
     icon: Settings,
@@ -56,5 +55,3 @@ const overlayData = [
     id: 8,
   },
 ];
-
-export { overlayData };
