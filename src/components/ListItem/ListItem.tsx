@@ -2,8 +2,10 @@ import React from "react";
 import styles from "./ListItem.module.scss";
 import Avatar from "../Avatar/Avatar";
 import { Variants } from "../Avatar/Avatar";
+
+
 type ListItemProps = {
-  variant: "default" | "icon-only" | "title-only";
+  variant: "default" | "icon-only" | "title-only"
   icon: string;
   title: string;
   children?: JSX.Element | React.ReactNode;
