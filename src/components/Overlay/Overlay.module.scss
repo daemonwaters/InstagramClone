@@ -11,6 +11,8 @@
   gap: 0.3rem;
   background: guide.$bg-more-options-nav;
   overflow: hidden;
+  position: absolute;
+  inset: auto auto 100% 0;
   li {
     width: 250px;
     height: 50px;

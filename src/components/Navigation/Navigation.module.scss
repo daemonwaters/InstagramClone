@@ -1,0 +1,23 @@
+@use "../../StyleGuides" as guide;
+
+.aside {
+  background: guide.$clr-primary;
+  height: 692px;
+  width: fit-content;
+  padding: 0.7rem 0.4rem;
+}
+
+.logo {
+  margin: 0.7rem 0 0.7rem 0.9rem;
+  cursor: pointer;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+
+  > li:last-child {
+    margin-top: 5rem;
+  }
+}

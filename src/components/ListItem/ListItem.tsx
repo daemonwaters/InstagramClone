@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./ListItem.module.scss";
 import Avatar from "../Avatar/Avatar";
 import { Variants } from "../Avatar/Avatar";
 
-
 type ListItemProps = {
-  variant: "default" | "icon-only" | "title-only"
+  variant: "default" | "icon-only" | "title-only";
   icon: string;
   title: string;
   children?: JSX.Element | React.ReactNode;
@@ -21,8 +20,12 @@ function ListItem({
   extraStyles,
   hasAvatar,
 }: ListItemProps) {
+  const [showOverlay, setShowOverlay] = useState<boolean>(false);
+  function handleClick() {
+    setShowOverlay(!showOverlay);
+  }
   return (
-    <li style={extraStyles} className={styles.listItem}>
+    <li onClick={handleClick} style={extraStyles} className={styles.listItem}>
       {variant !== "title-only" && !hasAvatar ? (
         <img src={icon} alt={title} />
       ) : (
@@ -30,7 +33,7 @@ function ListItem({
       )}
       {hasAvatar ? <Avatar src={icon} variant={Variants.msg} /> : <></>}
       {variant !== "icon-only" ? <span> {title}</span> : <></>}
-      {children}
+      {showOverlay ? children : <></>}
     </li>
   );
 }
