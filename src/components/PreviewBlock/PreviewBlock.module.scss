@@ -1,0 +1,22 @@
+.preview {
+  width: 319px;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  button {
+    margin-left: auto;
+  }
+}
+.user_meta {
+  span {
+    display: block;
+  }
+  .username {
+    color: #fff;
+    font-weight: 700;
+  }
+  .name {
+    color: #737373;
+  }
+}
