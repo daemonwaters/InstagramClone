@@ -1,0 +1,12 @@
+@use '../../StyleGuides' as guide;
+.home {
+    background: guide.$clr-primary;
+    display: flex;
+}
+
+.main_section {
+    width: 640px;
+    margin-left: 7%;
+    
+}
+
