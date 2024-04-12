@@ -1,0 +1,15 @@
+@use "../../../../StyleGuides" as guide;
+
+.actions {
+  width: 466px;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  img {
+    cursor: pointer;
+  }
+  img:last-child {
+    margin-left: auto;
+  }
+}

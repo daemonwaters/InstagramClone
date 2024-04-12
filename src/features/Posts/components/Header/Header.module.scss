@@ -1,0 +1,25 @@
+@use "../../../../StyleGuides" as guide;
+
+.header {
+  width: 466px;
+  height: 56px;
+  padding: 0.4rem 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  img {
+    margin-left: auto;
+    cursor: pointer;
+  }
+}
+
+.username {
+  color: #fff;
+  font-size: guide.$fs-heading2;
+  font-family: guide.$fw-bold;
+}
+
+.date {
+  color: #737373;
+}
