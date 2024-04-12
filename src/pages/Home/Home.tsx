@@ -5,6 +5,8 @@ import Story from "../../features/Story/components/Story/Story";
 import Post from "../../features/Posts/components/Post/Post";
 import AvatarMock from "../../assets/svgs/avatarmock.svg";
 import MockPostImg from "../../assets/imgs/post-placeholder.avif";
+import PreviewBlock from "../../components/PreviewBlock/PreviewBlock";
+import Button from "../../components/Button/Button";
 
 function Home() {
   return (
@@ -26,7 +28,32 @@ function Home() {
         />
       </main>
       <div className={styles.suggestion_section}>
-        
+        <PreviewBlock
+          variant="profile"
+          avatar_url={AvatarMock}
+          username="username"
+          name="somename"
+        />
+        <div className={styles.suggestions}>
+          <header>
+            <span>Suggested for you</span>
+            <Button
+              variant="ghost"
+              title="See All"
+              extraStyles={{ color: "#fff" }}
+            />
+          </header>
+          <div className={styles.wrapper}>
+            {Array.from(Array(5)).map(() => (
+              <PreviewBlock
+                variant="suggestion"
+                avatar_url={AvatarMock}
+                username="username"
+                name="somename"
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
