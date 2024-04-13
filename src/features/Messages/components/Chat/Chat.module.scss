@@ -1,0 +1,76 @@
+@use "../../../../StyleGuides" as guide;
+
+.chat {
+  background: #000;
+  width: 970px;
+  height: 692px;
+  display: flex;
+  flex-direction: column;
+  header {
+    display: flex;
+    height: 75px;
+    align-items: center;
+    padding: 0 0.6rem;
+    gap: 1.2rem;
+    border-bottom: solid 1px #262626;
+    .call {
+      margin-left: auto;
+    }
+
+    img:not(:first-child) {
+      cursor: pointer;
+    }
+  }
+}
+
+.chat_preview {
+  width: 100%;
+  position: relative;
+  flex: 1;
+}
+
+.preview_wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  span {
+    font-size: guide.$fs-heading1;
+    color: #fff;
+  }
+  p {
+    color: #a8a8a8;
+    font-size: 14px;
+  }
+}
+
+.messages_wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.input_wrapper {
+  width: 909px;
+  height: 44px;
+  border-radius: 100px;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0 1rem;
+  position: absolute;
+  top: 93%;
+  left: 3%;
+  transform: translate(0, -16px);
+  border: solid 1px #262626;
+  input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+  }
+}

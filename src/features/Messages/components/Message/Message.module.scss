@@ -1,0 +1,23 @@
+@use '../../../../StyleGuides' as guide;
+
+.message{
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.text{
+    width: fit-content;
+    height: fit-content;
+    color: #fff;
+    padding: 0.6rem;
+    border-radius: 100px;
+}
+
+#my_message{
+    background: guide.$clr-accent;
+}
+
+#contact_message{
+    background: #262626;
+}
