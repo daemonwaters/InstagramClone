@@ -1,0 +1,30 @@
+@use "../../../../StyleGuides" as guide;
+
+.inbox_row {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 397px;
+  height: 72px;
+  padding: 0.4rem;
+  background: transparent;
+  cursor: pointer;
+}
+
+.inboxmeta {
+  span {
+    color: #fff;
+    font-size: guide.$fs-heading2;
+    font-weight: guide.$fw-bold;
+    margin-bottom: 0.1rem;
+    display: inline-block;
+  }
+  p {
+    color: #737373;
+    font-size: guide.$fs-heading2;
+  }
+}
+
+#active {
+  background: guide.$bg-navigation-hover;
+}

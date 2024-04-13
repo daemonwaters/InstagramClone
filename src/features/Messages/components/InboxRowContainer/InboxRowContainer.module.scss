@@ -1,0 +1,35 @@
+@use "../../../../StyleGuides" as guide;
+.container {
+  width: 397px;
+  height: 692px;
+  header {
+    margin-top: 1rem;
+    padding: 0 0.4rem;
+    color: #fff;
+  }
+}
+
+.user_edit {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1rem 0;
+  span {
+    font-size: guide.$fs-heading1;
+    font-weight: guide.$fw-extra-bold;
+  }
+  img:last-child {
+    margin-left: auto;
+    cursor: pointer;
+  }
+}
+
+.messages_requests {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  span:last-child {
+    color: #737373;
+    font-size: guide.$fs-heading2;
+  }
+}
