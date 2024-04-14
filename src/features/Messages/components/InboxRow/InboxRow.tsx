@@ -1,6 +1,6 @@
 import styles from "./InboxRow.module.scss";
 import Avatar, { Variants } from "../../../../components/Avatar/Avatar";
-type InboxRowProps = {
+export type InboxRowProps = {
   user_avatar: string;
   username: string;
   last_msg: string;

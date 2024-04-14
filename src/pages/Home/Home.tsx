@@ -1,10 +1,7 @@
 import styles from "./Home.module.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import StoryContainer from "../../features/Story/components/StoryContainer/StoryContainer";
-import Story from "../../features/Story/components/Story/Story";
-import Post from "../../features/Posts/components/Post/Post";
 import AvatarMock from "../../assets/svgs/avatarmock.svg";
-import MockPostImg from "../../assets/imgs/post-placeholder.avif";
 import PreviewBlock from "../../components/PreviewBlock/PreviewBlock";
 import Button from "../../components/Button/Button";
 
@@ -13,19 +10,8 @@ function Home() {
     <div className={styles.home}>
       <Navigation variant="full-width" />
       <main className={styles.main_section}>
-        <StoryContainer>
-          {Array.from(Array(8)).map(() => (
-            <Story avatar_url={AvatarMock} username="username" />
-          ))}
-        </StoryContainer>
-        <Post
-          user_avatar_url={AvatarMock}
-          username="username"
-          date="1d"
-          likes_count={340}
-          caption="Wow are components are coming together!"
-          post_img_url={MockPostImg}
-        />
+        <StoryContainer>{/* this is where stories go */}</StoryContainer>
+        {/* this is where posts go */}
       </main>
       <div className={styles.suggestion_section}>
         <PreviewBlock
@@ -44,14 +30,7 @@ function Home() {
             />
           </header>
           <div className={styles.wrapper}>
-            {Array.from(Array(5)).map(() => (
-              <PreviewBlock
-                variant="suggestion"
-                avatar_url={AvatarMock}
-                username="username"
-                name="somename"
-              />
-            ))}
+            {/* this is where suggestion blocks go */}
           </div>
         </div>
       </div>

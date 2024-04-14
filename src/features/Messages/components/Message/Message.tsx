@@ -1,7 +1,6 @@
-import React from "react";
 import styles from "./Message.module.scss";
 import Avatar, { Variants } from "../../../../components/Avatar/Avatar";
-type MessageProps = {
+export type MessageProps = {
   message_author: string;
   current_user: string;
   avatar_url: string;

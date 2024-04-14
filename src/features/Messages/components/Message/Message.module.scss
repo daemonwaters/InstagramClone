@@ -1,23 +1,26 @@
-@use '../../../../StyleGuides' as guide;
+@use "../../../../StyleGuides" as guide;
 
-.message{
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
+.message {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0.4rem 0;
 }
 
-.text{
-    width: fit-content;
-    height: fit-content;
-    color: #fff;
-    padding: 0.6rem;
-    border-radius: 100px;
+.text {
+  width: fit-content;
+  height: fit-content;
+  color: #fff;
+  padding: 0.6rem;
+  border-radius: 100px;
 }
 
-#my_message{
-    background: guide.$clr-accent;
+#my_message {
+  background: guide.$clr-accent;
+  margin-left: auto;
 }
 
-#contact_message{
-    background: #262626;
+#contact_message {
+  background: #262626;
+  margin-right: auto;
 }

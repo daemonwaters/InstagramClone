@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./ListItem.module.scss";
 import Avatar from "../Avatar/Avatar";
 import { Variants } from "../Avatar/Avatar";
+import MockAvatar from '../../assets/svgs/avatarmock.svg'
 
 type ListItemProps = {
   variant: "default" | "icon-only" | "title-only";
@@ -31,7 +32,7 @@ function ListItem({
       ) : (
         <></>
       )}
-      {hasAvatar ? <Avatar src={icon} variant={Variants.msg} /> : <></>}
+      {hasAvatar ? <Avatar src={MockAvatar} variant={Variants.navigation} /> : <></>}
       {variant !== "icon-only" ? <span> {title}</span> : <></>}
       {showOverlay ? children : <></>}
     </li>

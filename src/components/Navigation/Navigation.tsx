@@ -25,7 +25,9 @@ function Navigation({ variant }: NavigationProps) {
             icon={nav.icon}
             title={nav.title}
             hasAvatar={nav.id === 8 ? true : false}
-            extraStyles={{width : variant === 'decreased' ? 'fit-content': '' }}
+            extraStyles={{
+              width: variant === "decreased" ? "fit-content" : "",
+            }}
           >
             {nav.id === 9 ? <Overlay /> : <></>}
           </ListItem>

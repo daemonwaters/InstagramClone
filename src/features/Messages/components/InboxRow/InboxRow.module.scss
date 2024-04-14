@@ -9,6 +9,9 @@
   padding: 0.4rem;
   background: transparent;
   cursor: pointer;
+  &:hover {
+    background: #1a1a1a;
+  }
 }
 
 .inboxmeta {

@@ -1,4 +1,3 @@
-import React from "react";
 import styles from "./Chat.module.scss";
 import Avatar, { Variants } from "../../../../components/Avatar/Avatar";
 import Call from "../../../../assets/svgs/call.svg";
@@ -9,25 +8,18 @@ import Record from "../../../../assets/svgs/record.svg";
 import Gallery from "../../../../assets/svgs/gallery.svg";
 import Heart from "../../../../assets/svgs/heart.svg";
 import Preview from "../../../../assets/svgs/chat-preview.svg";
-
+import MockAvatar from "../../../../assets/svgs/avatarmock.svg";
 type ChatProps = {
-  current_user_avatar: string;
-  username: string;
   activeChat: boolean;
-  messages: [];
 };
 
-function Chat({
-  current_user_avatar,
-  username,
-  activeChat,
-  messages,
-}: ChatProps) {
+function Chat({ activeChat }: ChatProps) {
   return (
     <div className={styles.chat}>
       {activeChat ? (
         <header>
-          <Avatar src={current_user_avatar} variant={Variants.inboxHeader} />
+          <Avatar src={MockAvatar} variant={Variants.inboxHeader} />
+          <span>username</span>
           <img className={styles.call} src={Call} alt="call" />
           <img src={VideoCall} alt="video call" />
           <img src={Info} alt="more information" />
@@ -44,12 +36,13 @@ function Chat({
           </div>
         ) : (
           <div className={styles.messages_wrapper}>
+            {/* this is where messages go */}
             <div className={styles.input_wrapper}>
-            <img src={Emoji} alt="emoji" />
-            <input type="text" placeholder="Message..." />
-            <img src={Record} alt="Record" />
-            <img src={Gallery} alt="Gallery" />
-            <img src={Heart} alt="Heart" />
+              <img src={Emoji} alt="emoji" />
+              <input type="text" placeholder="Message..." />
+              <img src={Record} alt="Record" />
+              <img src={Gallery} alt="Gallery" />
+              <img src={Heart} alt="Heart" />
             </div>
           </div>
         )}

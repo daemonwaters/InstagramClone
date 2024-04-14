@@ -45,7 +45,7 @@ export const NavigationData = [
     id: 7,
   },
   {
-    icon: Profile,
+    icon: "",
     title: "Profile",
     id: 8,
   },
