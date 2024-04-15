@@ -16,16 +16,18 @@ function Profile() {
         <header>
           <div className={styles.actions}>
             <Avatar variant={Variants.profile} src={MockAvatar} />
-            <div className={styles.upper_row}>
-              <span>username</span>
-              <Button variant="secondary" title="Edit Profile" />
-              <Button variant="secondary" title="View archive" />
-              <img src={Settings} alt="Settings" />
-            </div>
-            <div className={styles.profile_info}>
-              <span>7 posts</span>
-              <span>61 followers</span>
-              <span>779 following</span>
+            <div className={styles.action_wrapper}>
+              <div className={styles.upper_row}>
+                <span>username</span>
+                <Button variant="secondary" title="Edit Profile" />
+                <Button variant="secondary" title="View archive" />
+                <img src={Settings} alt="Settings" />
+              </div>
+              <div className={styles.profile_info}>
+                <span>7 posts</span>
+                <span>61 followers</span>
+                <span>779 following</span>
+              </div>
             </div>
           </div>
           <div className={styles.highlights}>
@@ -50,7 +52,9 @@ function Profile() {
               <span>TAGGED</span>
             </div>
           </nav>
-          <div className={styles.content}>{/* this where ths posts go */}</div>
+          <div className={styles.content}>
+            {/* this is where the posts go */}
+          </div>
         </div>
       </div>
     </div>
