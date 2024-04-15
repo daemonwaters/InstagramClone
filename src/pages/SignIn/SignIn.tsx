@@ -7,21 +7,19 @@ import GooglePlay from "../../assets/svgs/googleplay.svg";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { ChangeEvent, useState } from "react";
-
 type SignInProps = {};
 
 function SignIn({}: SignInProps) {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const [username,setUsername] = useState<string>('')
-  const [password,setPassword] = useState<string>('')
+  const handleChangeUsername = (e: ChangeEvent<HTMLInputElement>) => {
+    setUsername(e.target.value);
+  };
 
-  const handleChangeUsername = (e:ChangeEvent<HTMLInputElement>)=>{
-    setUsername(e.target.value)
-  }
-
-  const handleChangePassword = (e:ChangeEvent<HTMLInputElement>)=>{
-    setPassword(e.target.value)
-  }
+  const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
 
   return (
     <div role="signIn" className={styles.signIn_wrapper}>
@@ -58,7 +56,7 @@ function SignIn({}: SignInProps) {
               Forgotten your password?
             </p>
             <p className={styles.report}>
-              You can also 
+              You can also
               <span> report content that you believe is unlawful</span> in your
               country without logging in.
             </p>
