@@ -1,11 +1,11 @@
-import { ChangeEvent } from "react";
+import { ChangeEventHandler } from "react";
 import styles from "./Input.module.scss";
 
 type InputProps = {
   type: "text" | "password";
   placeholder: string;
   value: string;
-  onChange: (e:ChangeEvent<HTMLInputElement>) => void;
+  onChange: ChangeEventHandler<HTMLInputElement>
 };
 
 function Input({

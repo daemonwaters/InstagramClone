@@ -6,20 +6,30 @@ import AppStore from "../../assets/svgs/appstore.svg";
 import GooglePlay from "../../assets/svgs/googleplay.svg";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
-import { ChangeEvent, useState } from "react";
+import { ChangeEventHandler, MouseEventHandler, useState } from "react";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { signUpUser } from "../../features/Users/services/SignUpUser";
 type SignInProps = {};
 
 function SignIn({}: SignInProps) {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const dispatch = useAppDispatch()
 
-  const handleChangeUsername = (e: ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
+  const handleChangeUsername : ChangeEventHandler<HTMLInputElement> = (event) => {
+    setUsername(event.target.value);
   };
 
-  const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
+  const handleChangePassword : ChangeEventHandler<HTMLInputElement> = (event) => {
+    setPassword(event.target.value);
   };
+
+  const handleGetTodo : MouseEventHandler<HTMLButtonElement> = (event)=>{
+      event.preventDefault()
+      dispatch(signUpUser({username , password}))
+    
+  }
+
 
   return (
     <div role="signIn" className={styles.signIn_wrapper}>
@@ -45,7 +55,7 @@ function SignIn({}: SignInProps) {
                 onChange={handleChangePassword}
                 value={password}
               />
-              <Button variant="primary" title="Log in" />
+              <Button onClick={handleGetTodo} variant="primary" title="Log in" />
             </form>
             <span className={styles.or}>OR</span>
             <div className={styles.login_facebook}>

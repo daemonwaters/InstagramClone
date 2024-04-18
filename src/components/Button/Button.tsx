@@ -1,10 +1,11 @@
+import { MouseEventHandler } from "react";
 import styles from "./Button.module.scss";
 
 type ButtonProps = {
   variant: Required<"primary" | "secondary" | "ghost">;
   title: Required<string>;
   extraStyles?: Object;
-  onClick? : ()=> void
+  onClick? : MouseEventHandler<HTMLButtonElement>
 };
 
 function Button({ variant, title, extraStyles = {} , onClick }: ButtonProps) {
