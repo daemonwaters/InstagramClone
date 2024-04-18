@@ -6,7 +6,7 @@ import AppStore from "../../assets/svgs/appstore.svg";
 import GooglePlay from "../../assets/svgs/googleplay.svg";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
-import { ChangeEventHandler, MouseEventHandler, useState } from "react";
+import { ChangeEventHandler, FormEventHandler, useState } from "react";
 import { useAppDispatch } from "../../hooks/reduxHooks";
 import { signUpUser } from "../../features/Users/services/SignUpUser";
 type SignInProps = {};
@@ -14,22 +14,24 @@ type SignInProps = {};
 function SignIn({}: SignInProps) {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const handleChangeUsername : ChangeEventHandler<HTMLInputElement> = (event) => {
+  const handleChangeUsername: ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
     setUsername(event.target.value);
   };
 
-  const handleChangePassword : ChangeEventHandler<HTMLInputElement> = (event) => {
+  const handleChangePassword: ChangeEventHandler<HTMLInputElement> = (
+    event
+  ) => {
     setPassword(event.target.value);
   };
 
-  const handleGetTodo : MouseEventHandler<HTMLButtonElement> = (event)=>{
-      event.preventDefault()
-      dispatch(signUpUser({username , password}))
-    
-  }
-
+  const handleSignUp: FormEventHandler<HTMLFormElement> = (event) => {
+    event.preventDefault();
+    dispatch(signUpUser({ username, password }));
+  };
 
   return (
     <div role="signIn" className={styles.signIn_wrapper}>
@@ -42,7 +44,7 @@ function SignIn({}: SignInProps) {
               className={styles.insta_logo}
               alt="Instagram Logo"
             />
-            <form className={styles.form}>
+            <form onSubmit={handleSignUp} className={styles.form}>
               <Input
                 type="text"
                 placeholder="Phone number,username or email address"
@@ -55,7 +57,7 @@ function SignIn({}: SignInProps) {
                 onChange={handleChangePassword}
                 value={password}
               />
-              <Button onClick={handleGetTodo} variant="primary" title="Log in" />
+              <Button type="submit" variant="primary" title="Log in" />
             </form>
             <span className={styles.or}>OR</span>
             <div className={styles.login_facebook}>
@@ -73,7 +75,7 @@ function SignIn({}: SignInProps) {
           </div>
           <div className={styles.signUp_box}>
             <p>Don't have an account?</p>
-            <Button title="Sign Up" variant="ghost" />
+            <Button type="submit" title="Sign Up" variant="ghost" />
           </div>
           <div className={styles.get_app}>
             <span>Get the app.</span>

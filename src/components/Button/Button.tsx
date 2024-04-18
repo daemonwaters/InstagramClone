@@ -6,9 +6,10 @@ type ButtonProps = {
   title: Required<string>;
   extraStyles?: Object;
   onClick? : MouseEventHandler<HTMLButtonElement>
+  type : 'submit' | 'button'
 };
 
-function Button({ variant, title, extraStyles = {} , onClick }: ButtonProps) {
+function Button({ variant, title, extraStyles = {} , onClick , type }: ButtonProps) {
   return (
     <button
     onClick={onClick}
@@ -21,6 +22,7 @@ function Button({ variant, title, extraStyles = {} , onClick }: ButtonProps) {
       }
       className={styles.button}
       style={extraStyles}
+      type={type}
     >
       {title}
     </button>

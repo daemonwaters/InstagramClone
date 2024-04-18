@@ -30,6 +30,11 @@ const meta: Meta<typeof Button> = {
     onClick: {
       description: "A function that gets passed to the button event listener",
     },
+    type : {
+      description : "The type attribute of button",
+      options : ['submit', 'button'],
+      control : 'radio'
+    }
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
