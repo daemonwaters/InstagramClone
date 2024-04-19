@@ -16,7 +16,7 @@ import { signUpUser } from "../services/SignUpUser";
   };
 };
 
-export const initialState = {
+ const initialState = {
   status: "idle",
   error: null,
   data: {

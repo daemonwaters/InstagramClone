@@ -1,8 +1,22 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
-import React from "react";
 import { Provider } from "react-redux";
-import { initialState } from "../../src/features/Users/slices/currentUser";
 import { Decorator } from "@storybook/react";
+import Placeholder from '../../assets/imgs/profile-placeholder.jpeg'
+
+
+const MockInitialState  = {
+  status: "idle",
+  error: null,
+  data: {
+    username: "",
+    avatar_url: Placeholder,
+    bio: "",
+    posts: [],
+    following: [],
+    followers: [],
+    uid: "",
+  },
+}
 
 export const withRedux: Decorator = (story) => {
   return (
@@ -11,7 +25,7 @@ export const withRedux: Decorator = (story) => {
         reducer: {
           currentUser: createSlice({
             name: "currentUser",
-            initialState: initialState,
+            initialState: MockInitialState,
             reducers: {},
           }).reducer,
         },
