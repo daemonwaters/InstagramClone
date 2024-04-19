@@ -3,8 +3,7 @@ import { Provider } from "react-redux";
 import { Decorator } from "@storybook/react";
 import Placeholder from '../../assets/imgs/profile-placeholder.jpeg'
 
-
-const MockInitialState  = {
+const MockInitialState = {
   status: "idle",
   error: null,
   data: {
@@ -16,22 +15,21 @@ const MockInitialState  = {
     followers: [],
     uid: "",
   },
-}
+};
+
+const MockSlice = createSlice({
+  name: "currentUser",
+  initialState: MockInitialState,
+  reducers: {},
+});
+
+const MockStore = configureStore({
+  reducer: {
+    currentUser: MockSlice.reducer,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
+});
 
 export const withRedux: Decorator = (story) => {
-  return (
-    <Provider
-      store={configureStore({
-        reducer: {
-          currentUser: createSlice({
-            name: "currentUser",
-            initialState: MockInitialState,
-            reducers: {},
-          }).reducer,
-        },
-      })}
-    >
-      {story()}
-    </Provider>
-  );
+  return <Provider store={MockStore}>{story()}</Provider>;
 };

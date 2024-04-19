@@ -7,6 +7,10 @@ import Button from "../../components/Button/Button";
 import { useAppSelector } from "../../hooks/reduxHooks";
 
 function Home() {
+
+  const currentUser = useAppSelector(state => state.currentUser.data)
+  console.log(currentUser)
+
   return (
     <div className={styles.home}>
       <Navigation variant="full-width" />
@@ -17,9 +21,9 @@ function Home() {
       <div className={styles.suggestion_section}>
         <PreviewBlock
           variant="profile"
-          avatar_url={AvatarMock}
-          username="username"
-          name="somename"
+          avatar_url={currentUser.avatar_url}
+          username={currentUser.username}
+          name={currentUser.username}
         />
         <div className={styles.suggestions}>
           <header>

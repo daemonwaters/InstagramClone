@@ -7,7 +7,7 @@ type ButtonProps = {
   extraStyles?: Object;
   onClick?: MouseEventHandler<HTMLButtonElement>;
   type: "submit" | "button";
-  children? : JSX.Element | ReactNode
+  children?: JSX.Element | ReactNode;
 };
 
 function Button({
@@ -16,7 +16,7 @@ function Button({
   extraStyles = {},
   onClick,
   type,
-  children
+  children,
 }: ButtonProps) {
   return (
     <button
@@ -32,7 +32,7 @@ function Button({
       style={extraStyles}
       type={type}
     >
-      {children}
+      {children && title ? children : title}
     </button>
   );
 }

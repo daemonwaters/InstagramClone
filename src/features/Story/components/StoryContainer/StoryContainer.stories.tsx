@@ -17,11 +17,9 @@ export const Default: Story = {
   },
   render: () => (
     <StoryContainer>
-      {Array.from(Array(8)).map(() => (
-        <Story avatar_url={AvatarMock} username="username" />
+      {Array.from(Array(8).keys()).map((key) => (
+        <Story key={key} avatar_url={AvatarMock} username="username" />
       ))}
     </StoryContainer>
   ),
 };
-
-console.log(Array.from(Array(8)));

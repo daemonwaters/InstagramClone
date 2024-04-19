@@ -25,6 +25,7 @@ function SignIn({}: SignInProps) {
   });
   const dispatch = useAppDispatch();
   const isCurrentUser = useAppSelector(state => state.currentUser.data)
+  console.log(isCurrentUser)
 
 
   const handleChangeUsername: ChangeEventHandler<HTMLInputElement> = (
@@ -86,7 +87,9 @@ function SignIn({}: SignInProps) {
                 isValid={validation.isPasswordValid}
               />
               <Button type="submit" variant="primary" title="Log in" >
-                  Log in
+                  <Link to="/home">
+                    Log in
+                  </Link>
               </Button>
             </form>
             <span className={styles.or}>OR</span>
