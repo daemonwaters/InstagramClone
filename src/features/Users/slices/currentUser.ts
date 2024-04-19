@@ -2,21 +2,31 @@ import { createSlice } from "@reduxjs/toolkit";
 import Placeholder from "../../../assets/imgs/profile-placeholder.jpeg";
 import { signUpUser } from "../services/SignUpUser";
 
- type InitialState = {
+export type Post = {
+  author: string;
+  avatar: string;
+  date: string;
+  likes_count: number;
+  caption: string;
+  post_img_url: string;
+  id : number
+};
+
+type InitialState = {
   status: "idle" | "pending" | "succuss" | "fail";
   error: { message: string } | null;
   data: {
     username: string;
     avatar_url: string;
     bio: string;
-    posts: [];
+    posts: Array<Post>;
     following: [];
     followers: [];
     uid: string;
   };
 };
 
- const initialState = {
+const initialState = {
   status: "idle",
   error: null,
   data: {
@@ -28,7 +38,7 @@ import { signUpUser } from "../services/SignUpUser";
     followers: [],
     uid: "",
   },
-} satisfies InitialState as InitialState
+} satisfies InitialState as InitialState;
 
 const currentUserSlice = createSlice({
   name: "currentUser",
@@ -54,6 +64,5 @@ const currentUserSlice = createSlice({
   },
 });
 
-
 const currentUserSliceReducer = currentUserSlice.reducer;
-export default currentUserSliceReducer
+export default currentUserSliceReducer;

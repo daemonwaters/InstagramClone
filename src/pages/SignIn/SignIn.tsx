@@ -61,7 +61,7 @@ function SignIn({}: SignInProps) {
   };
 
   return (
-    <div role="signIn" className={styles.signIn_wrapper}>
+    <div className={styles.signIn_wrapper}>
       <div className={styles.signIn_content}>
         <img src={Phones} className={styles.phones} alt="Iphone and Galexy" />
         <div className={styles.boxes}>

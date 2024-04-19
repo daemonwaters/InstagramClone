@@ -5,25 +5,37 @@ import AvatarMock from "../../assets/svgs/avatarmock.svg";
 import PreviewBlock from "../../components/PreviewBlock/PreviewBlock";
 import Button from "../../components/Button/Button";
 import { useAppSelector } from "../../hooks/reduxHooks";
+import Post from "../../features/Posts/components/Post/Post";
 
 function Home() {
-
-  const currentUser = useAppSelector(state => state.currentUser.data)
-  console.log(currentUser)
+  const { avatar_url, username, posts } = useAppSelector(
+    (state) => state.currentUser.data
+  );
 
   return (
     <div className={styles.home}>
       <Navigation variant="full-width" />
       <main className={styles.main_section}>
         <StoryContainer>{/* this is where stories go */}</StoryContainer>
-        {/* this is where posts go */}
+
+        {posts.map((post) => (
+          <Post
+            key={post.id}
+            user_avatar_url={post.avatar}
+            username={post.author}
+            date={post.date}
+            likes_count={post.likes_count}
+            caption={post.caption}
+            post_img_url={post.post_img_url}
+          />
+        ))}
       </main>
       <div className={styles.suggestion_section}>
         <PreviewBlock
           variant="profile"
-          avatar_url={currentUser.avatar_url}
-          username={currentUser.username}
-          name={currentUser.username}
+          avatar_url={avatar_url}
+          username={username}
+          name={username}
         />
         <div className={styles.suggestions}>
           <header>

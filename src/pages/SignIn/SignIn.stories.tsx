@@ -1,6 +1,8 @@
+import React from "react";
 import type { StoryObj, Meta } from "@storybook/react";
 import SignIn from "./SignIn";
 import { expect, userEvent, within } from "@storybook/test";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const meta: Meta<typeof SignIn> = {
   title: "Pages/SignIn",
@@ -19,8 +21,6 @@ type Story = StoryObj<typeof SignIn>;
 export const Default: Story = {
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
-    const signInPage = canvas.getByRole("signIn");
-    await expect(signInPage).toBeInTheDocument();
 
     await step(
       "The user should fill out the username and password",

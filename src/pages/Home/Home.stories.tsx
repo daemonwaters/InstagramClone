@@ -74,3 +74,7 @@ export const Default: Story = {
     );
   },
 };
+
+export const HomeWithRedux: Story = {
+  render: () => <Home />,
+};

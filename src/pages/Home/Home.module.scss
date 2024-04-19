@@ -2,11 +2,18 @@
 .home {
   background: guide.$clr-primary;
   display: flex;
+  max-height: 692px;
+  overflow: hidden;
 }
 
 .main_section {
   width: 640px;
   margin-left: 7%;
+  overflow: scroll;
+}
+
+.main_section::-webkit-scrollbar { 
+  display: none; 
 }
 
 .suggestion_section {
