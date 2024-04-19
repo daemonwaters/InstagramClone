@@ -4,6 +4,7 @@ import StoryContainer from "../../features/Story/components/StoryContainer/Story
 import AvatarMock from "../../assets/svgs/avatarmock.svg";
 import PreviewBlock from "../../components/PreviewBlock/PreviewBlock";
 import Button from "../../components/Button/Button";
+import { useAppSelector } from "../../hooks/reduxHooks";
 
 function Home() {
   return (
@@ -27,6 +28,7 @@ function Home() {
               variant="ghost"
               title="See All"
               extraStyles={{ color: "#fff" }}
+              type="button"
             />
           </header>
           <div className={styles.wrapper}>

@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/react";
 import "../src/App.scss";
+import {withRedux} from './decorators/withRedux'
 
 const preview: Preview = {
   parameters: {
@@ -12,6 +13,7 @@ const preview: Preview = {
     },
     layout: "fullscreen",
   },
+  decorators : [withRedux]
 };
 
 export default preview;

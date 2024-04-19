@@ -7,29 +7,55 @@ import GooglePlay from "../../assets/svgs/googleplay.svg";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
-import { useAppDispatch } from "../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { signUpUser } from "../../features/Users/services/SignUpUser";
+import { Link } from "react-router-dom";
 type SignInProps = {};
+type Validation = {
+  isUsernameValid: boolean | undefined;
+  isPasswordValid: boolean | undefined;
+};
 
 function SignIn({}: SignInProps) {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [validation, setValidation] = useState<Validation>({
+    isPasswordValid: undefined,
+    isUsernameValid: undefined,
+  });
   const dispatch = useAppDispatch();
+  const isCurrentUser = useAppSelector(state => state.currentUser.data)
+
 
   const handleChangeUsername: ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
     setUsername(event.target.value);
+
   };
 
   const handleChangePassword: ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
     setPassword(event.target.value);
+    if(password.length >= 8) {
+      setValidation({ ...validation, isPasswordValid: true });
+    } else {
+      setValidation({ ...validation, isPasswordValid: false });
+    }
   };
 
   const handleSignUp: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
+
+    if (username.length == 0) {
+      setValidation({ ...validation, isUsernameValid: false });
+      return;
+    }
+    if (password.length < 8) {
+      setValidation({ ...validation, isPasswordValid: false });
+      return;
+    }
     dispatch(signUpUser({ username, password }));
   };
 
@@ -50,14 +76,18 @@ function SignIn({}: SignInProps) {
                 placeholder="Phone number,username or email address"
                 onChange={handleChangeUsername}
                 value={username}
+                isValid={validation.isUsernameValid}
               />
               <Input
                 type="password"
                 placeholder="Password"
                 onChange={handleChangePassword}
                 value={password}
+                isValid={validation.isPasswordValid}
               />
-              <Button type="submit" variant="primary" title="Log in" />
+              <Button type="submit" variant="primary" title="Log in" >
+                  Log in
+              </Button>
             </form>
             <span className={styles.or}>OR</span>
             <div className={styles.login_facebook}>

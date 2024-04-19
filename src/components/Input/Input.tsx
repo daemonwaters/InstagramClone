@@ -5,7 +5,8 @@ type InputProps = {
   type: "text" | "password";
   placeholder: string;
   value: string;
-  onChange: ChangeEventHandler<HTMLInputElement>
+  onChange: ChangeEventHandler<HTMLInputElement>;
+  isValid: boolean | undefined;
 };
 
 function Input({
@@ -13,15 +14,23 @@ function Input({
   placeholder = "Type...",
   value,
   onChange,
+  isValid,
 }: InputProps) {
   return (
-      <input
+    <input
       className={styles.input}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-      />
+      type={type}
+      placeholder={placeholder}
+      value={value}
+      onChange={onChange}
+      style={{
+        outline: isValid
+          ? "solid 1px green"
+          : isValid == false
+            ? "solid 1px red"
+            : "",
+      }}
+    />
   );
 }
 

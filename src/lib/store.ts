@@ -1,9 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { currentUserSliceReducer } from "../features/Users/slices/currentUser";
+import currentUserSliceReducer from "../features/Users/slices/currentUser";
 
 const store = configureStore({
   reducer: {
-    users: currentUserSliceReducer,
+    currentUser: currentUserSliceReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
 });

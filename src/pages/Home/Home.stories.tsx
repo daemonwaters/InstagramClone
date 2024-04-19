@@ -26,8 +26,8 @@ export const Default: Story = {
       <Navigation variant="full-width" />
       <main className={styles.main_section}>
         <StoryContainer>
-          {Array.from(Array(8)).map(() => (
-            <Story avatar_url={AvatarMock} username="username" />
+          {Array.from(Array(8).keys()).map((key) => (
+            <Story key={key} avatar_url={AvatarMock} username="username" />
           ))}
         </StoryContainer>
         <Post
@@ -53,11 +53,13 @@ export const Default: Story = {
               variant="ghost"
               title="See All"
               extraStyles={{ color: "#fff" }}
+              type="button"
             />
           </header>
           <div className={styles.wrapper}>
-            {Array.from(Array(5)).map(() => (
+            {Array.from(Array(5).keys()).map((key) => (
               <PreviewBlock
+                key={key}
                 variant="suggestion"
                 avatar_url={AvatarMock}
                 username="username"

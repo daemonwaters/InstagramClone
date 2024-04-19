@@ -1,8 +1,9 @@
-import { createSlice, Slice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import Placeholder from "../../../assets/imgs/profile-placeholder.jpeg";
 import { signUpUser } from "../services/SignUpUser";
 
-type InitialState = {
+ type InitialState = {
+  status: "idle" | "pending" | "succuss" | "fail";
   error: { message: string } | null;
   data: {
     username: string;
@@ -15,7 +16,8 @@ type InitialState = {
   };
 };
 
-const initialState: InitialState = {
+export const initialState = {
+  status: "idle",
   error: null,
   data: {
     username: "",
@@ -26,9 +28,9 @@ const initialState: InitialState = {
     followers: [],
     uid: "",
   },
-};
+} satisfies InitialState as InitialState
 
-const currentUserSlice: Slice = createSlice({
+const currentUserSlice = createSlice({
   name: "currentUser",
   initialState,
   reducers: {},
@@ -38,13 +40,20 @@ const currentUserSlice: Slice = createSlice({
         state.error = {
           message: action.payload as string,
         };
+        state.status = "fail";
       })
       .addCase(signUpUser.fulfilled, (state, { payload }) => {
         let { uid, email } = payload.user;
         state.data.uid = uid;
         state.data.username = email as string;
+        state.status = "succuss";
+      })
+      .addCase(signUpUser.pending, (state) => {
+        state.status = "pending";
       });
   },
 });
 
-export const currentUserSliceReducer = currentUserSlice.reducer;
+
+const currentUserSliceReducer = currentUserSlice.reducer;
+export default currentUserSliceReducer
