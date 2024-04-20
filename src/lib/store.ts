@@ -3,7 +3,7 @@ import currentUserSliceReducer from "../features/Users/slices/currentUser";
 
 const store = configureStore({
   reducer: {
-    currentUser: currentUserSliceReducer,
+    currentUser: currentUserSliceReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
 });

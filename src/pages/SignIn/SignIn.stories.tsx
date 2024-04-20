@@ -1,8 +1,11 @@
-import React from "react";
 import type { StoryObj, Meta } from "@storybook/react";
 import SignIn from "./SignIn";
 import { expect, userEvent, within } from "@storybook/test";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+  withRouter,
+  reactRouterParameters,
+} from "storybook-addon-remix-react-router";
 
 const meta: Meta<typeof SignIn> = {
   title: "Pages/SignIn",
@@ -19,6 +22,14 @@ export default meta;
 type Story = StoryObj<typeof SignIn>;
 
 export const Default: Story = {
+  decorators: [withRouter],
+  parameters: {
+    reactRouter: reactRouterParameters({
+      routing: {
+        path: "/",
+      },
+    }),
+  },
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 

@@ -10,7 +10,8 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     "@chromatic-com/storybook",
     "@storybook/addon-interactions",
-    "@storybook/addon-designs"
+    "@storybook/addon-designs" ,
+    'storybook-addon-remix-react-router'
   ],
   framework: {
     name: "@storybook/react-vite",

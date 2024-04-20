@@ -4,51 +4,56 @@ import Logo from "../../assets/svgs/logo.svg";
 import Facebook from "../../assets/svgs/facebook.svg";
 import AppStore from "../../assets/svgs/appstore.svg";
 import GooglePlay from "../../assets/svgs/googleplay.svg";
+import Spinner from "../../assets/svgs/spinner.svg";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { signUpUser } from "../../features/Users/services/SignUpUser";
-import { Link } from "react-router-dom";
-type SignInProps = {};
+import { useNavigate } from "react-router-dom";
 type Validation = {
   isUsernameValid: boolean | undefined;
   isPasswordValid: boolean | undefined;
 };
 
-function SignIn({}: SignInProps) {
+function SignIn() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [successSignal, setSuccussSignal] = useState<boolean>(false);
   const [validation, setValidation] = useState<Validation>({
     isPasswordValid: undefined,
     isUsernameValid: undefined,
   });
   const dispatch = useAppDispatch();
-  const isCurrentUser = useAppSelector(state => state.currentUser.data)
-  console.log(isCurrentUser)
-
+  const navigate = useNavigate();
+  const isCurrentUser = useAppSelector((state) => state.currentUser);
 
   const handleChangeUsername: ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
     setUsername(event.target.value);
-
+    if (validation.isUsernameValid == false) {
+      setValidation({ ...validation, isUsernameValid: true });
+    }
+    if (validation.isUsernameValid && username.length == 0) {
+      setValidation({ ...validation, isUsernameValid: false });
+    }
   };
 
   const handleChangePassword: ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
     setPassword(event.target.value);
-    if(password.length >= 8) {
+    if (validation.isPasswordValid == false && password.length >= 8) {
       setValidation({ ...validation, isPasswordValid: true });
-    } else {
+    }
+    if (validation.isPasswordValid && password.length < 8) {
       setValidation({ ...validation, isPasswordValid: false });
     }
   };
 
   const handleSignUp: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
-
     if (username.length == 0) {
       setValidation({ ...validation, isUsernameValid: false });
       return;
@@ -57,8 +62,16 @@ function SignIn({}: SignInProps) {
       setValidation({ ...validation, isPasswordValid: false });
       return;
     }
-    dispatch(signUpUser({ username, password }));
+    dispatch(signUpUser({ username, password, signal: setSuccussSignal }));
   };
+
+  if (successSignal) {
+    (function navigateToHome() {
+      setTimeout(() => {
+        navigate("/home");
+      }, 500);
+    })();
+  }
 
   return (
     <div className={styles.signIn_wrapper}>
@@ -86,16 +99,23 @@ function SignIn({}: SignInProps) {
                 value={password}
                 isValid={validation.isPasswordValid}
               />
-              <Button type="submit" variant="primary" title="Log in" >
-                  <Link to="/home">
-                    Log in
-                  </Link>
+              <Button
+                disable={isCurrentUser.status == "pending" ? true : false}
+                type="submit"
+                variant="primary"
+                title="Log in"
+              >
+                {isCurrentUser.status == "pending" ? (
+                  <img className={styles.spinner} src={Spinner} alt="Loading" />
+                ) : (
+                  "Log in"
+                )}
               </Button>
             </form>
             <span className={styles.or}>OR</span>
             <div className={styles.login_facebook}>
               <img src={Facebook} alt="Facebook logo" />
-              Log in with Facebook
+              Log in with Facebook {isCurrentUser.data.username}
             </div>
             <p className={styles.forgotten_password}>
               Forgotten your password?

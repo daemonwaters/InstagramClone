@@ -4,9 +4,10 @@ import styles from "./Button.module.scss";
 type ButtonProps = {
   variant: Required<"primary" | "secondary" | "ghost">;
   title: Required<string>;
+  type: "submit" | "button";
   extraStyles?: Object;
   onClick?: MouseEventHandler<HTMLButtonElement>;
-  type: "submit" | "button";
+  disable? : boolean
   children?: JSX.Element | ReactNode;
 };
 
@@ -16,10 +17,12 @@ function Button({
   extraStyles = {},
   onClick,
   type,
-  children,
+  disable,
+  children
 }: ButtonProps) {
   return (
     <button
+      disabled={disable}
       onClick={onClick}
       id={
         variant == "primary"

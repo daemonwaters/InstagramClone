@@ -1,7 +1,6 @@
 import styles from "./Home.module.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import StoryContainer from "../../features/Story/components/StoryContainer/StoryContainer";
-import AvatarMock from "../../assets/svgs/avatarmock.svg";
 import PreviewBlock from "../../components/PreviewBlock/PreviewBlock";
 import Button from "../../components/Button/Button";
 import { useAppSelector } from "../../hooks/reduxHooks";
@@ -11,6 +10,10 @@ function Home() {
   const { avatar_url, username, posts } = useAppSelector(
     (state) => state.currentUser.data
   );
+
+  const isCurrentUser = useAppSelector(state => state.currentUser.data)
+  console.log(isCurrentUser)
+
 
   return (
     <div className={styles.home}>

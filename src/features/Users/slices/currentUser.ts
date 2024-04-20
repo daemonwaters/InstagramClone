@@ -9,7 +9,7 @@ export type Post = {
   likes_count: number;
   caption: string;
   post_img_url: string;
-  id : number
+  id: number;
 };
 
 type InitialState = {
