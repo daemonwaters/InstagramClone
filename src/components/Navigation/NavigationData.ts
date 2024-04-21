@@ -5,7 +5,6 @@ import Reels from "../../assets/svgs/reels.svg";
 import Messages from "../../assets/svgs/direct.svg";
 import Notification from "../../assets/svgs/heart.svg";
 import Create from "../../assets/svgs/create.svg";
-import Profile from "../../assets/svgs/avatarmock.svg";
 import More from "../../assets/svgs/burger-menu.svg";
 
 export const NavigationData = [
@@ -13,6 +12,7 @@ export const NavigationData = [
     icon: Home,
     title: "Home",
     id: 1,
+    isLinkedTo : "/home"
   },
   {
     icon: Search,
@@ -33,6 +33,7 @@ export const NavigationData = [
     icon: Messages,
     title: "Messages",
     id: 5,
+    isLinkedTo : "/inbox"
   },
   {
     icon: Notification,
@@ -48,6 +49,7 @@ export const NavigationData = [
     icon: "",
     title: "Profile",
     id: 8,
+    isLinkedTo : "/profile"
   },
   {
     icon: More,

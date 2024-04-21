@@ -19,8 +19,8 @@ function Profile() {
             <div className={styles.action_wrapper}>
               <div className={styles.upper_row}>
                 <span>username</span>
-                <Button variant="secondary" title="Edit Profile" />
-                <Button variant="secondary" title="View archive" />
+                <Button type="button" variant="secondary" title="Edit Profile" />
+                <Button type="button" variant="secondary" title="View archive" />
                 <img src={Settings} alt="Settings" />
               </div>
               <div className={styles.profile_info}>

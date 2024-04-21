@@ -5,14 +5,15 @@ import PreviewBlock from "../../components/PreviewBlock/PreviewBlock";
 import Button from "../../components/Button/Button";
 import { useAppSelector } from "../../hooks/reduxHooks";
 import Post from "../../features/Posts/components/Post/Post";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const { avatar_url, username, posts } = useAppSelector(
     (state) => state.currentUser.data
   );
 
-  const isCurrentUser = useAppSelector(state => state.currentUser.data)
-  console.log(isCurrentUser)
+  const navigate = useNavigate();
+  const hasAccess = useAppSelector((state) => state.currentUser.hasAccess);
 
 
   return (

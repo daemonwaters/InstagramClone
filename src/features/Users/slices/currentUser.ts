@@ -15,6 +15,7 @@ export type Post = {
 type InitialState = {
   status: "idle" | "pending" | "succuss" | "fail";
   error: { message: string } | null;
+  hasAccess: boolean
   data: {
     username: string;
     avatar_url: string;
@@ -29,6 +30,7 @@ type InitialState = {
 const initialState = {
   status: "idle",
   error: null,
+  hasAccess: false,
   data: {
     username: "",
     avatar_url: Placeholder,
@@ -56,6 +58,7 @@ const currentUserSlice = createSlice({
         let { uid, email } = payload.user;
         state.data.uid = uid;
         state.data.username = email as string;
+        state.hasAccess = true
         state.status = "succuss";
       })
       .addCase(signUpUser.pending, (state) => {

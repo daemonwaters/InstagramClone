@@ -16,6 +16,9 @@
   display: flex;
   flex-direction: column;
   gap: 0.7rem;
+  a {
+    text-decoration: none;
+  }
 
   > li:last-child {
     margin-top: 5rem;

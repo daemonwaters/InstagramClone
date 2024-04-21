@@ -4,6 +4,7 @@ import Instagram from "../../assets/svgs/instagram-icon.svg";
 import ListItem from "../ListItem/ListItem";
 import { NavigationData } from "./NavigationData";
 import Overlay from "../Overlay/Overlay";
+import { Link } from "react-router-dom";
 
 type NavigationProps = {
   variant: "full-width" | "decreased";
@@ -13,25 +14,49 @@ function Navigation({ variant }: NavigationProps) {
   return (
     <aside className={styles.aside}>
       {variant == "full-width" ? (
-        <img className={styles.logo} src={Logo} alt="Instagram Logo" />
+        <Link to="/home">
+          <img className={styles.logo} src={Logo} alt="Instagram Logo" />
+        </Link>
       ) : (
-        <img className={styles.logo} src={Instagram} alt="Instagram" />
+        <Link to="/home">
+          <img className={styles.logo} src={Instagram} alt="Instagram" />
+        </Link>
       )}
       <ul className={styles.navigation}>
-        {NavigationData.map((nav) => (
-          <ListItem
-            key={nav.id}
-            variant={variant == "full-width" ? "default" : "icon-only"}
-            icon={nav.icon}
-            title={nav.title}
-            hasAvatar={nav.id === 8 ? true : false}
-            extraStyles={{
-              width: variant === "decreased" ? "fit-content" : "",
-            }}
-          >
-            {nav.id === 9 ? <Overlay /> : <></>}
-          </ListItem>
-        ))}
+        {NavigationData.map((nav) => {
+          return (
+            <>
+              {nav.isLinkedTo ? (
+                <Link key={nav.id} to={nav.isLinkedTo}>
+                  <ListItem
+                    variant={variant == "full-width" ? "default" : "icon-only"}
+                    icon={nav.icon}
+                    title={nav.title}
+                    hasAvatar={nav.id === 8 ? true : false}
+                    extraStyles={{
+                      width: variant === "decreased" ? "fit-content" : "",
+                    }}
+                  >
+                    {nav.id === 9 ? <Overlay /> : <></>}
+                  </ListItem>
+                </Link>
+              ) : (
+                <ListItem
+                  key={nav.id}
+                  variant={variant == "full-width" ? "default" : "icon-only"}
+                  icon={nav.icon}
+                  title={nav.title}
+                  hasAvatar={nav.id === 8 ? true : false}
+                  extraStyles={{
+                    width: variant === "decreased" ? "fit-content" : "",
+                  }}
+                >
+                  {nav.id === 9 ? <Overlay /> : <></>}
+                </ListItem>
+              )}
+            </>
+          );
+        })}
       </ul>
     </aside>
   );
