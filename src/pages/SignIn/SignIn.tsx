@@ -72,7 +72,6 @@ function SignIn() {
       }, 500);
     })();
   }
-
   return (
     <div className={styles.signIn_wrapper}>
       <div className={styles.signIn_content}>
@@ -115,7 +114,7 @@ function SignIn() {
             <span className={styles.or}>OR</span>
             <div className={styles.login_facebook}>
               <img src={Facebook} alt="Facebook logo" />
-              Log in with Facebook {isCurrentUser.data.username}
+              Log in with Facebook
             </div>
             <p className={styles.forgotten_password}>
               Forgotten your password?

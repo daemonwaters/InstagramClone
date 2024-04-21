@@ -1,6 +1,6 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import Button from "./Button";
-import { within, expect , fn } from "@storybook/test";
+import { within, expect, fn } from "@storybook/test";
 
 const meta: Meta<typeof Button> = {
   title: "Atoms/Button",
@@ -30,11 +30,14 @@ const meta: Meta<typeof Button> = {
     onClick: {
       description: "A function that gets passed to the button event listener",
     },
-    type : {
-      description : "The type attribute of button",
-      options : ['submit', 'button'],
-      control : 'radio'
-    }
+    type: {
+      description: "The type attribute of button",
+      options: ["submit", "button"],
+      control: "radio",
+    },
+    disable: {
+      description: "A boolean specifying if the button needs to be disabled",
+    },
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -49,7 +52,7 @@ export const Primary: Story = {
   args: {
     variant: "primary",
     title: "Button",
-    onClick : fn()
+    onClick: fn(),
   },
 };
 
