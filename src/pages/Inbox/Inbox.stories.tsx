@@ -20,14 +20,25 @@ import Chat from "../../features/Messages/components/Chat/Chat";
 import { useState } from "react";
 import { MockMessages as messages } from "../../features/Messages/components/Chat/Chat.stories";
 import { expect, userEvent, within } from "@storybook/test";
+import { withRedux } from "../../helpers/decorators/withRedux";
+import {
+  reactRouterParameters,
+  withRouter,
+} from "storybook-addon-remix-react-router";
 
 const MockContacts = Array.from(Array(8));
 
 const meta: Meta<typeof Inbox> = {
   title: "Pages/Inbox",
   component: Inbox,
+  decorators: [withRedux, withRouter],
   parameters: {
     layout: "fullscreen",
+    reactRouter: reactRouterParameters({
+      routing: {
+        path: "/inbox",
+      },
+    }),
   },
 };
 
@@ -186,11 +197,11 @@ export const TestCase: Story = {
     const contacts = canvas.getAllByTestId("contact");
     const random_contact = Math.floor(Math.random() * 8);
     await step("The user should click on a random contact", async () => {
-      await userEvent.click(contacts[random_contact] , {delay: 300});
+      await userEvent.click(contacts[random_contact], { delay: 300 });
     });
 
     await step("The chat should become active and show messages", async () => {
-     await expect(canvas.getByText("Hello there!")).toBeInTheDocument()
+      await expect(canvas.getByText("Hello there!")).toBeInTheDocument();
     });
   },
 };

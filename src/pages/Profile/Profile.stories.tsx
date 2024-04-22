@@ -10,12 +10,23 @@ import Navigation from "../../components/Navigation/Navigation";
 import Avatar, { Variants } from "../../components/Avatar/Avatar";
 import Button from "../../components/Button/Button";
 import MockPost from "../../assets/imgs/post-placeholder.avif";
+import { withRedux } from "../../helpers/decorators/withRedux";
+import {
+  reactRouterParameters,
+  withRouter,
+} from "storybook-addon-remix-react-router";
 
 const meta: Meta<typeof Profile> = {
   title: "Pages/Profile",
   component: Profile,
+  decorators: [withRedux, withRouter],
   parameters: {
     layout: "fullscreen",
+    reactRouter: reactRouterParameters({
+      routing: {
+        path: "/inbox",
+      },
+    }),
   },
 };
 
@@ -34,8 +45,16 @@ export const Default: Story = {
               <div className={styles.action_wrapper}>
                 <div className={styles.upper_row}>
                   <span>username</span>
-                  <Button type="button" variant="secondary" title="Edit Profile" />
-                  <Button type="button" variant="secondary" title="View archive" />
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    title="Edit Profile"
+                  />
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    title="View archive"
+                  />
                   <img src={Settings} alt="Settings" />
                 </div>
                 <div className={styles.profile_info}>

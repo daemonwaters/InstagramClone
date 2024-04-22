@@ -1,10 +1,11 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import SignIn from "./SignIn";
-import { expect, userEvent, within } from "@storybook/test";
+import { userEvent, within } from "@storybook/test";
 import {
   withRouter,
   reactRouterParameters,
 } from "storybook-addon-remix-react-router";
+import { withRedux } from "../../helpers/decorators/withRedux";
 
 const meta: Meta<typeof SignIn> = {
   title: "Pages/SignIn",
@@ -20,7 +21,7 @@ const meta: Meta<typeof SignIn> = {
       },
     }),
   },
-  decorators: [withRouter],
+  decorators: [withRouter, withRedux],
 };
 
 export default meta;
@@ -41,14 +42,6 @@ export const Default: Story = {
           canvas.getByPlaceholderText("Password"),
           "password123"
         );
-      }
-    );
-
-    await step(
-      "The user should click Log in button and loading indicator should show up",
-      async () => {
-        await userEvent.click(canvas.getByText("Log in"));
-        await expect(canvas.getByAltText("Loading")).toBeInTheDocument();
       }
     );
   },

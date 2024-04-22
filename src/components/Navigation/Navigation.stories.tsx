@@ -1,6 +1,8 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import Navigation from "./Navigation";
 import { expect, userEvent, within } from "@storybook/test";
+import { withRedux } from "../../helpers/decorators/withRedux";
+import { withRouter } from "storybook-addon-remix-react-router";
 
 const meta: Meta<typeof Navigation> = {
   title: "Components/Navigation",
@@ -13,6 +15,7 @@ const meta: Meta<typeof Navigation> = {
         "Specifies the variant of the Navigation component either full-width or decreased",
     },
   },
+  decorators: [withRedux, withRouter],
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
     const MoreListItem = canvas.getAllByRole("listitem")[8];
@@ -22,20 +25,20 @@ const meta: Meta<typeof Navigation> = {
     });
 
     await step("The user should click on the More options", async () => {
-      await userEvent.click(MoreListItem , {delay: 200});
+      await userEvent.click(MoreListItem, { delay: 200 });
     });
 
     await step("The overlay should render", async () => {
       await expect(canvas.getByText("Saved")).toBeInTheDocument();
     });
 
-    await step('The user should click to close the overlay' , async ()=>{
-        await userEvent.click(MoreListItem , {delay : 200})
-    })
+    await step("The user should click to close the overlay", async () => {
+      await userEvent.click(MoreListItem, { delay: 200 });
+    });
 
-    await step('The overlay should not be in the document' , async ()=>{
-        await expect(canvas.queryByText("Saved")).toBeFalsy()
-    })
+    await step("The overlay should not be in the document", async () => {
+      await expect(canvas.queryByText("Saved")).toBeFalsy();
+    });
   },
 };
 

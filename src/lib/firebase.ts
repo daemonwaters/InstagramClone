@@ -1,4 +1,20 @@
 import { initializeApp, FirebaseOptions, FirebaseApp } from "firebase/app";
+import {
+  getFirestore,
+  Firestore,
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  setDoc
+} from "firebase/firestore";
+import {
+  getStorage,
+  FirebaseStorage,
+  ref,
+  getMetadata,
+} from "firebase/storage";
+import {Auth, getAuth , createUserWithEmailAndPassword , UserCredential } from 'firebase/auth'
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -10,4 +26,22 @@ const firebaseConfig: FirebaseOptions = {
 };
 
 const app: FirebaseApp = initializeApp(firebaseConfig);
-export {app}
+const databse: Firestore = getFirestore(app);
+const storage: FirebaseStorage = getStorage(app);
+const auth : Auth = getAuth(app)
+export {
+  app,
+  databse,
+  auth,
+  addDoc,
+  collection,
+  storage,
+  ref,
+  getMetadata,
+  doc,
+  getDoc,
+  setDoc , 
+  createUserWithEmailAndPassword
+};
+
+export type { UserCredential}

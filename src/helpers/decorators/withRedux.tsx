@@ -9,11 +9,11 @@ import PlaceholderAvatar5 from "../../assets/svgs/avatarmock.svg";
 import PostPlaceholder1 from "../../assets/imgs/post-placeholder.avif";
 import PostPlaceholder2 from "../../assets/imgs/fall.jpeg";
 import PostPlaceholder3 from "../../assets/imgs/car.webp";
-import PostPlaceholder4 from "../../assets/imgs/toronto.webp"
+import PostPlaceholder4 from "../../assets/imgs/toronto.webp";
 import PostPlaceholder5 from "../../assets/imgs/tree.jpeg";
-import { Post } from "../../features/Users/slices/currentUser";
+import { Post } from "../../features/Users/slices/currentUserSlice";
 
-const MockPosts : Array<Post> = [
+const MockPosts: Array<Post> = [
   {
     author: "david24",
     avatar: PlaceholderAvatar1,
@@ -21,7 +21,7 @@ const MockPosts : Array<Post> = [
     likes_count: 24,
     caption: "Awesome day in the nature",
     post_img_url: PostPlaceholder1,
-    id : 1
+    id: 1,
   },
   {
     author: "tds_2002",
@@ -30,7 +30,7 @@ const MockPosts : Array<Post> = [
     likes_count: 90,
     caption: "Look at this view! I love this season.",
     post_img_url: PostPlaceholder2,
-    id : 2
+    id: 2,
   },
   {
     author: "james123",
@@ -39,7 +39,7 @@ const MockPosts : Array<Post> = [
     likes_count: 43,
     caption: "Check out my fav car! One day i will buy it.",
     post_img_url: PostPlaceholder3,
-    id : 3
+    id: 3,
   },
   {
     author: "somedude34",
@@ -48,7 +48,7 @@ const MockPosts : Array<Post> = [
     likes_count: 12,
     caption: "Amazing view of Toronto!",
     post_img_url: PostPlaceholder4,
-    id : 4
+    id: 4,
   },
   {
     author: "jalenx12y",
@@ -57,33 +57,42 @@ const MockPosts : Array<Post> = [
     likes_count: 200,
     caption: "No Caption , just beauty!",
     post_img_url: PostPlaceholder5,
-    id : 5
+    id: 5,
   },
 ];
 
 const MockInitialState = {
-  status: "idle",
   error: null,
-  data: {
-    username: "",
-    avatar_url: PlaceholderAvatar1,
-    bio: "",
-    posts: MockPosts,
-    following: [],
-    followers: [],
-    uid: "",
-  },
+  username: "",
+  avatar_url: PlaceholderAvatar1,
+  bio: "",
+  posts: MockPosts,
+  following: [],
+  followers: [],
+  uid: "",
 };
 
-const MockSlice = createSlice({
+const MockCurrentUserSlice = createSlice({
   name: "currentUser",
   initialState: MockInitialState,
   reducers: {},
 });
 
+const MockAuthSlice = createSlice({
+  name: "auth",
+  initialState: {
+    status: "idle",
+    error: null,
+    hasAccess: true,
+    accessId: "1234",
+  },
+  reducers: {},
+});
+
 const MockStore = configureStore({
   reducer: {
-    currentUser: MockSlice.reducer,
+    currentUser: MockCurrentUserSlice.reducer,
+    auth: MockAuthSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

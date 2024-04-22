@@ -8,9 +8,10 @@ import Spinner from "../../assets/svgs/spinner.svg";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { signUpUser } from "../../features/Users/services/SignUpUser";
+import { useAppSelector } from "../../hooks/reduxHooks";
+import { useSignUp } from "../../hooks/useSignUp";
 import { useNavigate } from "react-router-dom";
+
 type Validation = {
   isUsernameValid: boolean | undefined;
   isPasswordValid: boolean | undefined;
@@ -19,14 +20,13 @@ type Validation = {
 function SignIn() {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [successSignal, setSuccussSignal] = useState<boolean>(false);
   const [validation, setValidation] = useState<Validation>({
     isPasswordValid: undefined,
     isUsernameValid: undefined,
   });
-  const dispatch = useAppDispatch();
+  const { signUpUser, successSignal } = useSignUp();
   const navigate = useNavigate();
-  const isCurrentUser = useAppSelector((state) => state.currentUser);
+  const auth = useAppSelector((state) => state.auth);
 
   const handleChangeUsername: ChangeEventHandler<HTMLInputElement> = (
     event
@@ -62,7 +62,7 @@ function SignIn() {
       setValidation({ ...validation, isPasswordValid: false });
       return;
     }
-    dispatch(signUpUser({ username, password, signal: setSuccussSignal }));
+    signUpUser({ username, password });
   };
 
   if (successSignal) {
@@ -72,6 +72,7 @@ function SignIn() {
       }, 500);
     })();
   }
+
   return (
     <div className={styles.signIn_wrapper}>
       <div className={styles.signIn_content}>
@@ -99,12 +100,12 @@ function SignIn() {
                 isValid={validation.isPasswordValid}
               />
               <Button
-                disable={isCurrentUser.status == "pending" ? true : false}
+                disable={auth.status == "pending" ? true : false}
                 type="submit"
                 variant="primary"
                 title="Log in"
               >
-                {isCurrentUser.status == "pending" ? (
+                {auth.status == "pending" ? (
                   <img className={styles.spinner} src={Spinner} alt="Loading" />
                 ) : (
                   "Log in"

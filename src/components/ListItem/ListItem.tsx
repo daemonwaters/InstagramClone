@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "./ListItem.module.scss";
 import Avatar from "../Avatar/Avatar";
 import { Variants } from "../Avatar/Avatar";
-import MockAvatar from "../../assets/svgs/avatarmock.svg";
 import { useAppSelector } from "../../hooks/reduxHooks";
 
 type ListItemProps = {
@@ -35,10 +34,7 @@ function ListItem({
         <></>
       )}
       {hasAvatar ? (
-        <Avatar
-          src={currentUser.data.avatar_url}
-          variant={Variants.navigation}
-        />
+        <Avatar src={currentUser.avatar_url} variant={Variants.navigation} />
       ) : (
         <></>
       )}

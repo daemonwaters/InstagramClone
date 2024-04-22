@@ -16,4 +16,3 @@ function Inbox() {
 }
 
 export default Inbox;
-

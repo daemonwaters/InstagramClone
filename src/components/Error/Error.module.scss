@@ -1,0 +1,16 @@
+.error {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    background: #F2F0F1;
+}
+
+.content{
+    display: flex;
+    div {
+        margin-top: 4rem;
+        p{
+            margin: 1rem 0;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import styles from './Overlay.module.scss';
+import styles from "./Overlay.module.scss";
 import { overlayData } from "./OverlayData";
 import ListItem from "../ListItem/ListItem";
 

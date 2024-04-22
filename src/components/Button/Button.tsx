@@ -7,7 +7,7 @@ type ButtonProps = {
   type: "submit" | "button";
   extraStyles?: Object;
   onClick?: MouseEventHandler<HTMLButtonElement>;
-  disable? : boolean
+  disable?: boolean;
   children?: JSX.Element | ReactNode;
 };
 
@@ -18,7 +18,7 @@ function Button({
   onClick,
   type,
   disable,
-  children
+  children,
 }: ButtonProps) {
   return (
     <button

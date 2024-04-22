@@ -3,18 +3,36 @@ import Navigation from "../../components/Navigation/Navigation";
 import StoryContainer from "../../features/Story/components/StoryContainer/StoryContainer";
 import PreviewBlock from "../../components/PreviewBlock/PreviewBlock";
 import Button from "../../components/Button/Button";
-import { useAppSelector } from "../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import Post from "../../features/Posts/components/Post/Post";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { GetUserFromFirestore } from "../../features/Users/services/GetUserFromFirestore";
+import Error from "../../components/Error/Error";
 
 function Home() {
-  const { avatar_url, username, posts } = useAppSelector(
-    (state) => state.currentUser.data
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { accessId, hasAccess } = useAppSelector((state) => state.auth);
+  const { avatar_url, username, posts, error } = useAppSelector(
+    (state) => state.currentUser
   );
 
-  const navigate = useNavigate();
-  const hasAccess = useAppSelector((state) => state.currentUser.hasAccess);
+  useEffect(() => {
+    if (!hasAccess) {
+      return navigate("/");
+    }
+  }, []);
 
+  useEffect(() => {
+    if (accessId) {
+      dispatch(GetUserFromFirestore(accessId));
+    }
+  }, [accessId]);
+
+  if (error) {
+    return <Error />;
+  }
 
   return (
     <div className={styles.home}>

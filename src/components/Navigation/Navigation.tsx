@@ -27,8 +27,9 @@ function Navigation({ variant }: NavigationProps) {
           return (
             <>
               {nav.isLinkedTo ? (
-                <Link key={nav.id} to={nav.isLinkedTo}>
+                <Link to={nav.isLinkedTo}>
                   <ListItem
+                    key={nav.id}
                     variant={variant == "full-width" ? "default" : "icon-only"}
                     icon={nav.icon}
                     title={nav.title}

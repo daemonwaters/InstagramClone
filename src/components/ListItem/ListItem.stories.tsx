@@ -2,6 +2,7 @@ import type { StoryObj, Meta } from "@storybook/react";
 import ListItem from "./ListItem";
 import MockIcon from "../../assets/svgs/home.svg";
 import AvatarMock from "../../assets/svgs/avatarmock.svg";
+import { withRedux } from "../../helpers/decorators/withRedux";
 
 const meta: Meta<typeof ListItem> = {
   title: "Atoms/ListItem",
@@ -36,6 +37,7 @@ const meta: Meta<typeof ListItem> = {
   parameters: {
     layout: "padded",
   },
+  decorators: [withRedux],
 };
 
 export default meta;

@@ -9,12 +9,24 @@ import MockPostImg from "../../assets/imgs/post-placeholder.avif";
 import Post from "../../features/Posts/components/Post/Post";
 import PreviewBlock from "../../components/PreviewBlock/PreviewBlock";
 import Button from "../../components/Button/Button";
+import { withRedux } from "../../helpers/decorators/withRedux";
+import {
+  reactRouterParameters,
+  withRouter,
+} from "storybook-addon-remix-react-router";
 
 const meta: Meta<typeof Home> = {
   title: "Pages/Home",
   component: Home,
   tags: ["autodocs"],
-  parameters: {},
+  decorators: [withRedux, withRouter],
+  parameters: {
+    reactRouter: reactRouterParameters({
+      routing: {
+        path: "/home",
+      },
+    }),
+  },
 };
 
 export default meta;
