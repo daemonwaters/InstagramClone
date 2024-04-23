@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import Placeholder from "../../../assets/imgs/profile-placeholder.jpeg";
 import { GetUserFromFirestore } from "../services/GetUserFromFirestore";
+import { ChangeAvatar } from "../services/ChangeAvatar";
+import { ChangeBio } from "../services/ChangeBio";
 export type Post = {
   author: string;
   avatar: string;
@@ -52,6 +54,22 @@ const currentUserSlice = createSlice({
         state.following = payload.following;
         state.uid = payload.uid;
         state.posts = payload.posts;
+      })
+      .addCase(ChangeAvatar.rejected, (state, { payload }) => {
+        state.error = {
+          message: payload as string,
+        };
+      })
+      .addCase(ChangeAvatar.fulfilled, (state, { payload }) => {
+        state.avatar_url = payload;
+      })
+      .addCase(ChangeBio.rejected, (state, { payload }) => {
+        state.error = {
+          message: payload as string,
+        };
+      })
+      .addCase(ChangeBio.fulfilled, (state, { payload }) => {
+        state.bio = payload;
       });
   },
 });

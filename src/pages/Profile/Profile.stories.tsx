@@ -15,6 +15,7 @@ import {
   reactRouterParameters,
   withRouter,
 } from "storybook-addon-remix-react-router";
+import { BiEdit } from "react-icons/bi";
 
 const meta: Meta<typeof Profile> = {
   title: "Pages/Profile",
@@ -61,6 +62,10 @@ export const Default: Story = {
                   <span>7 posts</span>
                   <span>61 followers</span>
                   <span>779 following</span>
+                </div>
+                <div className={styles.bio}>
+                  Bio
+                  <BiEdit />
                 </div>
               </div>
             </div>

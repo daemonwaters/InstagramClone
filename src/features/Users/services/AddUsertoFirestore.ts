@@ -27,9 +27,7 @@ export const AddUsertoFiretore = createAsyncThunk(
       signal(true);
       return document.id;
     } catch (error) {
-      return rejectWithValue({
-        message: "Something went wrong, Signup failed.",
-      });
+      return rejectWithValue("Something went wrong, Signup failed.");
     }
   }
 );

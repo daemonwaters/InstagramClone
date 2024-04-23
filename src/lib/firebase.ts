@@ -13,6 +13,9 @@ import {
   FirebaseStorage,
   ref,
   getMetadata,
+  getDownloadURL , 
+  uploadBytesResumable , 
+  uploadBytes
 } from "firebase/storage";
 import {Auth, getAuth , createUserWithEmailAndPassword , UserCredential } from 'firebase/auth'
 
@@ -41,7 +44,10 @@ export {
   doc,
   getDoc,
   setDoc , 
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword ,
+  uploadBytesResumable , 
+  getDownloadURL , 
+  uploadBytes
 };
 
 export type { UserCredential}

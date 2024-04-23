@@ -14,9 +14,7 @@ export const GetUserFromFirestore = createAsyncThunk(
         throw new Error();
       }
     } catch (error) {
-      return rejectWithValue({
-        message: "There was an error getting user from databse",
-      });
+      return rejectWithValue("There was an error getting user from databse");
     }
   }
 );

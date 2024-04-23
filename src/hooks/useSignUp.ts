@@ -15,7 +15,7 @@ type User = {
 export function useSignUp() {
   const dispatch = useAppDispatch();
   const [successSignal, setSuccussSignal] = useState<boolean>(false);
-  const signUpUser = async (user:User) => {
+  const signUpUser = async (user: User) => {
     try {
       const { username, password } = user;
       const userCredential: UserCredential =
@@ -26,5 +26,5 @@ export function useSignUp() {
     }
   };
 
-  return {signUpUser, successSignal};
+  return { signUpUser, successSignal };
 }
