@@ -1,0 +1,25 @@
+.controls {
+    position: absolute;
+    bottom: 4%;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    padding: 0 0.4rem;
+    width: 100%;
+    span {
+      width: 32px;
+      aspect-ratio: 1/1;
+      border-radius: 50%;
+      cursor: pointer;
+      background: #232020;
+      display: grid;
+      place-items: center;
+      &:last-child {
+        margin-left: auto;
+      }
+      img {
+        width: 16px;
+        aspect-ratio: 1/1;
+      }
+    }
+  }

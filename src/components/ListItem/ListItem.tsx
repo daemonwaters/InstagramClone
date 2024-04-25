@@ -8,18 +8,22 @@ type ListItemProps = {
   variant: "default" | "icon-only" | "title-only";
   icon: string;
   title: string;
+  id?: number;
   children?: JSX.Element | React.ReactNode;
   extraStyles?: Object;
   hasAvatar?: boolean;
+  onClick?: () => void;
 };
 
 function ListItem({
   variant,
+  id,
   icon,
   title,
   children,
   extraStyles,
   hasAvatar,
+  onClick,
 }: ListItemProps) {
   const currentUser = useAppSelector((state) => state.currentUser);
   const [showOverlay, setShowOverlay] = useState<boolean>(false);
@@ -27,7 +31,11 @@ function ListItem({
     setShowOverlay(!showOverlay);
   }
   return (
-    <li onClick={handleClick} style={extraStyles} className={styles.listItem}>
+    <li
+      onClick={id == 7 ? onClick : handleClick}
+      style={extraStyles}
+      className={styles.listItem}
+    >
       {variant !== "title-only" && !hasAvatar ? (
         <img src={icon} alt={title} />
       ) : (

@@ -1,0 +1,23 @@
+@use "../../../../StyleGuides" as guide;
+
+.header {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  background: guide.$bg-post-modal;
+  border-bottom: solid 1px guide.$bg-more-options-nav-hover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 0 0.4rem;
+  span {
+    color: #fff;
+    font-size: guide.$fs-heading2;
+    font-weight: guide.$fw-bold;
+  }
+  button {
+    padding: 0;
+  }
+  img {
+    cursor: pointer;
+  }
+}

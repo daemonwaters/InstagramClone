@@ -1,0 +1,82 @@
+@use "../../../../../StyleGuides" as guide;
+
+.body {
+  display: flex;
+}
+.preview {
+  width: 473px;
+  height: 431px;
+  position: relative;
+  background: guide.$bg-post-modal;
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.post_info {
+  width: 340px;
+  background: guide.$bg-post-modal;
+  display: flex;
+  flex-direction: column;
+  padding: 0.8rem 1rem 0;
+}
+.username_avatar {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-bottom: 1.2rem;
+  > span {
+    color: #fff;
+    font-weight: 500;
+  }
+}
+
+.caption_area {
+  display: flex;
+  flex-direction: column;
+  width: 310px;
+  height: 205px;
+  textarea {
+    flex: 1;
+    background: transparent;
+    border: none;
+    resize: none;
+    outline: none;
+    padding-left: 0.5rem;
+    color: #fff;
+  }
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  > img {
+    width: 19px;
+    aspect-ratio: 1/1;
+    cursor: pointer;
+  }
+}
+
+.counter {
+  color: #fff;
+}
+.more_settings {
+  margin-top: 1rem;
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.7rem;
+    cursor: pointer;
+    &:first-child {
+      color: #a8a8a8;
+    }
+    &:not(:first-child) {
+      color: #fff;
+    }
+  }
+}

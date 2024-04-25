@@ -1,0 +1,61 @@
+import ModalHeader from "../../ModalHeader/ModalHeader";
+import styles from "./Final.module.scss";
+import Avatar, { Variants } from "../../../../../components/Avatar/Avatar";
+import MockAvatar from "../../../../../assets/svgs/avatarmock.svg";
+import Emoji from "../../../../../assets/svgs/emoji.svg";
+import Location from "../../../../../assets/svgs/Location.svg";
+import ArrowDown from "../../../../../assets/svgs/arrow-down.svg";
+import { useAppSelector } from "../../../../../hooks/reduxHooks";
+function Final() {
+  const PreviewSrc = useAppSelector((state) => state.step.preview_src);
+  return (
+    <div className={styles.final}>
+      <ModalHeader
+        extended
+        title="Create new post"
+        variant="withActions"
+        buttonTitle="Share"
+      />
+      <div className={styles.body}>
+        <div className={styles.preview}>
+          <img src={PreviewSrc!} alt="Image" />
+        </div>
+        <div className={styles.post_info}>
+          <div className={styles.username_avatar}>
+            <Avatar variant={Variants.msg} src={MockAvatar} />
+            <span>username</span>
+          </div>
+          <div className={styles.caption_area}>
+            {/* <input
+              placeholder="Write a caption..."
+              type="text"
+              name="post-caption"
+              id="post-caption"
+            /> */}
+            <textarea placeholder="Write a caption..." name="" id=""></textarea>
+            <footer className={styles.footer}>
+              <img src={Emoji} alt="Emoji" />
+              <span className={styles.counter}>0/200</span>
+            </footer>
+          </div>
+          <div className={styles.more_settings}>
+            <div>
+              <span>Add Location</span>
+              <img src={Location} alt="location" />
+            </div>
+            <div>
+              <span>Accessibility</span>
+              <img src={ArrowDown} alt="arrow down" />
+            </div>
+            <div>
+              <span>Advanced Settings</span>
+              <img src={ArrowDown} alt="arrow down" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Final;

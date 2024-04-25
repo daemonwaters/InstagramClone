@@ -18,4 +18,8 @@ const meta: Meta<typeof Overlay> = {
 export default meta;
 type Story = StoryObj<typeof Overlay>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  decorators: [
+    (story) => <div style={{ position: "absolute" , top:'100%' }}>{story()}</div>,
+  ],
+};

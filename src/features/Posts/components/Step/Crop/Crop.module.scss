@@ -1,0 +1,14 @@
+@use "../../../../../StyleGuides" as guide;
+
+.body {
+  width: 473px;
+  height: 431px;
+  position: relative;
+  background: guide.$bg-post-modal;
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}

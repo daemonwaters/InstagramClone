@@ -5,12 +5,20 @@ import ListItem from "../ListItem/ListItem";
 import { NavigationData } from "./NavigationData";
 import Overlay from "../Overlay/Overlay";
 import { Link } from "react-router-dom";
+import { useAppDispatch } from "../../hooks/reduxHooks";
+import { showModal } from "../../features/Posts/slices/modalSlice";
 
 type NavigationProps = {
   variant: "full-width" | "decreased";
 };
 
 function Navigation({ variant }: NavigationProps) {
+  const dispatch = useAppDispatch();
+
+  const handlePostModal = () => {
+    dispatch(showModal());
+  };
+
   return (
     <aside className={styles.aside}>
       {variant == "full-width" ? (
@@ -37,9 +45,7 @@ function Navigation({ variant }: NavigationProps) {
                     extraStyles={{
                       width: variant === "decreased" ? "fit-content" : "",
                     }}
-                  >
-                    {nav.id === 9 ? <Overlay /> : <></>}
-                  </ListItem>
+                  />
                 </Link>
               ) : (
                 <ListItem
@@ -51,6 +57,8 @@ function Navigation({ variant }: NavigationProps) {
                   extraStyles={{
                     width: variant === "decreased" ? "fit-content" : "",
                   }}
+                  onClick={nav.id == 7 ? handlePostModal : undefined}
+                  id={nav.id}
                 >
                   {nav.id === 9 ? <Overlay /> : <></>}
                 </ListItem>

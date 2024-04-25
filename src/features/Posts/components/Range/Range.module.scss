@@ -1,0 +1,39 @@
+.range {
+  width: 307px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0.2rem 0;
+  position: relative;
+}
+
+input[type="range"] {
+  cursor: pointer;
+  appearance: none;
+  width: 92%;
+  &::-webkit-slider-runnable-track {
+    background: #000;
+    height: 3px;
+  }
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #fff;
+    margin-top: -5px;
+  }
+}
+
+.title {
+  color: #fff;
+  font-weight: 500;
+}
+
+.value {
+  position: absolute;
+  right: 0;
+  top: 45%;
+  margin-right: 0.5rem;
+  color: #737373;
+}

@@ -1,0 +1,76 @@
+@use "../../../../../StyleGuides" as guide;
+
+.body {
+  display: flex;
+}
+
+.preview {
+  width: 473px;
+  height: 431px;
+  position: relative;
+  background: guide.$bg-post-modal;
+  > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.edit_section {
+  width: 340px;
+  background: guide.$bg-post-modal;
+}
+
+.tabs {
+  height: 35px;
+  display: flex;
+  span {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    border-bottom: solid 1px #3c3c3c;
+    cursor: pointer;
+    color: #3c3c3c;
+    transition: all ease 300ms;
+  }
+}
+
+.filters_preview {
+  display: grid;
+  padding: 1rem 0.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 1rem;
+}
+
+.filter {
+  min-width: 88px;
+  height: 111px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  > img {
+    width: 88px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    object-position: top;
+    transition: opacity ease 250ms;
+  }
+  &:hover > img {
+    opacity: 0.75;
+  }
+}
+
+.filter_name {
+  color: #fff;
+}
+
+.adjustments {
+  padding: 1rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}

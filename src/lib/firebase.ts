@@ -6,18 +6,23 @@ import {
   collection,
   doc,
   getDoc,
-  setDoc
+  setDoc,
 } from "firebase/firestore";
 import {
   getStorage,
   FirebaseStorage,
   ref,
   getMetadata,
-  getDownloadURL , 
-  uploadBytesResumable , 
-  uploadBytes
+  getDownloadURL,
+  uploadBytesResumable,
+  uploadBytes,
 } from "firebase/storage";
-import {Auth, getAuth , createUserWithEmailAndPassword , UserCredential } from 'firebase/auth'
+import {
+  Auth,
+  getAuth,
+  createUserWithEmailAndPassword,
+  UserCredential,
+} from "firebase/auth";
 
 const firebaseConfig: FirebaseOptions = {
   apiKey: import.meta.env.VITE_API_KEY,
@@ -31,7 +36,7 @@ const firebaseConfig: FirebaseOptions = {
 const app: FirebaseApp = initializeApp(firebaseConfig);
 const databse: Firestore = getFirestore(app);
 const storage: FirebaseStorage = getStorage(app);
-const auth : Auth = getAuth(app)
+const auth: Auth = getAuth(app);
 export {
   app,
   databse,
@@ -43,11 +48,11 @@ export {
   getMetadata,
   doc,
   getDoc,
-  setDoc , 
-  createUserWithEmailAndPassword ,
-  uploadBytesResumable , 
-  getDownloadURL , 
-  uploadBytes
+  setDoc,
+  createUserWithEmailAndPassword,
+  uploadBytesResumable,
+  getDownloadURL,
+  uploadBytes,
 };
 
-export type { UserCredential}
+export type { UserCredential };
