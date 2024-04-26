@@ -5,9 +5,13 @@ import MockAvatar from "../../../../../assets/svgs/avatarmock.svg";
 import Emoji from "../../../../../assets/svgs/emoji.svg";
 import Location from "../../../../../assets/svgs/Location.svg";
 import ArrowDown from "../../../../../assets/svgs/arrow-down.svg";
+import FilterClasses from "../Edit/Filters.module.scss";
 import { useAppSelector } from "../../../../../hooks/reduxHooks";
 function Final() {
   const PreviewSrc = useAppSelector((state) => state.step.preview_src);
+  const { customClass, activeFilter } = useAppSelector(
+    (state) => state.editProcess
+  );
   return (
     <div className={styles.final}>
       <ModalHeader
@@ -18,7 +22,12 @@ function Final() {
       />
       <div className={styles.body}>
         <div className={styles.preview}>
-          <img src={PreviewSrc!} alt="Image" />
+          <img
+            style={customClass}
+            id={FilterClasses[activeFilter]}
+            src={PreviewSrc!}
+            alt="Image"
+          />
         </div>
         <div className={styles.post_info}>
           <div className={styles.username_avatar}>

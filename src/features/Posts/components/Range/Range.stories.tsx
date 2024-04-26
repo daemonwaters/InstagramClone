@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from "@storybook/react";
 import Range from "./Range";
+import { withRedux } from "../../../../helpers/decorators/withRedux";
 
 const meta: Meta<typeof Range> = {
   title: "Components/Range",
@@ -9,11 +10,15 @@ const meta: Meta<typeof Range> = {
       description: "Title of the given Range component.",
     },
   },
+  decorators : [withRedux]
 };
 
 export default meta;
 export const Default: StoryObj<typeof Range> = {
-  render: () => <Range title="Brightness" />,
+  args: {
+    title: "Brightness",
+  },
+  render: (args) => <Range {...args} />,
   parameters: {
     layout: "padded",
   },

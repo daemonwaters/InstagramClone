@@ -1,6 +1,6 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import Crop from "./Crop";
-import { withSteps } from "../../../../../helpers/decorators/withSteps";
+import { withRedux } from "../../../../../helpers/decorators/withRedux";
 
 const meta: Meta<typeof Crop> = {
   title: "Components/Steps/Crop",
@@ -12,7 +12,7 @@ const meta: Meta<typeof Crop> = {
     },
     layout: "padded",
   },
-  decorators: [withSteps],
+  decorators: [withRedux],
 };
 
 export default meta;

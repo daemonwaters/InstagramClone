@@ -1,6 +1,7 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import Modal from "./Modal";
-import { withSteps } from "../../../../helpers/decorators/withSteps";
+import { withRedux } from "../../../../helpers/decorators/withRedux";
+withRedux
 
 const meta: Meta<typeof Modal> = {
   title: "Components/Modal",
@@ -12,7 +13,7 @@ const meta: Meta<typeof Modal> = {
     },
     layout: "padded",
   },
-  decorators: [withSteps],
+  decorators: [withRedux],
 };
 
 export default meta;

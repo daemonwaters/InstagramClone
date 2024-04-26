@@ -1,6 +1,6 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import SelectMedia from "./SelectMedia";
-import { withSteps } from "../../../../../helpers/decorators/withSteps";
+import { withRedux } from "../../../../../helpers/decorators/withRedux";
 
 const meta: Meta<typeof SelectMedia> = {
   title: "Components/Steps/SelectMedia",
@@ -17,7 +17,7 @@ const meta: Meta<typeof SelectMedia> = {
       description: "A function which gets passed down to the onChange event",
     },
   },
-  decorators: [withSteps],
+  decorators: [withRedux],
 };
 
 export default meta;

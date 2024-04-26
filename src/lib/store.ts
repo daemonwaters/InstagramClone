@@ -3,6 +3,7 @@ import authSliceReducer from "../features/Users/slices/authSlice";
 import currentUserReducer from "../features/Users/slices/currentUserSlice";
 import stepSliceReducer from "../features/Posts/slices/stepSlice";
 import modalSliceReducer from "../features/Posts/slices/modalSlice";
+import editSliceReducer from "../features/Posts/slices/editSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     currentUser: currentUserReducer,
     step: stepSliceReducer,
     modal: modalSliceReducer,
+    editProcess : editSliceReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

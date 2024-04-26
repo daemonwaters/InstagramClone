@@ -1,38 +1,38 @@
 export const Filters = [
   {
-    name: "B&W",
+    name: "bw",
     id: 1,
   },
   {
-    name: "Dark",
+    name: "hudson",
     id: 2,
   },
   {
-    name: "Light",
+    name: "aden",
     id: 3,
   },
   {
-    name: "Classic",
+    name: "brooklyn",
     id: 4,
   },
   {
-    name: "New York",
+    name: "earlybird",
     id: 5,
   },
   {
-    name: "Warm",
+    name: "hefe",
     id: 6,
   },
   {
-    name: "Cold",
+    name: "lofi",
     id: 7,
   },
   {
-    name: "Dramatic",
+    name: "crema",
     id: 8,
   },
   {
-    name: "Film",
+    name: "nashville",
     id: 9,
   },
 ];

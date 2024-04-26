@@ -1,6 +1,6 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import Edit from "./Edit";
-import { withSteps } from "../../../../../helpers/decorators/withSteps";
+import { withRedux } from "../../../../../helpers/decorators/withRedux";
 
 const meta: Meta<typeof Edit> = {
   title: "Components/Steps/Edit",
@@ -12,7 +12,7 @@ const meta: Meta<typeof Edit> = {
     },
     layout: "padded",
   },
-  decorators: [withSteps],
+  decorators: [withRedux],
 };
 
 export default meta;

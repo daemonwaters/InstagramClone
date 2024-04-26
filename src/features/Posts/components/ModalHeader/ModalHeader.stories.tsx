@@ -1,6 +1,6 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import ModalHeader from "./ModalHeader";
-import { withSteps } from "../../../../helpers/decorators/withSteps";
+import { withRedux } from "../../../../helpers/decorators/withRedux";
 
 const meta: Meta<typeof ModalHeader> = {
   title: "Components/ModalHeader",
@@ -25,7 +25,7 @@ const meta: Meta<typeof ModalHeader> = {
       description: "Title given to the button of header",
     },
   },
-  decorators: [withSteps],
+  decorators: [withRedux],
 };
 
 export default meta;

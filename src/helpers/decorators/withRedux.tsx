@@ -12,6 +12,8 @@ import PostPlaceholder3 from "../../assets/imgs/car.webp";
 import PostPlaceholder4 from "../../assets/imgs/toronto.webp";
 import PostPlaceholder5 from "../../assets/imgs/tree.jpeg";
 import { Post } from "../../features/Users/slices/currentUserSlice";
+import MockStepSliceReducer from "./withSteps";
+import MockEditSliceReducer from "./withEdit";
 
 const MockPosts: Array<Post> = [
   {
@@ -93,6 +95,8 @@ const MockStore = configureStore({
   reducer: {
     currentUser: MockCurrentUserSlice.reducer,
     auth: MockAuthSlice.reducer,
+    step : MockStepSliceReducer , 
+    editProcess : MockEditSliceReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
