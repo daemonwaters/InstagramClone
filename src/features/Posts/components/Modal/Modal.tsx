@@ -7,6 +7,9 @@ import Final from "../Step/Final/Final";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
 import { FaXmark } from "react-icons/fa6";
 import { closeModal } from "../../slices/modalSlice";
+import { clearStepProcess } from "../../slices/stepSlice";
+import { clearPostData } from "../../slices/postSlice";
+import { clearEditProcess } from "../../slices/editSlice";
 function Modal() {
   const steps = [<SelectMedia />, <Crop />, <Edit />, <Final />];
   const dispatch = useAppDispatch();
@@ -14,6 +17,9 @@ function Modal() {
 
   const handleCloseModal = () => {
     dispatch(closeModal());
+    dispatch(clearStepProcess());
+    dispatch(clearPostData());
+    dispatch(clearEditProcess());
   };
 
   return createPortal(

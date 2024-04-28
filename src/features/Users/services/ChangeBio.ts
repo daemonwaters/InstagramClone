@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { databse, doc } from "../../../lib/firebase";
-import { updateDoc } from "firebase/firestore";
+import { databse, doc, updateDoc } from "../../../lib/firebase";
 
 type Params = {
   documentId: string;

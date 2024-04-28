@@ -7,24 +7,32 @@ import PostsTab from "../../assets/svgs/posts-tab.svg";
 import SavedTab from "../../assets/svgs/bookmark-tab.svg";
 import TaggedTab from "../../assets/svgs/tagged-tab.svg";
 import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, useEffect, useState } from "react";
 import { useUpload } from "../../hooks/useUpload";
 import { BiEdit } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa6";
 import { ChangeBio } from "../../features/Users/services/ChangeBio";
-
+import { GetMyPostsFromFirestore } from "../../features/Posts/services/GetMyPostsFromFirestore";
+import FilterClasses from "../../features/Posts/components/Step/Edit/Filters.module.scss";
 function Profile() {
-  const { username, posts, avatar_url, followers, following, bio } =
-    useAppSelector((state) => state.currentUser);
+  const {
+    username,
+    posts: myPosts,
+    avatar_url,
+    followers,
+    following,
+    bio,
+  } = useAppSelector((state) => state.currentUser);
   const dispatch = useAppDispatch();
   const upload = useUpload();
   const { accessId } = useAppSelector((state) => state.auth);
   const [edit, setEdit] = useState(false);
   const [newBio, setNewBio] = useState<null | string>(null);
+  const { postId } = useAppSelector((state) => state.post);
 
   const handleProfileChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const newFile = event.target.files?.item(0) as File;
-    upload(newFile, accessId!);
+    upload({ action: "avatar_change", file: newFile, documentId: accessId! });
   };
 
   const handleEditBio: ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -35,6 +43,10 @@ function Profile() {
     setEdit(false);
     dispatch(ChangeBio({ new_bio: newBio!, documentId: accessId! }));
   };
+
+  useEffect(() => {
+    dispatch(GetMyPostsFromFirestore(accessId!));
+  }, [postId]);
 
   return (
     <div className={styles.profile_page}>
@@ -68,7 +80,7 @@ function Profile() {
                 <img src={Settings} alt="Settings" />
               </div>
               <div className={styles.profile_info}>
-                <span>{posts.length} posts</span>
+                <span>{myPosts.length} posts</span>
                 <span>{followers.length} followers</span>
                 <span>{following.length} following</span>
               </div>
@@ -115,7 +127,14 @@ function Profile() {
             </div>
           </nav>
           <div className={styles.content}>
-            {/* this is where the posts go */}
+            {myPosts.map((post) => (
+              <img
+                style={post.editValue.customClass}
+                id={FilterClasses[post.editValue.filter]}
+                src={post.content_url}
+                alt={post.caption}
+              />
+            ))}
           </div>
         </div>
       </div>

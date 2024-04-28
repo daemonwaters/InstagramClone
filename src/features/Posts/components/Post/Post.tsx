@@ -1,14 +1,21 @@
 import styles from "./Post.module.scss";
 import Header from "../Header/Header";
 import Actions from "../Actions/Actions";
+import FilterClasses from "../Step/Edit/Filters.module.scss";
+import { ActiveFilter, CustomClass } from "../../slices/editSlice";
 
 type PostProps = {
   user_avatar_url: string;
   username: string;
-  date: string;
+  date: number;
+  //change later to string
   post_img_url: string;
   likes_count: number;
   caption: string;
+  editValue: {
+    filter: ActiveFilter;
+    customClass: CustomClass;
+  };
 };
 
 function Post(props: PostProps) {
@@ -19,6 +26,7 @@ function Post(props: PostProps) {
     post_img_url,
     likes_count,
     caption,
+    editValue,
   } = props;
 
   return (
@@ -26,10 +34,15 @@ function Post(props: PostProps) {
       <Header
         user_avatar_url={user_avatar_url}
         username={username}
-        date={date}
+        date={`${date}`}
       />
       <div className={styles.img_wrapper}>
-        <img src={post_img_url} alt="Image" />
+        <img
+          id={FilterClasses[editValue.filter]}
+          style={editValue.customClass}
+          src={post_img_url}
+          alt="Image"
+        />
       </div>
       <Actions />
       <div className={styles.meta}>

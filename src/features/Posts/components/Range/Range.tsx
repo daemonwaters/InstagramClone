@@ -1,11 +1,7 @@
 import { ChangeEventHandler, useState } from "react";
 import styles from "./Range.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
-import {
-  createCustomClass,
-  mutateAdjustments,
-  setFilterInteraction,
-} from "../../slices/editSlice";
+import { createCustomClass, mutateAdjustments } from "../../slices/editSlice";
 type RangeProps = {
   title: string;
 };
@@ -16,7 +12,6 @@ function Range({ title }: RangeProps) {
   const handleAdjustmentChange: ChangeEventHandler<HTMLInputElement> = (
     event
   ) => {
-    dispatch(setFilterInteraction(false));
     dispatch(mutateAdjustments({ title, value: Number(event.target.value) }));
     setAdjustmentValue(event.target.value);
     dispatch(

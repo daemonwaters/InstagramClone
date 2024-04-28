@@ -11,7 +11,7 @@ export type ActiveFilter =
   | "crema"
   | "nashville"
   | "";
-type CustomClass = { filter: string } | {};
+export type CustomClass = { filter: string } | {};
 export type Adjustments<T> = {
   brightness?: T;
   saturate?: T;
@@ -29,7 +29,6 @@ type InitialState = {
   activeTab: ActiveTab;
   activeFilter: ActiveFilter;
   adjustments: Adjustments<number>;
-  filtersInteraction: boolean;
   customClass: CustomClass;
 };
 
@@ -37,7 +36,6 @@ const initialState: InitialState = {
   activeTab: "filters",
   activeFilter: "",
   adjustments: {},
-  filtersInteraction: false,
   customClass: {},
 };
 
@@ -57,14 +55,18 @@ const editSlice = createSlice({
         [action.payload.title]: action.payload.value,
       };
     },
-    setAdjustments: (state, action: PayloadAction<Adjustments<number>>) => {
-      state.adjustments = action.payload;
-    },
-    setFilterInteraction: (state, action: PayloadAction<boolean>) => {
-      state.filtersInteraction = action.payload;
-    },
     createCustomClass: (state, action: PayloadAction<CustomClass>) => {
       state.customClass = action.payload;
+    },
+    clearAdjustments: (state) => {
+      state.adjustments = {};
+      state.customClass = {};
+    },
+    clearFilters: (state) => {
+      state.activeFilter = "";
+    },
+    clearEditProcess: (state) => {
+      state = initialState;
     },
   },
 });
@@ -74,8 +76,9 @@ export default editSliceReducer;
 export const {
   activateTab,
   activateFilter,
-  setAdjustments,
-  setFilterInteraction,
   mutateAdjustments,
   createCustomClass,
+  clearFilters,
+  clearAdjustments,
+  clearEditProcess,
 } = editSlice.actions;

@@ -4,6 +4,8 @@ import currentUserReducer from "../features/Users/slices/currentUserSlice";
 import stepSliceReducer from "../features/Posts/slices/stepSlice";
 import modalSliceReducer from "../features/Posts/slices/modalSlice";
 import editSliceReducer from "../features/Posts/slices/editSlice";
+import postSlideReducer from "../features/Posts/slices/postSlice";
+import suggestionSliceReducer from "../features/Users/slices/suggestionSlice";
 
 const store = configureStore({
   reducer: {
@@ -11,7 +13,9 @@ const store = configureStore({
     currentUser: currentUserReducer,
     step: stepSliceReducer,
     modal: modalSliceReducer,
-    editProcess : editSliceReducer
+    editProcess: editSliceReducer,
+    post: postSlideReducer,
+    suggestion: suggestionSliceReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

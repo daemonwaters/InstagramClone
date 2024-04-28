@@ -7,10 +7,10 @@ const modalSlice = createSlice({
   initialState,
   reducers: {
     showModal: (state) => {
-      return state = true;
+      return (state = true);
     },
     closeModal: (state) => {
-      return state = false;
+      return (state = false);
     },
   },
 });

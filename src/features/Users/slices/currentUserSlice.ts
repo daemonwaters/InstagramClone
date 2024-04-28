@@ -3,14 +3,21 @@ import Placeholder from "../../../assets/imgs/profile-placeholder.jpeg";
 import { GetUserFromFirestore } from "../services/GetUserFromFirestore";
 import { ChangeAvatar } from "../services/ChangeAvatar";
 import { ChangeBio } from "../services/ChangeBio";
+import { GetMyPostsFromFirestore } from "../../Posts/services/GetMyPostsFromFirestore";
+import { ActiveFilter, CustomClass } from "../../Posts/slices/editSlice";
+
 export type Post = {
-  author: string;
+  id: string;
   avatar: string;
-  date: string;
-  likes_count: number;
+  author: string;
+  content_url: string;
+  createdAt: number;
   caption: string;
-  post_img_url: string;
-  id: number;
+  likes_count: number;
+  editValue: {
+    filter: ActiveFilter;
+    customClass: CustomClass;
+  };
 };
 
 type InitialState = {
@@ -70,6 +77,14 @@ const currentUserSlice = createSlice({
       })
       .addCase(ChangeBio.fulfilled, (state, { payload }) => {
         state.bio = payload;
+      })
+      .addCase(GetMyPostsFromFirestore.rejected, (state, { payload }) => {
+        state.error = {
+          message: payload as string,
+        };
+      })
+      .addCase(GetMyPostsFromFirestore.fulfilled, (state, { payload }) => {
+        state.posts = payload;
       });
   },
 });

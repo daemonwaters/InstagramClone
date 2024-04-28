@@ -9,14 +9,17 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { GetUserFromFirestore } from "../../features/Users/services/GetUserFromFirestore";
 import Error from "../../components/Error/Error";
+import { GetSuggestions } from "../../features/Users/services/GetSuggestions";
 
 function Home() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { accessId, hasAccess } = useAppSelector((state) => state.auth);
-  const { avatar_url, username, posts, error } = useAppSelector(
+  const { avatar_url, username, posts, error, uid } = useAppSelector(
     (state) => state.currentUser
   );
+
+  const { suggestedUsers } = useAppSelector((state) => state.suggestion);
 
   useEffect(() => {
     if (!hasAccess) {
@@ -25,10 +28,9 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    if (accessId) {
-      dispatch(GetUserFromFirestore(accessId));
-    }
-  }, [accessId]);
+    dispatch(GetUserFromFirestore(accessId!));
+    dispatch(GetSuggestions(uid));
+  }, []);
 
   if (error) {
     return <Error />;
@@ -45,10 +47,11 @@ function Home() {
             key={post.id}
             user_avatar_url={post.avatar}
             username={post.author}
-            date={post.date}
+            date={post.createdAt}
             likes_count={post.likes_count}
             caption={post.caption}
-            post_img_url={post.post_img_url}
+            post_img_url={post.content_url}
+            editValue={post.editValue}
           />
         ))}
       </main>
@@ -70,7 +73,18 @@ function Home() {
             />
           </header>
           <div className={styles.wrapper}>
-            {/* this is where suggestion blocks go */}
+            {suggestedUsers
+              .filter((user) => user.user_id !== uid)
+              .map((user) => {
+                return (
+                  <PreviewBlock
+                    variant="suggestion"
+                    username={user.username}
+                    avatar_url={user.avatar}
+                    name={"dd"}
+                  />
+                );
+              })}
           </div>
         </div>
       </div>

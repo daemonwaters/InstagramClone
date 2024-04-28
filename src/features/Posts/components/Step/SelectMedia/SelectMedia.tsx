@@ -4,7 +4,8 @@ import Gallery from "../../../../../assets/svgs/gallery.svg";
 import Button from "../../../../../components/Button/Button";
 import { ChangeEventHandler } from "react";
 import { useAppDispatch } from "../../../../../hooks/reduxHooks";
-import { setFile } from "../../../slices/stepSlice";
+import { setPreview } from "../../../slices/stepSlice";
+import { setFile } from "../../../slices/postSlice";
 
 function SelectMedia() {
   const dispatch = useAppDispatch();
@@ -12,7 +13,8 @@ function SelectMedia() {
   const handleInput: ChangeEventHandler<HTMLInputElement> = (event) => {
     const selectedFile = event.target.files?.item(0) as File;
     const previewSrc = URL.createObjectURL(selectedFile);
-    dispatch(setFile({ file: selectedFile, preview_src: previewSrc }));
+    dispatch(setPreview(previewSrc));
+    dispatch(setFile(selectedFile));
   };
 
   return (
@@ -25,6 +27,7 @@ function SelectMedia() {
         </span>
         <div className={styles.input_wrapper}>
           <input
+            accept="image/*"
             type="file"
             name="media-select"
             id="media-select"

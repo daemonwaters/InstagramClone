@@ -6,12 +6,23 @@ import Emoji from "../../../../../assets/svgs/emoji.svg";
 import Location from "../../../../../assets/svgs/Location.svg";
 import ArrowDown from "../../../../../assets/svgs/arrow-down.svg";
 import FilterClasses from "../Edit/Filters.module.scss";
-import { useAppSelector } from "../../../../../hooks/reduxHooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../../../hooks/reduxHooks";
+import { ChangeEventHandler } from "react";
+import { setCaption } from "../../../slices/postSlice";
 function Final() {
+  const dispatch = useAppDispatch();
   const PreviewSrc = useAppSelector((state) => state.step.preview_src);
   const { customClass, activeFilter } = useAppSelector(
     (state) => state.editProcess
   );
+
+  const handleCaption: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
+    dispatch(setCaption(event.target.value));
+  };
+
   return (
     <div className={styles.final}>
       <ModalHeader
@@ -35,13 +46,12 @@ function Final() {
             <span>username</span>
           </div>
           <div className={styles.caption_area}>
-            {/* <input
+            <textarea
+              onChange={handleCaption}
               placeholder="Write a caption..."
-              type="text"
-              name="post-caption"
-              id="post-caption"
-            /> */}
-            <textarea placeholder="Write a caption..." name="" id=""></textarea>
+              name="caption"
+              id="caption"
+            ></textarea>
             <footer className={styles.footer}>
               <img src={Emoji} alt="Emoji" />
               <span className={styles.counter}>0/200</span>

@@ -2,17 +2,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 type InitialState = {
   currentStep: number;
-  file: File | null;
   preview_src: string | null;
 };
 
-type FilePayload = {
-  file: File;
-  preview_src: string;
-};
+type PreviewPayload = string;
+
 const initialState: InitialState = {
   currentStep: 0,
-  file: null,
   preview_src: null,
 };
 
@@ -26,15 +22,18 @@ const stepSlice = createSlice({
     back: (state) => {
       state.currentStep -= 1;
     },
-    setFile: (state, action: PayloadAction<FilePayload>) => {
+    setPreview: (state, action: PayloadAction<PreviewPayload>) => {
       const { payload } = action;
-      state.file = payload.file;
-      state.preview_src = payload.preview_src;
+      state.preview_src = payload;
       state.currentStep += 1;
+    },
+    clearStepProcess: (state) => {
+      state = initialState
     },
   },
 });
 
 const stepSliceReducer = stepSlice.reducer;
 export default stepSliceReducer;
-export const { forward, back, setFile } = stepSlice.actions;
+export const { forward, back, setPreview, clearStepProcess } =
+  stepSlice.actions;

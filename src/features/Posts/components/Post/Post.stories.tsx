@@ -39,6 +39,10 @@ const meta: Meta<typeof Post> = {
       control: "text",
       description: "Caption of the post",
     },
+    editValue: {
+      description:
+        "An object containing additional filters or custom adjustmets made to the image",
+    },
   },
 };
 
@@ -49,9 +53,13 @@ export const Default: Story = {
   args: {
     user_avatar_url: MockAvatar,
     username: "randomuser",
-    date: "1d",
+    date: 200,
     post_img_url: MockPostImg,
     likes_count: 377,
     caption: "Hello this is our first post!",
+    editValue: {
+      filter: "",
+      customClass: {},
+    },
   },
 };

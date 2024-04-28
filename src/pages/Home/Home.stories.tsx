@@ -46,10 +46,11 @@ export const Default: Story = {
           <Post
             user_avatar_url={AvatarMock}
             username="username"
-            date="1d"
+            date={100}
             likes_count={340}
             caption="Wow are components are coming together!"
             post_img_url={MockPostImg}
+            editValue={{ filter: "", customClass: {} }}
           />
         </main>
         <div className={styles.suggestion_section}>

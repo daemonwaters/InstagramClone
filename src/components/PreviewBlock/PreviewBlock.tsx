@@ -26,9 +26,9 @@ function PreviewBlock({
         )}
       </div>
       {variant == "profile" ? (
-        <Button variant="ghost" title="Switch" />
+        <Button type="button" variant="ghost" title="Switch" />
       ) : (
-        <Button variant="ghost" title="Follow" />
+        <Button type="button" variant="ghost" title="Follow" />
       )}
     </div>
   );

@@ -8,8 +8,8 @@ import {
   ActiveTab,
   activateFilter,
   activateTab,
-  setAdjustments,
-  setFilterInteraction,
+  clearAdjustments,
+  clearFilters,
 } from "../../../slices/editSlice";
 import { Filters } from "./Filters";
 import Range from "../../Range/Range";
@@ -33,27 +33,23 @@ const adjustmentsData = [
 
 function Edit() {
   const PreviewSrc = useAppSelector((state) => state.step.preview_src);
-  const {
-    activeTab,
-    activeFilter,
-    adjustments,
-    filtersInteraction,
-    customClass,
-  } = useAppSelector((state) => state.editProcess);
+  const { activeTab, activeFilter, customClass } = useAppSelector(
+    (state) => state.editProcess
+  );
   const dispatch = useAppDispatch();
 
   const handleTabChange = (tab: ActiveTab) => {
     dispatch(activateTab(tab));
+    if (tab == "adjustments") {
+      dispatch(clearFilters());
+    }
+    if (tab == "filters") {
+      dispatch(clearAdjustments());
+    }
   };
 
   const handleFilterSelect = (filterName: ActiveFilter) => {
     dispatch(activateFilter(filterName));
-    if (Object.keys(adjustments).length !== 0) {
-      dispatch(setAdjustments({}));
-    }
-    if (!filtersInteraction) {
-      dispatch(setFilterInteraction(true));
-    }
   };
 
   return (
@@ -67,11 +63,7 @@ function Edit() {
       <div className={styles.body}>
         <div className={styles.preview}>
           <img
-            id={
-              !filtersInteraction
-                ? FilterClasses[""]
-                : FilterClasses[activeFilter]
-            }
+            id={FilterClasses[activeFilter]}
             src={PreviewSrc!}
             alt="Image"
             style={customClass}

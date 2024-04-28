@@ -7,6 +7,11 @@ import {
   doc,
   getDoc,
   setDoc,
+  updateDoc,
+  arrayUnion,
+  query,
+  where,
+  getDocs,
 } from "firebase/firestore";
 import {
   getStorage,
@@ -53,6 +58,11 @@ export {
   uploadBytesResumable,
   getDownloadURL,
   uploadBytes,
+  arrayUnion,
+  updateDoc,
+  getDocs,
+  query,
+  where,
 };
 
 export type { UserCredential };

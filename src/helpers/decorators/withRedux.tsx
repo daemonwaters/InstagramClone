@@ -14,52 +14,73 @@ import PostPlaceholder5 from "../../assets/imgs/tree.jpeg";
 import { Post } from "../../features/Users/slices/currentUserSlice";
 import MockStepSliceReducer from "./withSteps";
 import MockEditSliceReducer from "./withEdit";
+import MockPostSliceReducer from "./withPost";
 
 const MockPosts: Array<Post> = [
   {
     author: "david24",
     avatar: PlaceholderAvatar1,
-    date: "2h",
     likes_count: 24,
+    createdAt: 1000,
     caption: "Awesome day in the nature",
-    post_img_url: PostPlaceholder1,
-    id: 1,
+    content_url: PostPlaceholder1,
+    id: "1",
+    editValue: {
+      filter: "",
+      customClass: {},
+    },
   },
   {
     author: "tds_2002",
     avatar: PlaceholderAvatar2,
-    date: "3h",
     likes_count: 90,
+    createdAt: 2000,
     caption: "Look at this view! I love this season.",
-    post_img_url: PostPlaceholder2,
-    id: 2,
+    content_url: PostPlaceholder2,
+    id: "2",
+    editValue: {
+      filter: "",
+      customClass: {},
+    },
   },
   {
     author: "james123",
     avatar: PlaceholderAvatar3,
-    date: "1d",
     likes_count: 43,
+    createdAt: 3000,
     caption: "Check out my fav car! One day i will buy it.",
-    post_img_url: PostPlaceholder3,
-    id: 3,
+    content_url: PostPlaceholder3,
+    id: "3",
+    editValue: {
+      filter: "",
+      customClass: {},
+    },
   },
   {
     author: "somedude34",
     avatar: PlaceholderAvatar4,
-    date: "2d",
     likes_count: 12,
+    createdAt: 4000,
     caption: "Amazing view of Toronto!",
-    post_img_url: PostPlaceholder4,
-    id: 4,
+    content_url: PostPlaceholder4,
+    id: "4",
+    editValue: {
+      filter: "",
+      customClass: {},
+    },
   },
   {
     author: "jalenx12y",
     avatar: PlaceholderAvatar5,
-    date: "1w",
     likes_count: 200,
+    createdAt: 1000,
     caption: "No Caption , just beauty!",
-    post_img_url: PostPlaceholder5,
-    id: 5,
+    content_url: PostPlaceholder5,
+    id: "5",
+    editValue: {
+      filter: "",
+      customClass: {},
+    },
   },
 ];
 
@@ -95,8 +116,9 @@ const MockStore = configureStore({
   reducer: {
     currentUser: MockCurrentUserSlice.reducer,
     auth: MockAuthSlice.reducer,
-    step : MockStepSliceReducer , 
-    editProcess : MockEditSliceReducer
+    step: MockStepSliceReducer,
+    editProcess: MockEditSliceReducer,
+    post: MockPostSliceReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });
