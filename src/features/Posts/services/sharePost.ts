@@ -35,7 +35,7 @@ export const sharePost = createAsyncThunk(
         posts: arrayUnion(newPost),
       });
 
-      return newPost.id;
+      return newPost
     } catch (error) {
       return rejectWithValue("Failed.There was an erorr uploading your post.");
     }

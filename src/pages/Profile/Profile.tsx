@@ -3,6 +3,7 @@ import Navigation from "../../components/Navigation/Navigation";
 import Avatar, { Variants } from "../../components/Avatar/Avatar";
 import Button from "../../components/Button/Button";
 import Settings from "../../assets/svgs/settings.svg";
+import Dots from "../../assets/svgs/dots.svg";
 import PostsTab from "../../assets/svgs/posts-tab.svg";
 import SavedTab from "../../assets/svgs/bookmark-tab.svg";
 import TaggedTab from "../../assets/svgs/tagged-tab.svg";
@@ -12,23 +13,33 @@ import { useUpload } from "../../hooks/useUpload";
 import { BiEdit } from "react-icons/bi";
 import { FaCheck } from "react-icons/fa6";
 import { ChangeBio } from "../../features/Users/services/ChangeBio";
-import { GetMyPostsFromFirestore } from "../../features/Posts/services/GetMyPostsFromFirestore";
 import FilterClasses from "../../features/Posts/components/Step/Edit/Filters.module.scss";
+import { useParams } from "react-router-dom";
+import { collection, databse, getDocs, query, where } from "../../lib/firebase";
+import { GetUserPreview } from "../../features/Users/services/GetUserPreview";
+import { setPreviewUser } from "../../features/Users/slices/previewSlice";
 function Profile() {
   const {
     username,
-    posts: myPosts,
+    posts,
     avatar_url,
     followers,
     following,
     bio,
+    uid
   } = useAppSelector((state) => state.currentUser);
   const dispatch = useAppDispatch();
   const upload = useUpload();
+  const params = useParams<{ username: string }>();
   const { accessId } = useAppSelector((state) => state.auth);
   const [edit, setEdit] = useState(false);
   const [newBio, setNewBio] = useState<null | string>(null);
-  const { postId } = useAppSelector((state) => state.post);
+  const {
+    error,
+    user: PreviewUser,
+    status,
+  } = useAppSelector((state) => state.preview);
+  // const { postId } = useAppSelector((state) => state.post);
 
   const handleProfileChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const newFile = event.target.files?.item(0) as File;
@@ -44,9 +55,38 @@ function Profile() {
     dispatch(ChangeBio({ new_bio: newBio!, documentId: accessId! }));
   };
 
-  useEffect(() => {
-    dispatch(GetMyPostsFromFirestore(accessId!));
-  }, [postId]);
+  useEffect(()=> {
+    if(username !== params.username){
+      dispatch(GetUserPreview(params.username!))
+    } else {
+      dispatch(setPreviewUser({
+        username,
+        avatar_url,
+        bio,
+        posts,
+        followers,
+        following,
+        uid
+      }))
+    }
+  },[])
+
+  // useEffect(() => {
+  //   dispatch(GetMyPostsFromFirestore(accessId!));
+  // }, [postId]);
+
+  // useEffect(() => {
+  //   const get = async () => {
+  //     const usersRef = collection(databse, "users");
+  //     const q = query(usersRef, where("username", "==", params.username));
+  //     const querySnapshot = await getDocs(q);
+  //     querySnapshot.forEach((doc) => {
+  //       console.log(doc.id, " => ", doc.data());
+  //     });
+  //   };
+
+  //   get();
+  // }, []);
 
   return (
     <div className={styles.profile_page}>
@@ -55,7 +95,10 @@ function Profile() {
         <header>
           <div className={styles.actions}>
             <div className={styles.avatar_wrapper}>
-              <Avatar variant={Variants.profile} src={avatar_url} />
+              <Avatar
+                variant={Variants.profile}
+                src={PreviewUser.avatar_url}
+              />
               <input
                 type="file"
                 name="avatar"
@@ -66,23 +109,45 @@ function Profile() {
             </div>
             <div className={styles.action_wrapper}>
               <div className={styles.upper_row}>
-                <span>{username}</span>
-                <Button
-                  type="button"
-                  variant="secondary"
-                  title="Edit Profile"
+                <span>{PreviewUser.username}</span>
+                {username == params.username ? (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    title="Edit Profile"
+                  />
+                ) : (
+                  <Button type="button" variant="primary" title="Follow" />
+                )}
+
+                {username == params.username ? (
+                  <Button
+                    type="button"
+                    variant="secondary"
+                    title="View archive"
+                  />
+                ) : (
+                  <></>
+                )}
+
+                <img
+                  src={username == params.username ? Settings : Dots}
+                  alt={username == params.username ? "Settings" : "Options"}
                 />
-                <Button
-                  type="button"
-                  variant="secondary"
-                  title="View archive"
-                />
-                <img src={Settings} alt="Settings" />
               </div>
               <div className={styles.profile_info}>
-                <span>{myPosts.length} posts</span>
-                <span>{followers.length} followers</span>
-                <span>{following.length} following</span>
+                <span>
+                  {PreviewUser.posts.length}
+                  posts
+                </span>
+                <span>
+                  {PreviewUser.followers.length}
+                  followers
+                </span>
+                <span>
+                  { PreviewUser.following.length}
+                  following
+                </span>
               </div>
               <div className={styles.bio}>
                 {edit ? (
@@ -97,8 +162,12 @@ function Profile() {
                   </div>
                 ) : (
                   <>
-                    {bio}
-                    <BiEdit onClick={() => setEdit(true)} />
+                    {PreviewUser.bio}
+                    {username == params.username ? (
+                      <BiEdit onClick={() => setEdit(true)} />
+                    ) : (
+                      <></>
+                    )}
                   </>
                 )}
               </div>
@@ -127,7 +196,7 @@ function Profile() {
             </div>
           </nav>
           <div className={styles.content}>
-            {myPosts.map((post) => (
+            {PreviewUser.posts.map((post) => (
               <img
                 style={post.editValue.customClass}
                 id={FilterClasses[post.editValue.filter]}

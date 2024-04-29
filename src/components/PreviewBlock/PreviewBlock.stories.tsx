@@ -1,6 +1,7 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import PreviewBlock from "./PreviewBlock";
 import AvatarMock from "../../assets/svgs/avatarmock.svg";
+import { withRouter } from "storybook-addon-remix-react-router";
 
 const meta: Meta<typeof PreviewBlock> = {
   title: "Components/PreviewBlock",
@@ -28,6 +29,7 @@ const meta: Meta<typeof PreviewBlock> = {
       description: "name of the user in previewblock",
     },
   },
+  decorators : [withRouter]
 };
 
 export default meta;

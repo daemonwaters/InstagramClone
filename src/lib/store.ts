@@ -6,6 +6,7 @@ import modalSliceReducer from "../features/Posts/slices/modalSlice";
 import editSliceReducer from "../features/Posts/slices/editSlice";
 import postSlideReducer from "../features/Posts/slices/postSlice";
 import suggestionSliceReducer from "../features/Users/slices/suggestionSlice";
+import previewSliceReducer from "../features/Users/slices/previewSlice";
 
 const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ const store = configureStore({
     editProcess: editSliceReducer,
     post: postSlideReducer,
     suggestion: suggestionSliceReducer,
+    preview : previewSliceReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

@@ -15,7 +15,7 @@ function Home() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { accessId, hasAccess } = useAppSelector((state) => state.auth);
-  const { avatar_url, username, posts, error, uid } = useAppSelector(
+  const { avatar_url, username, posts, error , uid } = useAppSelector(
     (state) => state.currentUser
   );
 

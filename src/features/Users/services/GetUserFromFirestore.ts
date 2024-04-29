@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getDoc, doc, databse } from "../../../lib/firebase";
+import { getDoc, doc, databse, collection } from "../../../lib/firebase";
 
 export const GetUserFromFirestore = createAsyncThunk(
   "currentUser/getdata",

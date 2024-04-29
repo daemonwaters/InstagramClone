@@ -23,7 +23,7 @@ function ModalHeader({
   const dispatch = useAppDispatch();
   const upload = useUpload();
   const { currentStep } = useAppSelector((state) => state.step);
-  const { postData } = useAppSelector((state) => state.post);
+  const { caption , file } = useAppSelector((state) => state.post);
   const { accessId } = useAppSelector((state) => state.auth);
   const { username, avatar_url } = useAppSelector((state) => state.currentUser);
   const { activeFilter, customClass } = useAppSelector(
@@ -43,13 +43,13 @@ function ModalHeader({
       authorId: accessId!,
       author: username,
       avatar: avatar_url,
-      caption: postData.caption,
+      caption: caption,
       editValue: {
         filter: activeFilter,
         customClass,
       },
     };
-    upload({ action: "post_upload", file: postData.file!, postInfo });
+    upload({ action: "post_upload", file: file!, postInfo });
     dispatch(closeModal());
     dispatch(clearStepProcess())
     dispatch(clearPostData())

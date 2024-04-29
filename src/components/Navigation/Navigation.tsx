@@ -5,7 +5,7 @@ import ListItem from "../ListItem/ListItem";
 import { NavigationData } from "./NavigationData";
 import Overlay from "../Overlay/Overlay";
 import { Link } from "react-router-dom";
-import { useAppDispatch } from "../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { showModal } from "../../features/Posts/slices/modalSlice";
 
 type NavigationProps = {
@@ -14,7 +14,7 @@ type NavigationProps = {
 
 function Navigation({ variant }: NavigationProps) {
   const dispatch = useAppDispatch();
-
+  const { username } = useAppSelector((state) => state.currentUser);
   const handlePostModal = () => {
     dispatch(showModal());
   };
@@ -35,7 +35,13 @@ function Navigation({ variant }: NavigationProps) {
           return (
             <>
               {nav.isLinkedTo ? (
-                <Link to={nav.isLinkedTo}>
+                <Link
+                  to={
+                    nav.isLinkedTo == "/profile"
+                      ? `/profile/${username}`
+                      : nav.isLinkedTo
+                  }
+                >
                   <ListItem
                     key={nav.id}
                     variant={variant == "full-width" ? "default" : "icon-only"}

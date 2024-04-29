@@ -18,7 +18,7 @@ function App() {
           <Route element={<SignIn />} path="/" />
           <Route element={<Home />} path="/home" />
           <Route element={<Inbox />} path="/inbox" />
-          <Route element={<Profile />} path="/profile" />
+          <Route element={<Profile />} path="/profile/:username"/>
         </Routes>
         {showModal ? <Modal /> : <></>}
       </div>

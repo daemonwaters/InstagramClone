@@ -3,8 +3,8 @@ import Placeholder from "../../../assets/imgs/profile-placeholder.jpeg";
 import { GetUserFromFirestore } from "../services/GetUserFromFirestore";
 import { ChangeAvatar } from "../services/ChangeAvatar";
 import { ChangeBio } from "../services/ChangeBio";
-import { GetMyPostsFromFirestore } from "../../Posts/services/GetMyPostsFromFirestore";
 import { ActiveFilter, CustomClass } from "../../Posts/slices/editSlice";
+import { sharePost } from "../../Posts/services/sharePost";
 
 export type Post = {
   id: string;
@@ -20,7 +20,7 @@ export type Post = {
   };
 };
 
-type InitialState = {
+export type InitialState = {
   error: { message: string } | null;
   username: string;
   avatar_url: string;
@@ -31,7 +31,7 @@ type InitialState = {
   uid: string;
 };
 
-const initialState = {
+ export const initialState = {
   error: null,
   username: "",
   avatar_url: Placeholder,
@@ -78,13 +78,13 @@ const currentUserSlice = createSlice({
       .addCase(ChangeBio.fulfilled, (state, { payload }) => {
         state.bio = payload;
       })
-      .addCase(GetMyPostsFromFirestore.rejected, (state, { payload }) => {
+      .addCase(sharePost.rejected, (state, { payload }) => {
         state.error = {
           message: payload as string,
         };
       })
-      .addCase(GetMyPostsFromFirestore.fulfilled, (state, { payload }) => {
-        state.posts = payload;
+      .addCase(sharePost.fulfilled, (state, { payload }) => {
+        state.posts.push(payload)
       });
   },
 });
