@@ -15,7 +15,6 @@ import { FaCheck } from "react-icons/fa6";
 import { ChangeBio } from "../../features/Users/services/ChangeBio";
 import FilterClasses from "../../features/Posts/components/Step/Edit/Filters.module.scss";
 import { useParams } from "react-router-dom";
-import { collection, databse, getDocs, query, where } from "../../lib/firebase";
 import { GetUserPreview } from "../../features/Users/services/GetUserPreview";
 import { setPreviewUser } from "../../features/Users/slices/previewSlice";
 function Profile() {
@@ -35,11 +34,8 @@ function Profile() {
   const [edit, setEdit] = useState(false);
   const [newBio, setNewBio] = useState<null | string>(null);
   const {
-    error,
     user: PreviewUser,
-    status,
   } = useAppSelector((state) => state.preview);
-  // const { postId } = useAppSelector((state) => state.post);
 
   const handleProfileChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const newFile = event.target.files?.item(0) as File;
@@ -70,23 +66,6 @@ function Profile() {
       }))
     }
   },[])
-
-  // useEffect(() => {
-  //   dispatch(GetMyPostsFromFirestore(accessId!));
-  // }, [postId]);
-
-  // useEffect(() => {
-  //   const get = async () => {
-  //     const usersRef = collection(databse, "users");
-  //     const q = query(usersRef, where("username", "==", params.username));
-  //     const querySnapshot = await getDocs(q);
-  //     querySnapshot.forEach((doc) => {
-  //       console.log(doc.id, " => ", doc.data());
-  //     });
-  //   };
-
-  //   get();
-  // }, []);
 
   return (
     <div className={styles.profile_page}>
