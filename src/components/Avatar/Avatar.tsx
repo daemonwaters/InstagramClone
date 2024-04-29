@@ -8,6 +8,7 @@ export enum Variants {
   inboxRow = "56",
   inboxHeader = "44",
   msg = "28",
+  postPreview = "32"
 }
 
 type AvatarProps = {

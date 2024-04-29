@@ -11,7 +11,7 @@ import {
   arrayUnion,
   query,
   where,
-  getDocs
+  getDocs,
 } from "firebase/firestore";
 import {
   getStorage,

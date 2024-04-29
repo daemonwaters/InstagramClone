@@ -17,25 +17,24 @@ import FilterClasses from "../../features/Posts/components/Step/Edit/Filters.mod
 import { useParams } from "react-router-dom";
 import { GetUserPreview } from "../../features/Users/services/GetUserPreview";
 import { setPreviewUser } from "../../features/Users/slices/previewSlice";
+import PostPreview from "../../features/Posts/components/PostPreview/PostPreview";
+import { Post } from "../../features/Users/slices/currentUserSlice";
+import {
+  setPostPreview,
+  showPostPreview,
+} from "../../features/Posts/slices/postPreviewSlice";
+
 function Profile() {
-  const {
-    username,
-    posts,
-    avatar_url,
-    followers,
-    following,
-    bio,
-    uid
-  } = useAppSelector((state) => state.currentUser);
+  const { username, posts, avatar_url, followers, following, bio, uid } =
+    useAppSelector((state) => state.currentUser);
   const dispatch = useAppDispatch();
   const upload = useUpload();
   const params = useParams<{ username: string }>();
   const { accessId } = useAppSelector((state) => state.auth);
   const [edit, setEdit] = useState(false);
   const [newBio, setNewBio] = useState<null | string>(null);
-  const {
-    user: PreviewUser,
-  } = useAppSelector((state) => state.preview);
+  const { user: PreviewUser } = useAppSelector((state) => state.preview);
+  const { isOnScreen } = useAppSelector((state) => state.postPreview);
 
   const handleProfileChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const newFile = event.target.files?.item(0) as File;
@@ -51,21 +50,28 @@ function Profile() {
     dispatch(ChangeBio({ new_bio: newBio!, documentId: accessId! }));
   };
 
-  useEffect(()=> {
-    if(username !== params.username){
-      dispatch(GetUserPreview(params.username!))
+  const handlePostPreview = (post: Post) => {
+    dispatch(setPostPreview(post));
+    dispatch(showPostPreview());
+  };
+
+  useEffect(() => {
+    if (username !== params.username) {
+      dispatch(GetUserPreview(params.username!));
     } else {
-      dispatch(setPreviewUser({
-        username,
-        avatar_url,
-        bio,
-        posts,
-        followers,
-        following,
-        uid
-      }))
+      dispatch(
+        setPreviewUser({
+          username,
+          avatar_url,
+          bio,
+          posts,
+          followers,
+          following,
+          uid,
+        })
+      );
     }
-  },[])
+  }, [params.username]);
 
   return (
     <div className={styles.profile_page}>
@@ -74,10 +80,7 @@ function Profile() {
         <header>
           <div className={styles.actions}>
             <div className={styles.avatar_wrapper}>
-              <Avatar
-                variant={Variants.profile}
-                src={PreviewUser.avatar_url}
-              />
+              <Avatar variant={Variants.profile} src={PreviewUser.avatar_url} />
               <input
                 type="file"
                 name="avatar"
@@ -87,7 +90,10 @@ function Profile() {
               />
             </div>
             <div className={styles.action_wrapper}>
-              <div className={styles.upper_row}>
+              <div
+                id={username !== params.username ? styles["not_admin"] : ""}
+                className={styles.upper_row}
+              >
                 <span>{PreviewUser.username}</span>
                 {username == params.username ? (
                   <Button
@@ -124,7 +130,7 @@ function Profile() {
                   followers
                 </span>
                 <span>
-                  { PreviewUser.following.length}
+                  {PreviewUser.following.length}
                   following
                 </span>
               </div>
@@ -181,11 +187,13 @@ function Profile() {
                 id={FilterClasses[post.editValue.filter]}
                 src={post.content_url}
                 alt={post.caption}
+                onClick={() => handlePostPreview(post)}
               />
             ))}
           </div>
         </div>
       </div>
+      {isOnScreen ? <PostPreview /> : <></>}
     </div>
   );
 }

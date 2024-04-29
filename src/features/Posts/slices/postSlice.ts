@@ -1,14 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { sharePost } from "../services/sharePost";
 
 export type InitialState = {
-    file: File | null;
-    caption: string | "";
+  file: File | null;
+  caption: string | "";
 };
 
 const initialState: InitialState = {
-    file: null,
-    caption: "",
+  file: null,
+  caption: "",
 };
 
 const postSlice = createSlice({
@@ -22,9 +21,9 @@ const postSlice = createSlice({
       state.caption = action.payload;
     },
     clearPostData: (state) => {
-      state =  initialState;
+      state = initialState;
     },
-  }
+  },
 });
 
 const postSlideReducer = postSlice.reducer;

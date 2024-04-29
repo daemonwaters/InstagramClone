@@ -1,0 +1,121 @@
+.preview_modal {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: grid;
+  place-items: center;
+  inset: 0;
+  background: rgba(#343333, 0.4);
+}
+
+.x_button {
+  position: absolute;
+  top: 3%;
+  right: 3%;
+  svg {
+    fill: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+  }
+}
+
+.post_preview {
+  width: 1015px;
+  height: 643px;
+  display: flex;
+  background: #000;
+  color: #fff;
+}
+
+.preview_img {
+  width: 515px;
+  height: 643px;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+}
+
+.preivew_data {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1rem 0.5rem;
+  header {
+    display: flex;
+    align-items: center;
+    height: 70px;
+    gap: 0.5rem;
+    > span {
+      font-weight: 700;
+      font-size: 16px;
+      padding-bottom: 0.4rem;
+    }
+    img {
+      margin-left: auto;
+      cursor: pointer;
+    }
+  }
+}
+
+.comments_and_author {
+  margin-top: 1rem;
+  flex: 1;
+}
+
+.author_section {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  position: relative;
+}
+
+.author_username_and_caption {
+  padding-bottom: 0.4rem;
+  display: flex;
+  gap: 0.5rem;
+
+  .username {
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+  .caption {
+    font-size: 14px;
+  }
+}
+
+.date {
+  position: absolute;
+  left: 12%;
+  top: 53%;
+  color: #a8a8a8;
+}
+
+.actions {
+  margin-bottom: 0.5rem;
+}
+
+.likes_count {
+  margin: 0.5rem 0;
+}
+
+.add_comment {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.5rem;
+  height: 40px;
+  span {
+    color: #a8a8a8;
+  }
+
+  button {
+    margin-left: auto;
+    padding: 0;
+  }
+}

@@ -79,6 +79,13 @@ export const Msg: Story = {
   },
 };
 
+
+export const PostPreview: Story = {
+  args: {
+    variant: Variants.postPreview,
+  },
+};
+
 export const Sizes: Story = {
   render: (args) => (
     <>

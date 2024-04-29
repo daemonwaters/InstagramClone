@@ -5,8 +5,11 @@ import Comment from "../../../../assets/svgs/comment.svg";
 import Direct from "../../../../assets/svgs/direct.svg";
 import Bookmark from "../../../../assets/svgs/bookmark.svg";
 import { useState } from "react";
+type ActionProps = {
+  extraStyles?: {};
+};
 
-function Actions() {
+function Actions({ extraStyles = {} }: ActionProps) {
   const [liked, setLiked] = useState<boolean>(false);
 
   const handleClick = () => {
@@ -14,7 +17,7 @@ function Actions() {
   };
 
   return (
-    <div className={styles.actions}>
+    <div style={extraStyles} className={styles.actions}>
       <img
         data-testid={liked ? "liked" : "notliked"}
         onClick={handleClick}

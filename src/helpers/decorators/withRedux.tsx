@@ -15,6 +15,8 @@ import { Post } from "../../features/Users/slices/currentUserSlice";
 import MockStepSliceReducer from "./withSteps";
 import MockEditSliceReducer from "./withEdit";
 import MockPostSliceReducer from "./withPost";
+import MockPostPreviewSliceReducer from "./withPostPreview";
+import MockSuggestionSliceReducer from "./withSuggestion";
 
 const MockPosts: Array<Post> = [
   {
@@ -119,6 +121,8 @@ const MockStore = configureStore({
     step: MockStepSliceReducer,
     editProcess: MockEditSliceReducer,
     post: MockPostSliceReducer,
+    postPreview: MockPostPreviewSliceReducer,
+    suggestion : MockSuggestionSliceReducer
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

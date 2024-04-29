@@ -7,7 +7,7 @@ type SuggestedUser = {
   user_id: string;
 };
 
-type InitialState = {
+export type InitialState = {
   error: { message: string } | null;
   suggestedUsers: Array<SuggestedUser>;
 };
