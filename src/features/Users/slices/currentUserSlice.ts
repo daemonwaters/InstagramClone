@@ -6,6 +6,8 @@ import { ChangeBio } from "../services/ChangeBio";
 import { ActiveFilter, CustomClass } from "../../Posts/slices/editSlice";
 import { sharePost } from "../../Posts/services/sharePost";
 import { DocumentData } from "firebase/firestore";
+import { FollowUser } from "../services/FollowUser";
+import { UnfollowUser } from "../services/UnfollowUser";
 
 export type Post = {
   id: string;
@@ -34,8 +36,8 @@ export type InitialState = {
   avatar_url: string;
   bio: string;
   posts: Array<Post>;
-  following: [];
-  followers: [];
+  following: Array<string>;
+  followers: Array<string>;
   uid: string;
   documentId: string;
 };
@@ -100,6 +102,22 @@ const currentUserSlice = createSlice({
       })
       .addCase(sharePost.fulfilled, (state, { payload }) => {
         state.posts.push(payload);
+      })
+      .addCase(FollowUser.rejected, (state, { payload }) => {
+        state.error = {
+          message: payload as string,
+        };
+      })
+      .addCase(FollowUser.fulfilled, (state, { payload }) => {
+        state.following.push(payload);
+      })
+      .addCase(UnfollowUser.rejected, (state, { payload }) => {
+        state.error = {
+          message: payload as string,
+        };
+      })
+      .addCase(UnfollowUser.fulfilled, (state, { payload }) => {
+        state.following = state.following.filter((id) => id !== payload);
       });
   },
 });

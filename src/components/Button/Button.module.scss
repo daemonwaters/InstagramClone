@@ -1,28 +1,27 @@
-@use '../../StyleGuides' as guide;
+@use "../../StyleGuides" as guide;
 
 .button {
-    outline: none;
-    border: none;
-    border-radius: 7px;
-    display: grid;
-    place-items: center;
-    padding: 0.5rem 1.6rem;
-    font-size: guide.$fs-heading2;
-    color: #fff;
-    font-weight: guide.$fw-bold;
-    cursor: pointer;
-
+  outline: none;
+  border: none;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  padding: 0.5rem 1.6rem;
+  font-size: guide.$fs-heading2;
+  color: #fff;
+  font-weight: guide.$fw-bold;
+  cursor: pointer;
 }
 
 #primary {
-    background: guide.$clr-accent;
+  background: guide.$clr-accent;
 }
 
 #secondary {
-    background: guide.$bg-secondary-btn;
+  background: guide.$bg-secondary-btn;
 }
 
 #ghost {
-    background: transparent;
-    color: guide.$clr-accent;
+  background: transparent;
+  color: guide.$clr-accent;
 }

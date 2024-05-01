@@ -7,6 +7,7 @@ type PreviewBlockProps = {
   avatar_url: string;
   username: string;
   name: string;
+  followers?: string[];
 };
 
 function PreviewBlock({
@@ -14,6 +15,7 @@ function PreviewBlock({
   avatar_url,
   username,
   name,
+  followers,
 }: PreviewBlockProps) {
   const navigate = useNavigate();
 
@@ -28,7 +30,7 @@ function PreviewBlock({
         {variant == "profile" ? (
           <span className={styles.name}>{name}</span>
         ) : (
-          <span className={styles.name}>Followed by someone</span>
+          <span className={styles.name}>{/*change later*/}</span>
         )}
       </div>
       {variant == "profile" ? (

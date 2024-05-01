@@ -22,6 +22,8 @@ import {
   setPostPreview,
   showPostPreview,
 } from "../../features/Posts/slices/postPreviewSlice";
+import { FollowUser } from "../../features/Users/services/FollowUser";
+import { UnfollowUser } from "../../features/Users/services/UnfollowUser";
 
 function Profile() {
   const { username, posts, avatar_url, followers, following, bio } =
@@ -32,9 +34,12 @@ function Profile() {
   const { accessId } = useAppSelector((state) => state.auth);
   const [edit, setEdit] = useState(false);
   const [newBio, setNewBio] = useState<null | string>(null);
-  const [isAdmin, setIsAdmin] = useState(params.username == username);
+  const [isAdmin, setIsAdmin] = useState(params.username === username);
   const { user: PreviewUser } = useAppSelector((state) => state.preview);
   const { isOnScreen } = useAppSelector((state) => state.postPreview);
+  const [isFollowed, setIsFollowed] = useState(
+    following.includes(PreviewUser.documentId)
+  );
 
   const handleProfileChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     const newFile = event.target.files?.item(0) as File;
@@ -55,13 +60,32 @@ function Profile() {
     dispatch(showPostPreview());
   };
 
+  const handleFollow = () => {
+    if (!isFollowed) {
+      dispatch(
+        FollowUser({
+          currentUserId: accessId!,
+          userWhoGetsFollowedId: PreviewUser.documentId,
+          signal: setIsFollowed,
+        })
+      );
+    } else {
+      dispatch(
+        UnfollowUser({
+          currentUserId: accessId!,
+          userWhoGetsUnfollowedId: PreviewUser.documentId,
+          signal: setIsFollowed,
+        })
+      );
+    }
+  };
+
   useEffect(() => {
-    if (!isAdmin) {
+    if (params.username !== username) {
       dispatch(GetUserPreview(params.username!));
     }
-    setIsAdmin(username == params.username);
-    //watch out for this
-  }, [params.username, isOnScreen]);
+    setIsAdmin(username === params.username);
+  }, [params.username, isOnScreen, isFollowed]);
 
   return (
     <div className={styles.profile_page}>
@@ -99,7 +123,22 @@ function Profile() {
                     title="Edit Profile"
                   />
                 ) : (
-                  <Button type="button" variant="primary" title="Follow" />
+                  <Button
+                    onClick={handleFollow}
+                    type="button"
+                    variant={isFollowed ? "secondary" : "primary"}
+                    title={isFollowed ? "Following" : "Follow"}
+                  >
+                    {isFollowed ? (
+                      <>
+                        Following
+                        <FaCheck />
+                        <div className={styles.hover_element}>Unfollow</div>
+                      </>
+                    ) : (
+                      "Follow"
+                    )}
+                  </Button>
                 )}
 
                 {isAdmin ? (

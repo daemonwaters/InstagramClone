@@ -85,6 +85,7 @@ function Home() {
                       username={user.username}
                       avatar_url={user.avatar}
                       name={"dd"}
+                      followers={user.followers}
                     />
                   );
                 })}

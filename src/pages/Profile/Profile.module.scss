@@ -36,6 +36,29 @@
     color: #fff;
     font-weight: 700;
   }
+  button {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    position: relative;
+  }
+}
+
+.hover_element{
+  position: absolute;
+  inset: 0;
+  background: transparent;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ff3a44;
+  opacity: 0;
+  transition: opacity 200ms ease;
+
+  &:hover {
+      opacity: 1;
+  }
 }
 
 #not_admin {
