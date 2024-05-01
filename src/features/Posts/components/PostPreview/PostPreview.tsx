@@ -14,6 +14,7 @@ import {
 import FilterClasses from "../../../Posts/components/Step/Edit/Filters.module.scss";
 import { LikePostInPreview } from "../../services/LikePostInPreview";
 import { UnlikePostInPreview } from "../../services/UnlikePostInPreview";
+import { HowLongAgo } from "../../utils/HowLongAgo";
 
 function PostPreview() {
   const post = useAppSelector((state) => state.postPreview.post);
@@ -23,24 +24,6 @@ function PostPreview() {
   const handleClosePostPreview = () => {
     dispatch(closePostPreview());
     dispatch(clearPostPreview());
-  };
-
-  const getDate = (createdAt: number) => {
-    const gap = new Date().getTime() - createdAt;
-    const day = Math.floor(gap / (1000 * 60 * 60 * 24));
-    const hour = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const min = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
-
-    if (day >= 1) {
-      return `${day}d`;
-    }
-    if (hour >= 1) {
-      return `${hour}h`;
-    }
-    if (min >= 1) {
-      return `${min}m`;
-    }
-    return `just now`;
   };
 
   const handleLikePost = () => {
@@ -89,7 +72,7 @@ function PostPreview() {
                 <span className={styles.username}>{post!.author}</span>
                 <span className={styles.caption}>{post!.caption}</span>
               </div>
-              <span className={styles.date}>{getDate(post!.createdAt)}</span>
+              <span className={styles.date}>{HowLongAgo(post!.createdAt)}</span>
             </div>
           </div>
           <div className={styles.actions}>
