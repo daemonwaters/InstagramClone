@@ -7,12 +7,26 @@ import Bookmark from "../../../../assets/svgs/bookmark.svg";
 import { useState } from "react";
 type ActionProps = {
   extraStyles?: {};
+  likeHandler: () => void;
+  unlikeHandler: () => void;
+  didLike: boolean;
 };
 
-function Actions({ extraStyles = {} }: ActionProps) {
-  const [liked, setLiked] = useState<boolean>(false);
+function Actions({
+  unlikeHandler,
+  likeHandler,
+  extraStyles = {},
+  didLike,
+}: ActionProps) {
+  const [liked, setLiked] = useState<boolean>(didLike);
 
   const handleClick = () => {
+    if (liked) {
+      unlikeHandler();
+    }
+    if (!liked) {
+      likeHandler();
+    }
     setLiked(!liked);
   };
 

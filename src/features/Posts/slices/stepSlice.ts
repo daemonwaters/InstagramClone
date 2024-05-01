@@ -28,7 +28,8 @@ const stepSlice = createSlice({
       state.currentStep += 1;
     },
     clearStepProcess: (state) => {
-      state = initialState
+      state.currentStep = 0;
+      state.preview_src = null;
     },
   },
 });

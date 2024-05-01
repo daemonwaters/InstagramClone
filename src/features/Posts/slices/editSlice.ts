@@ -66,7 +66,9 @@ const editSlice = createSlice({
       state.activeFilter = "";
     },
     clearEditProcess: (state) => {
-      state = initialState;
+      state.activeFilter = "";
+      state.adjustments = {};
+      state.customClass = {};
     },
   },
 });

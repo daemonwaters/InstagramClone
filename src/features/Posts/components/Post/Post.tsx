@@ -12,6 +12,7 @@ type PostProps = {
   post_img_url: string;
   likes_count: number;
   caption: string;
+  authorId: string;
   editValue: {
     filter: ActiveFilter;
     customClass: CustomClass;
@@ -27,6 +28,7 @@ function Post(props: PostProps) {
     likes_count,
     caption,
     editValue,
+    authorId,
   } = props;
 
   return (
@@ -44,7 +46,11 @@ function Post(props: PostProps) {
           alt="Image"
         />
       </div>
-      <Actions />
+      <Actions
+        likeHandler={() => {}}
+        unlikeHandler={() => {}}
+        didLike={false}
+      />
       <div className={styles.meta}>
         <span className={styles.likes}> {likes_count} Likes</span>
         <div className={styles.user_caption}>

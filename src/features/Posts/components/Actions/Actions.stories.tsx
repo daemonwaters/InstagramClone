@@ -1,6 +1,6 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import Actions from "./Actions";
-import { expect, userEvent, within } from "@storybook/test";
+import { expect, fn, userEvent, within } from "@storybook/test";
 
 const meta: Meta<typeof Actions> = {
   title: "Components/Actions",
@@ -17,6 +17,15 @@ const meta: Meta<typeof Actions> = {
       description: "An object containing any extra css styling",
       defaultValue: {},
     },
+    likeHandler: {
+      description: "A function passed down to control like functionality",
+    },
+    unlikeHandler: {
+      description: "A function passed down to control unlike functionality",
+    },
+    didLike: {
+      description: "A boolean describing if the content is liked or not",
+    },
   },
 };
 
@@ -24,20 +33,25 @@ export default meta;
 type Story = StoryObj<typeof Actions>;
 
 export const Default: Story = {
-  render: () => <Actions />,
+  args: {
+    didLike: false,
+    likeHandler: fn(),
+    unlikeHandler: fn(),
+  },
+  render: (args) => <Actions {...args} />,
   play: async ({ canvasElement, step }) => {
     const canvas = within(canvasElement);
 
     await step("The user should click on Like Button", async () => {
-      await userEvent.click(canvas.getByTestId("notliked"));
+      await userEvent.click(canvas.getByAltText("Like"));
     });
 
     await step("The like button should be in active state", async () => {
-      await expect(canvas.getByTestId("liked")).toBeInTheDocument();
+      await expect(canvas.getByAltText("Like")).toBeInTheDocument();
     });
 
     await step("The user should click to undo the like", async () => {
-      await userEvent.click(canvas.getByTestId("liked"));
+      await userEvent.click(canvas.getByAltText("Like"));
     });
   },
 };

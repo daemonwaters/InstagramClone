@@ -1,5 +1,7 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { Post } from "../../Users/slices/currentUserSlice";
+import { LikePostInPreview } from "../services/LikePostInPreview";
+import { UnlikePostInPreview } from "../services/UnlikePostInPreview";
 
 export type InitialState = {
   isOnScreen: boolean;
@@ -27,6 +29,21 @@ const postPreviewSlice = createSlice({
     clearPostPreview: (state) => {
       state = initialState;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(LikePostInPreview.rejected, (_, { payload }) => {
+        console.error(payload);
+      })
+      .addCase(LikePostInPreview.fulfilled, (state) => {
+        state.post!.likes_count += 1;
+      })
+      .addCase(UnlikePostInPreview.rejected, (_, { payload }) => {
+        console.error(payload);
+      })
+      .addCase(UnlikePostInPreview.fulfilled, (state) => {
+        state.post!.likes_count -= 1;
+      });
   },
 });
 

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { getDoc, doc, databse, collection } from "../../../lib/firebase";
+import { getDoc, doc, databse } from "../../../lib/firebase";
 
 export const GetUserFromFirestore = createAsyncThunk(
   "currentUser/getdata",
@@ -9,7 +9,7 @@ export const GetUserFromFirestore = createAsyncThunk(
     try {
       const docSnap = await getDoc(userRef);
       if (docSnap.exists()) {
-        return docSnap.data();
+        return { data: docSnap.data(), documentId: docId };
       } else {
         throw new Error();
       }

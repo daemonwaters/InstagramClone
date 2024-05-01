@@ -1,21 +1,21 @@
+import { useEffect } from "react";
 import styles from "./Home.module.scss";
 import Navigation from "../../components/Navigation/Navigation";
 import StoryContainer from "../../features/Story/components/StoryContainer/StoryContainer";
 import PreviewBlock from "../../components/PreviewBlock/PreviewBlock";
 import Button from "../../components/Button/Button";
-import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import Post from "../../features/Posts/components/Post/Post";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { GetUserFromFirestore } from "../../features/Users/services/GetUserFromFirestore";
 import Error from "../../components/Error/Error";
+import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
+import { useNavigate } from "react-router-dom";
+import { GetUserFromFirestore } from "../../features/Users/services/GetUserFromFirestore";
 import { GetSuggestions } from "../../features/Users/services/GetSuggestions";
 
 function Home() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { accessId, hasAccess } = useAppSelector((state) => state.auth);
-  const { avatar_url, username, posts, error , uid } = useAppSelector(
+  const { avatar_url, username, posts, error, uid } = useAppSelector(
     (state) => state.currentUser
   );
 
@@ -52,6 +52,7 @@ function Home() {
             caption={post.caption}
             post_img_url={post.content_url}
             editValue={post.editValue}
+            authorId={post.authorId}
           />
         ))}
       </main>
@@ -62,31 +63,36 @@ function Home() {
           username={username}
           name={username}
         />
-        <div className={styles.suggestions}>
-          <header>
-            <span>Suggested for you</span>
-            <Button
-              variant="ghost"
-              title="See All"
-              extraStyles={{ color: "#fff" }}
-              type="button"
-            />
-          </header>
-          <div className={styles.wrapper}>
-            {suggestedUsers
-              .filter((user) => user.user_id !== uid)
-              .map((user) => {
-                return (
-                  <PreviewBlock
-                    variant="suggestion"
-                    username={user.username}
-                    avatar_url={user.avatar}
-                    name={"dd"}
-                  />
-                );
-              })}
+        {suggestedUsers.length !== 0 ? (
+          <div className={styles.suggestions}>
+            <header>
+              <span>Suggested for you</span>
+              <Button
+                variant="ghost"
+                title="See All"
+                extraStyles={{ color: "#fff" }}
+                type="button"
+              />
+            </header>
+            <div className={styles.wrapper}>
+              {suggestedUsers
+                .filter((user) => user.user_id !== uid)
+                .map((user) => {
+                  return (
+                    <PreviewBlock
+                      key={user.user_id}
+                      variant="suggestion"
+                      username={user.username}
+                      avatar_url={user.avatar}
+                      name={"dd"}
+                    />
+                  );
+                })}
+            </div>
           </div>
-        </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

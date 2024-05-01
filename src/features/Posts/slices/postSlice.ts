@@ -21,7 +21,8 @@ const postSlice = createSlice({
       state.caption = action.payload;
     },
     clearPostData: (state) => {
-      state = initialState;
+      state.file = null;
+      state.caption = "";
     },
   },
 });

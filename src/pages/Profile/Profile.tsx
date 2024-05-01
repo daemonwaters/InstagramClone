@@ -16,7 +16,6 @@ import { ChangeBio } from "../../features/Users/services/ChangeBio";
 import FilterClasses from "../../features/Posts/components/Step/Edit/Filters.module.scss";
 import { useParams } from "react-router-dom";
 import { GetUserPreview } from "../../features/Users/services/GetUserPreview";
-import { setPreviewUser } from "../../features/Users/slices/previewSlice";
 import PostPreview from "../../features/Posts/components/PostPreview/PostPreview";
 import { Post } from "../../features/Users/slices/currentUserSlice";
 import {
@@ -25,7 +24,7 @@ import {
 } from "../../features/Posts/slices/postPreviewSlice";
 
 function Profile() {
-  const { username, posts, avatar_url, followers, following, bio, uid } =
+  const { username, posts, avatar_url, followers, following, bio } =
     useAppSelector((state) => state.currentUser);
   const dispatch = useAppDispatch();
   const upload = useUpload();
@@ -33,6 +32,7 @@ function Profile() {
   const { accessId } = useAppSelector((state) => state.auth);
   const [edit, setEdit] = useState(false);
   const [newBio, setNewBio] = useState<null | string>(null);
+  const [isAdmin, setIsAdmin] = useState(params.username == username);
   const { user: PreviewUser } = useAppSelector((state) => state.preview);
   const { isOnScreen } = useAppSelector((state) => state.postPreview);
 
@@ -56,22 +56,12 @@ function Profile() {
   };
 
   useEffect(() => {
-    if (username !== params.username) {
+    if (!isAdmin) {
       dispatch(GetUserPreview(params.username!));
-    } else {
-      dispatch(
-        setPreviewUser({
-          username,
-          avatar_url,
-          bio,
-          posts,
-          followers,
-          following,
-          uid,
-        })
-      );
     }
-  }, [params.username]);
+    setIsAdmin(username == params.username);
+    //watch out for this
+  }, [params.username, isOnScreen]);
 
   return (
     <div className={styles.profile_page}>
@@ -80,22 +70,29 @@ function Profile() {
         <header>
           <div className={styles.actions}>
             <div className={styles.avatar_wrapper}>
-              <Avatar variant={Variants.profile} src={PreviewUser.avatar_url} />
-              <input
-                type="file"
-                name="avatar"
-                id="avatar"
-                onChange={handleProfileChange}
-                accept="image/*"
+              <Avatar
+                variant={Variants.profile}
+                src={isAdmin ? avatar_url : PreviewUser.avatar_url}
               />
+              {isAdmin ? (
+                <input
+                  type="file"
+                  name="avatar"
+                  id="avatar"
+                  onChange={handleProfileChange}
+                  accept="image/*"
+                />
+              ) : (
+                <></>
+              )}
             </div>
             <div className={styles.action_wrapper}>
               <div
-                id={username !== params.username ? styles["not_admin"] : ""}
+                id={!isAdmin ? styles["not_admin"] : ""}
                 className={styles.upper_row}
               >
-                <span>{PreviewUser.username}</span>
-                {username == params.username ? (
+                <span>{isAdmin ? username : PreviewUser.username}</span>
+                {isAdmin ? (
                   <Button
                     type="button"
                     variant="secondary"
@@ -105,7 +102,7 @@ function Profile() {
                   <Button type="button" variant="primary" title="Follow" />
                 )}
 
-                {username == params.username ? (
+                {isAdmin ? (
                   <Button
                     type="button"
                     variant="secondary"
@@ -116,21 +113,20 @@ function Profile() {
                 )}
 
                 <img
-                  src={username == params.username ? Settings : Dots}
-                  alt={username == params.username ? "Settings" : "Options"}
+                  src={isAdmin ? Settings : Dots}
+                  alt={isAdmin ? "Settings" : "Options"}
                 />
               </div>
               <div className={styles.profile_info}>
                 <span>
-                  {PreviewUser.posts.length}
-                  posts
+                  {isAdmin ? posts.length : PreviewUser.posts.length} posts
                 </span>
                 <span>
-                  {PreviewUser.followers.length}
+                  {isAdmin ? followers.length : PreviewUser.followers.length}{" "}
                   followers
                 </span>
                 <span>
-                  {PreviewUser.following.length}
+                  {isAdmin ? following.length : PreviewUser.following.length}{" "}
                   following
                 </span>
               </div>
@@ -147,12 +143,8 @@ function Profile() {
                   </div>
                 ) : (
                   <>
-                    {PreviewUser.bio}
-                    {username == params.username ? (
-                      <BiEdit onClick={() => setEdit(true)} />
-                    ) : (
-                      <></>
-                    )}
+                    {isAdmin ? bio : PreviewUser.bio}
+                    {isAdmin ? <BiEdit onClick={() => setEdit(true)} /> : <></>}
                   </>
                 )}
               </div>
@@ -160,7 +152,7 @@ function Profile() {
           </div>
           <div className={styles.highlights}>
             <div className={styles.highlight}>
-              <div>+</div>
+              <div style={{ cursor: !isAdmin ? "default" : "pointer" }}>+</div>
               <span>New</span>
             </div>
           </div>
@@ -181,15 +173,25 @@ function Profile() {
             </div>
           </nav>
           <div className={styles.content}>
-            {PreviewUser.posts.map((post) => (
-              <img
-                style={post.editValue.customClass}
-                id={FilterClasses[post.editValue.filter]}
-                src={post.content_url}
-                alt={post.caption}
-                onClick={() => handlePostPreview(post)}
-              />
-            ))}
+            {isAdmin
+              ? posts.map((post) => (
+                  <img
+                    style={post.editValue.customClass}
+                    id={FilterClasses[post.editValue.filter]}
+                    src={post.content_url}
+                    alt={post.caption}
+                    onClick={() => handlePostPreview(post)}
+                  />
+                ))
+              : PreviewUser.posts.map((post) => (
+                  <img
+                    style={post.editValue.customClass}
+                    id={FilterClasses[post.editValue.filter]}
+                    src={post.content_url}
+                    alt={post.caption}
+                    onClick={() => handlePostPreview(post)}
+                  />
+                ))}
           </div>
         </div>
       </div>

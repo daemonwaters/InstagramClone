@@ -12,6 +12,7 @@ import {
   query,
   where,
   getDocs,
+  arrayRemove,
 } from "firebase/firestore";
 import {
   getStorage,
@@ -63,6 +64,7 @@ export {
   getDocs,
   query,
   where,
+  arrayRemove,
 };
 
 export type { UserCredential };

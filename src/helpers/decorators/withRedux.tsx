@@ -17,6 +17,7 @@ import MockEditSliceReducer from "./withEdit";
 import MockPostSliceReducer from "./withPost";
 import MockPostPreviewSliceReducer from "./withPostPreview";
 import MockSuggestionSliceReducer from "./withSuggestion";
+import MockProfilePreviewSliceReducer from "./withProfilePreview";
 
 const MockPosts: Array<Post> = [
   {
@@ -27,6 +28,8 @@ const MockPosts: Array<Post> = [
     caption: "Awesome day in the nature",
     content_url: PostPlaceholder1,
     id: "1",
+    authorId: "",
+    likedBy: [],
     editValue: {
       filter: "",
       customClass: {},
@@ -40,6 +43,8 @@ const MockPosts: Array<Post> = [
     caption: "Look at this view! I love this season.",
     content_url: PostPlaceholder2,
     id: "2",
+    authorId: "",
+    likedBy: [],
     editValue: {
       filter: "",
       customClass: {},
@@ -53,6 +58,8 @@ const MockPosts: Array<Post> = [
     caption: "Check out my fav car! One day i will buy it.",
     content_url: PostPlaceholder3,
     id: "3",
+    authorId: "",
+    likedBy: [],
     editValue: {
       filter: "",
       customClass: {},
@@ -66,6 +73,8 @@ const MockPosts: Array<Post> = [
     caption: "Amazing view of Toronto!",
     content_url: PostPlaceholder4,
     id: "4",
+    authorId: "",
+    likedBy: [],
     editValue: {
       filter: "",
       customClass: {},
@@ -79,6 +88,8 @@ const MockPosts: Array<Post> = [
     caption: "No Caption , just beauty!",
     content_url: PostPlaceholder5,
     id: "5",
+    authorId: "",
+    likedBy: [],
     editValue: {
       filter: "",
       customClass: {},
@@ -122,7 +133,8 @@ const MockStore = configureStore({
     editProcess: MockEditSliceReducer,
     post: MockPostSliceReducer,
     postPreview: MockPostPreviewSliceReducer,
-    suggestion : MockSuggestionSliceReducer
+    suggestion: MockSuggestionSliceReducer,
+    preview: MockProfilePreviewSliceReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

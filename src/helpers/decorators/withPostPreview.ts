@@ -3,7 +3,7 @@ import { InitialState } from "../../features/Posts/slices/postPreviewSlice";
 import PlaceholderPost from "../../assets/imgs/post-placeholder.avif";
 import MockAvatar from "../../assets/svgs/avatarmock.svg";
 
-const initialState: InitialState = {
+const MockInitialState: InitialState = {
   isOnScreen: false,
   post: {
     id: "123",
@@ -13,6 +13,8 @@ const initialState: InitialState = {
     createdAt: 20,
     caption: "hello this is mock post",
     likes_count: 20,
+    authorId: "12345",
+    likedBy: [],
     editValue: {
       filter: "",
       customClass: {},
@@ -22,7 +24,7 @@ const initialState: InitialState = {
 
 const MockPostPreviewSlice = createSlice({
   name: "postPreview",
-  initialState,
+  initialState: MockInitialState,
   reducers: {},
 });
 

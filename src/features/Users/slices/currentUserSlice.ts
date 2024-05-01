@@ -1,23 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Placeholder from "../../../assets/imgs/profile-placeholder.jpeg";
 import { GetUserFromFirestore } from "../services/GetUserFromFirestore";
 import { ChangeAvatar } from "../services/ChangeAvatar";
 import { ChangeBio } from "../services/ChangeBio";
 import { ActiveFilter, CustomClass } from "../../Posts/slices/editSlice";
 import { sharePost } from "../../Posts/services/sharePost";
+import { DocumentData } from "firebase/firestore";
 
 export type Post = {
   id: string;
   avatar: string;
   author: string;
+  authorId: string;
   content_url: string;
   createdAt: number;
   caption: string;
   likes_count: number;
+  likedBy: Array<string>;
   editValue: {
     filter: ActiveFilter;
     customClass: CustomClass;
   };
+};
+
+type UserPayload = {
+  documentId: string;
+  data: DocumentData;
 };
 
 export type InitialState = {
@@ -29,9 +37,10 @@ export type InitialState = {
   following: [];
   followers: [];
   uid: string;
+  documentId: string;
 };
 
- export const initialState = {
+export const initialState = {
   error: null,
   username: "",
   avatar_url: Placeholder,
@@ -40,6 +49,7 @@ export type InitialState = {
   followers: [],
   following: [],
   uid: "",
+  documentId: "",
 } satisfies InitialState as InitialState;
 
 const currentUserSlice = createSlice({
@@ -53,15 +63,20 @@ const currentUserSlice = createSlice({
           message: payload as string,
         };
       })
-      .addCase(GetUserFromFirestore.fulfilled, (state, { payload }) => {
-        state.username = payload.username;
-        state.avatar_url = payload.avatar_url;
-        state.bio = payload.bio;
-        state.followers = payload.followers;
-        state.following = payload.following;
-        state.uid = payload.uid;
-        state.posts = payload.posts;
-      })
+      .addCase(
+        GetUserFromFirestore.fulfilled,
+        (state, action: PayloadAction<UserPayload>) => {
+          const { data, documentId } = action.payload;
+          state.username = data.username;
+          state.avatar_url = data.avatar_url;
+          state.bio = data.bio;
+          state.followers = data.followers;
+          state.following = data.following;
+          state.uid = data.uid;
+          state.posts = data.posts;
+          state.documentId = documentId;
+        }
+      )
       .addCase(ChangeAvatar.rejected, (state, { payload }) => {
         state.error = {
           message: payload as string,
@@ -84,7 +99,7 @@ const currentUserSlice = createSlice({
         };
       })
       .addCase(sharePost.fulfilled, (state, { payload }) => {
-        state.posts.push(payload)
+        state.posts.push(payload);
       });
   },
 });

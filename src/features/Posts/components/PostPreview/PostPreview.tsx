@@ -12,13 +12,57 @@ import {
   closePostPreview,
 } from "../../slices/postPreviewSlice";
 import FilterClasses from "../../../Posts/components/Step/Edit/Filters.module.scss";
+import { LikePostInPreview } from "../../services/LikePostInPreview";
+import { UnlikePostInPreview } from "../../services/UnlikePostInPreview";
 
 function PostPreview() {
   const post = useAppSelector((state) => state.postPreview.post);
+  const { user } = useAppSelector((state) => state.preview);
+  const currentUserId = useAppSelector((state) => state.auth.accessId);
   const dispatch = useAppDispatch();
   const handleClosePostPreview = () => {
     dispatch(closePostPreview());
     dispatch(clearPostPreview());
+  };
+
+  const getDate = (createdAt: number) => {
+    const gap = new Date().getTime() - createdAt;
+    const day = Math.floor(gap / (1000 * 60 * 60 * 24));
+    const hour = Math.floor((gap % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const min = Math.floor((gap % (1000 * 60 * 60)) / (1000 * 60));
+
+    if (day >= 1) {
+      return `${day}d`;
+    }
+    if (hour >= 1) {
+      return `${hour}h`;
+    }
+    if (min >= 1) {
+      return `${min}m`;
+    }
+    return `just now`;
+  };
+
+  const handleLikePost = () => {
+    dispatch(
+      LikePostInPreview({
+        authorId: post!.authorId,
+        postToUpdate: post!,
+        posts: user.posts,
+        currentUserId: currentUserId!,
+      })
+    );
+  };
+
+  const handleUnlikePost = () => {
+    dispatch(
+      UnlikePostInPreview({
+        authorId: post!.authorId,
+        postToUpdate: post!,
+        posts: user.posts,
+        currentUserId: currentUserId!,
+      })
+    );
   };
 
   return createPortal(
@@ -45,11 +89,16 @@ function PostPreview() {
                 <span className={styles.username}>{post!.author}</span>
                 <span className={styles.caption}>{post!.caption}</span>
               </div>
-              <span className={styles.date}>{post!.createdAt}</span>
+              <span className={styles.date}>{getDate(post!.createdAt)}</span>
             </div>
           </div>
           <div className={styles.actions}>
-            <Actions extraStyles={{ padding: 0 }} />
+            <Actions
+              likeHandler={handleLikePost}
+              unlikeHandler={handleUnlikePost}
+              extraStyles={{ padding: 0 }}
+              didLike={post!.likedBy.includes(currentUserId!)}
+            />
           </div>
           <div className={styles.likes_count}>{post!.likes_count} Likes</div>
           <div className={styles.add_comment}>

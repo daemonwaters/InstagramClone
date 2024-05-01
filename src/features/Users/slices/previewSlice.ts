@@ -3,7 +3,7 @@ import { InitialState as UserInitialStateType } from "../slices/currentUserSlice
 import { GetUserPreview } from "../services/GetUserPreview";
 import Placeholder from "../../../assets/imgs/profile-placeholder.jpeg";
 
-type InitialState = {
+export type InitialState = {
   error: null | { message: string };
   status: "idle" | "fail" | "succuss" | "pending";
   user: Omit<UserInitialStateType, "error">;
@@ -20,17 +20,14 @@ const initialState: InitialState = {
     followers: [],
     following: [],
     uid: "",
+    documentId: "",
   },
 };
 
 const previewSlice = createSlice({
   name: "preview",
   initialState,
-  reducers: {
-    setPreviewUser : (state , {payload})=> {
-        state.user = payload
-    }
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(GetUserPreview.pending, (state) => {
@@ -54,6 +51,7 @@ const previewSlice = createSlice({
             followers: data.followers,
             following: data.following,
             uid: data.uid,
+            documentId: doc.id,
           };
         });
       });
@@ -61,5 +59,4 @@ const previewSlice = createSlice({
 });
 
 const previewSliceReducer = previewSlice.reducer;
-export const {setPreviewUser} = previewSlice.actions
 export default previewSliceReducer;

@@ -22,11 +22,13 @@ export const sharePost = createAsyncThunk(
     const authorRef = doc(databse, "users", authorId);
     const newPost = {
       author,
+      authorId,
       caption,
       content_url,
       avatar,
       createdAt: new Date().getTime(),
       likes_count: 0,
+      likedBy: [],
       id: v4(),
       editValue,
     };
@@ -35,7 +37,7 @@ export const sharePost = createAsyncThunk(
         posts: arrayUnion(newPost),
       });
 
-      return newPost
+      return newPost;
     } catch (error) {
       return rejectWithValue("Failed.There was an erorr uploading your post.");
     }
