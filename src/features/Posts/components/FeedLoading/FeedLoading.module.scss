@@ -1,0 +1,28 @@
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  img {
+    width: 140px;
+    aspect-ratio: 1/1;
+    animation: spin 1.7s linear infinite;
+  }
+  span {
+    color: #fff;
+    font-size: 1.2rem;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

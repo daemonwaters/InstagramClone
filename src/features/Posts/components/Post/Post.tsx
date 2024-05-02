@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import Actions from "../Actions/Actions";
 import FilterClasses from "../Step/Edit/Filters.module.scss";
 import { ActiveFilter, CustomClass } from "../../slices/editSlice";
+import { HowLongAgo } from "../../utils/HowLongAgo";
 
 type PostProps = {
   user_avatar_url: string;
@@ -36,7 +37,7 @@ function Post(props: PostProps) {
       <Header
         user_avatar_url={user_avatar_url}
         username={username}
-        date={`${date}`}
+        date={`${HowLongAgo(date)}`}
       />
       <div className={styles.img_wrapper}>
         <img

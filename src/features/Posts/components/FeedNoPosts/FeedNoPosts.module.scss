@@ -1,0 +1,16 @@
+.wrapper {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  img {
+    width: 300px;
+  }
+  span {
+    color: #fff;
+    font-size: 1rem;
+  }
+}

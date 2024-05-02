@@ -10,6 +10,9 @@ import { useAppDispatch, useAppSelector } from "../../hooks/reduxHooks";
 import { useNavigate } from "react-router-dom";
 import { GetUserFromFirestore } from "../../features/Users/services/GetUserFromFirestore";
 import { GetSuggestions } from "../../features/Users/services/GetSuggestions";
+import { GetFeedPosts } from "../../features/Posts/services/GetFeedPosts";
+import FeedLoading from "../../features/Posts/components/FeedLoading/FeedLoading";
+import FeedNoPosts from "../../features/Posts/components/FeedNoPosts/FeedNoPosts";
 
 function Home() {
   const dispatch = useAppDispatch();
@@ -18,7 +21,7 @@ function Home() {
   const { avatar_url, username, posts, error, uid } = useAppSelector(
     (state) => state.currentUser
   );
-
+  const { status, posts: feed } = useAppSelector((state) => state.feed);
   const { suggestedUsers } = useAppSelector((state) => state.suggestion);
 
   useEffect(() => {
@@ -30,31 +33,49 @@ function Home() {
   useEffect(() => {
     dispatch(GetUserFromFirestore(accessId!));
     dispatch(GetSuggestions(uid));
+    const timeOut = setTimeout(() => {
+      dispatch(GetFeedPosts(accessId!));
+    }, 1000);
+    return () => {
+      clearTimeout(timeOut);
+    };
   }, []);
 
   if (error) {
     return <Error />;
   }
 
+  const handleFeedState = () => {
+    const feedPosts = [...feed, ...posts];
+    if (feedPosts.length == 0 && status == "succuss") {
+      return <FeedNoPosts />;
+    }
+    if (status == "fetching") {
+      return <FeedLoading />;
+    }
+    return feedPosts
+      .reverse()
+      .map((post) => (
+        <Post
+          key={post.id}
+          user_avatar_url={post.avatar}
+          username={post.author}
+          date={post.createdAt}
+          likes_count={post.likes_count}
+          caption={post.caption}
+          post_img_url={post.content_url}
+          editValue={post.editValue}
+          authorId={post.authorId}
+        />
+      ));
+  };
+
   return (
     <div className={styles.home}>
       <Navigation variant="full-width" />
       <main className={styles.main_section}>
         <StoryContainer>{/* this is where stories go */}</StoryContainer>
-
-        {posts.map((post) => (
-          <Post
-            key={post.id}
-            user_avatar_url={post.avatar}
-            username={post.author}
-            date={post.createdAt}
-            likes_count={post.likes_count}
-            caption={post.caption}
-            post_img_url={post.content_url}
-            editValue={post.editValue}
-            authorId={post.authorId}
-          />
-        ))}
+        {handleFeedState()}
       </main>
       <div className={styles.suggestion_section}>
         <PreviewBlock

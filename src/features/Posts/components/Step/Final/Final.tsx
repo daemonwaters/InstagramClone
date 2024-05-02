@@ -1,7 +1,6 @@
 import ModalHeader from "../../ModalHeader/ModalHeader";
 import styles from "./Final.module.scss";
 import Avatar, { Variants } from "../../../../../components/Avatar/Avatar";
-import MockAvatar from "../../../../../assets/svgs/avatarmock.svg";
 import Emoji from "../../../../../assets/svgs/emoji.svg";
 import Location from "../../../../../assets/svgs/Location.svg";
 import ArrowDown from "../../../../../assets/svgs/arrow-down.svg";
@@ -18,6 +17,8 @@ function Final() {
   const { customClass, activeFilter } = useAppSelector(
     (state) => state.editProcess
   );
+  const avatar = useAppSelector((state) => state.currentUser.avatar_url);
+  const captionCount = useAppSelector((state) => state.post.caption);
 
   const handleCaption: ChangeEventHandler<HTMLTextAreaElement> = (event) => {
     dispatch(setCaption(event.target.value));
@@ -42,7 +43,7 @@ function Final() {
         </div>
         <div className={styles.post_info}>
           <div className={styles.username_avatar}>
-            <Avatar variant={Variants.msg} src={MockAvatar} />
+            <Avatar variant={Variants.msg} src={avatar} />
             <span>username</span>
           </div>
           <div className={styles.caption_area}>
@@ -54,7 +55,7 @@ function Final() {
             ></textarea>
             <footer className={styles.footer}>
               <img src={Emoji} alt="Emoji" />
-              <span className={styles.counter}>0/200</span>
+              <span className={styles.counter}>{captionCount.length}/200</span>
             </footer>
           </div>
           <div className={styles.more_settings}>

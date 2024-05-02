@@ -51,6 +51,7 @@ export const Default: Story = {
             caption="Wow are components are coming together!"
             post_img_url={MockPostImg}
             editValue={{ filter: "", customClass: {} }}
+            authorId="345577"
           />
         </main>
         <div className={styles.suggestion_section}>
