@@ -1,6 +1,7 @@
 import type { StoryObj, Meta } from "@storybook/react";
 import Header from "./Header";
 import MockAvatar from "../../../../assets/svgs/avatarmock.svg";
+import { withRouter } from "storybook-addon-remix-react-router";
 
 const meta: Meta<typeof Header> = {
   title: "Components/Header",
@@ -28,6 +29,7 @@ const meta: Meta<typeof Header> = {
       description: "Display when the post was published",
     },
   },
+  decorators: [withRouter],
 };
 
 export default meta;

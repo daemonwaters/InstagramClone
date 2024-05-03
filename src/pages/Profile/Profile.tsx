@@ -24,6 +24,7 @@ import {
 } from "../../features/Posts/slices/postPreviewSlice";
 import { FollowUser } from "../../features/Users/services/FollowUser";
 import { UnfollowUser } from "../../features/Users/services/UnfollowUser";
+import NoPostsInProfile from "../../features/Posts/components/NoPostsInProfile/NoPostsInProfile";
 
 function Profile() {
   const { username, posts, avatar_url, followers, following, bio } =
@@ -211,27 +212,37 @@ function Profile() {
               <span>TAGGED</span>
             </div>
           </nav>
-          <div className={styles.content}>
-            {isAdmin
-              ? posts.map((post) => (
-                  <img
-                    style={post.editValue.customClass}
-                    id={FilterClasses[post.editValue.filter]}
-                    src={post.content_url}
-                    alt={post.caption}
-                    onClick={() => handlePostPreview(post)}
-                  />
-                ))
-              : PreviewUser.posts.map((post) => (
-                  <img
-                    style={post.editValue.customClass}
-                    id={FilterClasses[post.editValue.filter]}
-                    src={post.content_url}
-                    alt={post.caption}
-                    onClick={() => handlePostPreview(post)}
-                  />
-                ))}
-          </div>
+          {posts.length == 0 || PreviewUser.posts.length == 0 ? (
+            <div className={styles.no_content}>
+              <NoPostsInProfile />
+            </div>
+          ) : (
+            <div className={styles.content}>
+              {isAdmin
+                ? [...posts]
+                    .reverse()
+                    .map((post) => (
+                      <img
+                        style={post.editValue.customClass}
+                        id={FilterClasses[post.editValue.filter]}
+                        src={post.content_url}
+                        alt={post.caption}
+                        onClick={() => handlePostPreview(post)}
+                      />
+                    ))
+                : [...PreviewUser.posts]
+                    .reverse()
+                    .map((post) => (
+                      <img
+                        style={post.editValue.customClass}
+                        id={FilterClasses[post.editValue.filter]}
+                        src={post.content_url}
+                        alt={post.caption}
+                        onClick={() => handlePostPreview(post)}
+                      />
+                    ))}
+            </div>
+          )}
         </div>
       </div>
       {isOnScreen ? <PostPreview /> : <></>}

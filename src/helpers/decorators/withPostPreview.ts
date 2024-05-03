@@ -10,7 +10,7 @@ const MockInitialState: InitialState = {
     avatar: MockAvatar,
     author: "James",
     content_url: PlaceholderPost,
-    createdAt: 20,
+    createdAt: new Date().getTime(),
     caption: "hello this is mock post",
     likes_count: 20,
     authorId: "12345",

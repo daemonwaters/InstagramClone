@@ -2,6 +2,7 @@ import type { StoryObj, Meta } from "@storybook/react";
 import Post from "./Post";
 import MockAvatar from "../../../../assets/svgs/avatarmock.svg";
 import MockPostImg from "../../../../assets/imgs/post-placeholder.avif";
+import { withRouter } from "storybook-addon-remix-react-router";
 const meta: Meta<typeof Post> = {
   title: "Components/Post",
   component: Post,
@@ -44,6 +45,7 @@ const meta: Meta<typeof Post> = {
         "An object containing additional filters or custom adjustmets made to the image",
     },
   },
+  decorators: [withRouter],
 };
 
 export default meta;

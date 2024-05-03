@@ -13,19 +13,21 @@ export const LikePostInPreview = createAsyncThunk(
   "postPreview/likePost",
   async (params: Params, { rejectWithValue }) => {
     const authorRef = doc(databse, "users", params.authorId);
+    const postToUpdateIndex = params.posts.findIndex(
+      (post) => post.id == params.postToUpdate.id
+    );
     const existingPosts = params.posts.filter(
       (post) => post.id !== params.postToUpdate.id
     );
+    const newPostsArray = [...existingPosts];
+    newPostsArray.splice(postToUpdateIndex, 0, {
+      ...params.postToUpdate,
+      likes_count: params.postToUpdate.likes_count + 1,
+      likedBy: [...params.postToUpdate.likedBy, params.currentUserId],
+    });
     try {
       await updateDoc(authorRef, {
-        posts: [
-          ...existingPosts,
-          {
-            ...params.postToUpdate,
-            likes_count: params.postToUpdate.likes_count + 1,
-            likedBy: [...params.postToUpdate.likedBy, params.currentUserId],
-          },
-        ],
+        posts: newPostsArray,
       });
     } catch (error) {
       console.log("error from post preview slice" + error);
@@ -33,3 +35,4 @@ export const LikePostInPreview = createAsyncThunk(
     }
   }
 );
+
