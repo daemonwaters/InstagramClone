@@ -17,7 +17,9 @@ function Final() {
   const { customClass, activeFilter } = useAppSelector(
     (state) => state.editProcess
   );
-  const {avatar_url : avatar , username} = useAppSelector((state) => state.currentUser);
+  const { avatar_url: avatar, username } = useAppSelector(
+    (state) => state.currentUser
+  );
   const captionCount = useAppSelector((state) => state.post.caption);
 
   const handleCaption: ChangeEventHandler<HTMLTextAreaElement> = (event) => {

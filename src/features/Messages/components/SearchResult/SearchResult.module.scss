@@ -1,0 +1,24 @@
+.search_result {
+  display: flex;
+  background: transparent;
+  width: 548px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  padding: 0 1rem;
+  .username {
+    color: #fff;
+    font-size: 14px;
+    padding-bottom: 0.6rem;
+  }
+
+  &:hover {
+    background: #3c3c3c;
+  }
+}
+
+#active{
+  background: #3c3c3c;
+}
