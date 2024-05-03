@@ -88,6 +88,54 @@ function Profile() {
     setIsAdmin(username === params.username);
   }, [params.username, isOnScreen, isFollowed]);
 
+  const showPosts = () => {
+    if (isAdmin) {
+      if (posts.length == 0) {
+        return (
+          <div className={styles.no_content}>
+            <NoPostsInProfile />
+          </div>
+        );
+      } else {
+        return (
+          <div className={styles.content}>
+            {[...posts].reverse().map((post) => (
+              <img
+                style={post.editValue.customClass}
+                id={FilterClasses[post.editValue.filter]}
+                src={post.content_url}
+                alt={post.caption}
+                onClick={() => handlePostPreview(post)}
+              />
+            ))}
+          </div>
+        );
+      }
+    } else {
+      if (PreviewUser.posts.length == 0) {
+        return (
+          <div className={styles.no_content}>
+            <NoPostsInProfile />
+          </div>
+        );
+      } else {
+        return (
+          <div className={styles.content}>
+            {[...PreviewUser.posts].reverse().map((post) => (
+              <img
+                style={post.editValue.customClass}
+                id={FilterClasses[post.editValue.filter]}
+                src={post.content_url}
+                alt={post.caption}
+                onClick={() => handlePostPreview(post)}
+              />
+            ))}
+          </div>
+        );
+      }
+    }
+  };
+
   return (
     <div className={styles.profile_page}>
       <Navigation variant="full-width" />
@@ -212,37 +260,7 @@ function Profile() {
               <span>TAGGED</span>
             </div>
           </nav>
-          {posts.length == 0 || PreviewUser.posts.length == 0 ? (
-            <div className={styles.no_content}>
-              <NoPostsInProfile />
-            </div>
-          ) : (
-            <div className={styles.content}>
-              {isAdmin
-                ? [...posts]
-                    .reverse()
-                    .map((post) => (
-                      <img
-                        style={post.editValue.customClass}
-                        id={FilterClasses[post.editValue.filter]}
-                        src={post.content_url}
-                        alt={post.caption}
-                        onClick={() => handlePostPreview(post)}
-                      />
-                    ))
-                : [...PreviewUser.posts]
-                    .reverse()
-                    .map((post) => (
-                      <img
-                        style={post.editValue.customClass}
-                        id={FilterClasses[post.editValue.filter]}
-                        src={post.content_url}
-                        alt={post.caption}
-                        onClick={() => handlePostPreview(post)}
-                      />
-                    ))}
-            </div>
-          )}
+          {showPosts()}
         </div>
       </div>
       {isOnScreen ? <PostPreview /> : <></>}
