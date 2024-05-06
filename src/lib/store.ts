@@ -9,6 +9,7 @@ import suggestionSliceReducer from "../features/Users/slices/suggestionSlice";
 import previewSliceReducer from "../features/Users/slices/previewSlice";
 import postPreviewSliceReducer from "../features/Posts/slices/postPreviewSlice";
 import feedSliceReducer from "../features/Posts/slices/feedSlice";
+import inboxSliceReducer from "../features/Messages/slices/inboxSlice";
 
 const store = configureStore({
   reducer: {
@@ -22,6 +23,7 @@ const store = configureStore({
     preview: previewSliceReducer,
     postPreview: postPreviewSliceReducer,
     feed: feedSliceReducer,
+    inbox: inboxSliceReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

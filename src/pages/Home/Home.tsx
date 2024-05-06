@@ -66,6 +66,7 @@ function Home() {
           post_img_url={post.content_url}
           editValue={post.editValue}
           authorId={post.authorId}
+          likedBy={post.likedBy}
         />
       ));
   };

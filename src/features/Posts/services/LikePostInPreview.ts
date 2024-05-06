@@ -30,9 +30,7 @@ export const LikePostInPreview = createAsyncThunk(
         posts: newPostsArray,
       });
     } catch (error) {
-      console.log("error from post preview slice" + error);
       return rejectWithValue("Error, Failed to like the post" + error);
     }
   }
 );
-

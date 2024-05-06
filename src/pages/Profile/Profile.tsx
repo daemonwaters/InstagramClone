@@ -226,6 +226,7 @@ function Profile() {
                       type="text"
                       name="edit-bio"
                       id="edit-bio"
+                      autoComplete="off"
                     />
                     <FaCheck onClick={handleChangeBio} />
                   </div>

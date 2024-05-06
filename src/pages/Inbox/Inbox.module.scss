@@ -1,4 +1,22 @@
-.inbox_page{
-    background: #000;
-    display: flex;
+.inbox_page {
+  background: #000;
+  display: flex;
+  position: relative;
+}
+
+.empty {
+  position: absolute;
+  top: 48%;
+  left: 12%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  svg {
+    fill: #a8a8a8;
+    font-size: 3rem;
+  }
+  > span {
+    color: #a8a8a8;
+  }
 }

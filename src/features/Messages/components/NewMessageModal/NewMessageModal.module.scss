@@ -43,7 +43,8 @@
   padding-left: 0.5rem;
   display: flex;
   align-items: center;
-  border: solid 1px #3c3a3a;
+  border-top: solid 1px #3c3a3a;
+  border-bottom: solid 1px #3c3a3a;
   > span {
     color: #fff;
   }
@@ -67,6 +68,7 @@
   flex-direction: column;
   padding: 1rem 0;
   gap: 1rem;
+  overflow: scroll;
   > p {
     color: #a8a8a8;
     padding-left: 1rem;

@@ -16,9 +16,31 @@
 
   &:hover {
     background: #3c3c3c;
+    .select_btn {
+      border: solid 1px #fff;
+    }
   }
 }
 
-#active{
+#active {
   background: #3c3c3c;
+}
+
+.select_btn {
+  width: 20px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  background: transparent;
+  border: solid 1px #3c3c3c;
+  margin-left: auto;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  span {
+    width: 13px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    background: #67b5fa;
+    display: inline-block;
+  }
 }

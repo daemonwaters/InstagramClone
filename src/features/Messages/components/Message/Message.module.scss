@@ -13,6 +13,7 @@
   color: #fff;
   padding: 0.6rem;
   border-radius: 100px;
+  position: relative;
 }
 
 #my_message {
@@ -23,4 +24,26 @@
 #contact_message {
   background: #262626;
   margin-right: auto;
+}
+
+.status {
+  position: absolute;
+  img {
+    width: 15px;
+    aspect-ratio: 1/1;
+  }
+  svg {
+    font-size: 0.8rem;
+    fill: #fff;
+  }
+}
+
+#contact_status {
+  left: 100%;
+  bottom: -20%;
+}
+
+#my_status {
+  bottom: -20%;
+  right: -6%;
 }

@@ -4,6 +4,7 @@ import Actions from "../Actions/Actions";
 import FilterClasses from "../Step/Edit/Filters.module.scss";
 import { ActiveFilter, CustomClass } from "../../slices/editSlice";
 import { HowLongAgo } from "../../utils/HowLongAgo";
+import { useAppSelector } from "../../../../hooks/reduxHooks";
 
 type PostProps = {
   user_avatar_url: string;
@@ -12,6 +13,7 @@ type PostProps = {
   //change later to string
   post_img_url: string;
   likes_count: number;
+  likedBy: string[];
   caption: string;
   authorId: string;
   editValue: {
@@ -30,7 +32,10 @@ function Post(props: PostProps) {
     caption,
     editValue,
     authorId,
+    likedBy,
   } = props;
+
+  const currentUserId = useAppSelector((state) => state.auth.accessId);
 
   return (
     <div className={styles.post}>
@@ -50,7 +55,7 @@ function Post(props: PostProps) {
       <Actions
         likeHandler={() => {}}
         unlikeHandler={() => {}}
-        didLike={false}
+        didLike={likedBy.includes(currentUserId!)}
       />
       <div className={styles.meta}>
         <span className={styles.likes}> {likes_count} Likes</span>
