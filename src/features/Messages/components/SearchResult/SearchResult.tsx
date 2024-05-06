@@ -9,13 +9,24 @@ function SearchResult(props: SearchResultProps) {
   const selectedUserId = useAppSelector(
     (state) => state.inbox.selectedUser?.id
   );
+  const rooms = useAppSelector((state) => state.inbox.rooms);
   const dispatch = useAppDispatch();
   const handleSelectResult = () => {
-    dispatch(selectUserToChat(props));
+    if (!rooms.find((room) => room.between.includes(props.username))) {
+      dispatch(selectUserToChat(props));
+    }
   };
 
   return (
-    <div onClick={handleSelectResult} className={styles.search_result}>
+    <div
+      style={{
+        opacity: rooms.find((room) => room.between.includes(props.username))
+          ? 0.4
+          : 1,
+      }}
+      onClick={handleSelectResult}
+      className={styles.search_result}
+    >
       <Avatar variant={Variants.inboxHeader} src={props.avatar} />
       <span className={styles.username}>{props.username}</span>
       <div className={styles.select_btn}>

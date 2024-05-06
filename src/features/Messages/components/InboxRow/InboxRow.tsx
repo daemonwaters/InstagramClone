@@ -1,6 +1,6 @@
 import styles from "./InboxRow.module.scss";
 import Avatar, { Variants } from "../../../../components/Avatar/Avatar";
-import { useAppDispatch } from "../../../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
 import { setChatActivity, setCurrentRoom } from "../../slices/inboxSlice";
 export type InboxRowProps = {
   user_avatar: string;
@@ -10,6 +10,7 @@ export type InboxRowProps = {
 };
 
 function InboxRow({ user_avatar, username, last_msg, id }: InboxRowProps) {
+  const currentRoom = useAppSelector((state) => state.inbox.currentRoom);
   const dispatch = useAppDispatch();
   const handleCurrentRoom = () => {
     dispatch(setCurrentRoom(id));
@@ -17,7 +18,11 @@ function InboxRow({ user_avatar, username, last_msg, id }: InboxRowProps) {
   };
 
   return (
-    <div onClick={handleCurrentRoom} className={styles.inbox_row}>
+    <div
+      id={styles[currentRoom?.roomId == id ? "active" : ""]}
+      onClick={handleCurrentRoom}
+      className={styles.inbox_row}
+    >
       <Avatar src={user_avatar} variant={Variants.inboxRow} />
       <div className={styles.inboxmeta}>
         <span>{username}</span>
