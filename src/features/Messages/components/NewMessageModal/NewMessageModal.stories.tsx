@@ -5,12 +5,14 @@ import X from "../../../../assets/svgs/xbutton.svg";
 import Button from "../../../../components/Button/Button";
 import SearchResult from "../SearchResult/SearchResult";
 import MockAvatar from "../../../../assets/svgs/avatarmock.svg";
+import { withRedux } from "../../../../helpers/decorators/withRedux";
 
 const meta: Meta<typeof NewMessageModal> = {
   title: "Components/NewMessageModal",
   component: NewMessageModal,
   decorators: [
     (story) => <div style={{ position: "relative" }}>{story()}</div>,
+    withRedux,
   ],
 };
 

@@ -25,7 +25,7 @@ const meta: Meta<typeof Profile> = {
     layout: "fullscreen",
     reactRouter: reactRouterParameters({
       routing: {
-        path: "/inbox",
+        path: "/profile",
       },
     }),
   },

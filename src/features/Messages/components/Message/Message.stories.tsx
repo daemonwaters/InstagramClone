@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import Message from "./Message";
 import MockAvatar from "../../../../assets/svgs/avatarmock.svg";
+import { withRedux } from "../../../../helpers/decorators/withRedux";
 
 const meta: Meta<typeof Message> = {
   title: "Components/Message",
@@ -28,6 +29,7 @@ const meta: Meta<typeof Message> = {
       options: ["idle", "pending", "succuss", "fail"],
     },
   },
+  decorators: [withRedux],
 };
 
 export default meta;
@@ -38,7 +40,7 @@ export const MyMessage: Story = {
     message_author: "user1",
     avatar_url: MockAvatar,
     message_text: "Hello there!",
-    status : "succuss"
+    status: "succuss",
   },
 };
 
@@ -47,6 +49,6 @@ export const ContactMessage: Story = {
     message_author: "user2",
     avatar_url: MockAvatar,
     message_text: "Are you ready?",
-    status : "succuss"
+    status: "succuss",
   },
 };

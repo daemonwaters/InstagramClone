@@ -13,6 +13,7 @@ import Preview from "../../../../assets/svgs/chat-preview.svg";
 import MockAvatar from "../../../../assets/svgs/avatarmock.svg";
 import Message from "../Message/Message";
 import * as MessageStories from "../Message/Message.stories";
+import { withRedux } from "../../../../helpers/decorators/withRedux";
 
 export const MockMessages = [
   { ...MessageStories.MyMessage.args },
@@ -32,6 +33,7 @@ const meta: Meta<typeof Chat> = {
         "Specifies if there's an active chat with one of user's inbox contacts ",
     },
   },
+  decorators: [withRedux],
 };
 
 export default meta;

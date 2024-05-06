@@ -23,7 +23,7 @@ export const SendMessage = createAsyncThunk(
           status: "succuss",
         }),
       });
-      return { sender, senderId, content };
+      return roomId;
     } catch (error) {
       return rejectWithValue("Error, Failed to send your message. " + error);
     }

@@ -152,13 +152,16 @@ const inboxSlice = createSlice({
           messageId: "",
         };
       })
-      .addCase(SendMessage.fulfilled, (state) => {
+      .addCase(SendMessage.fulfilled, (state, { payload }) => {
         const filteredMessages = [...state.currentRoom!.messages].filter(
           (msg) => msg.messageId !== state.currentMessage.messageId
         );
         state.currentRoom!.messages = filteredMessages;
         state.currentMessage.status = "succuss";
         state.currentRoom?.messages.push(state.currentMessage);
+        state.rooms
+          .find((room) => room.roomId == payload)
+          ?.messages.push(state.currentMessage);
         state.currentMessage = {
           sender: "",
           senderId: "",

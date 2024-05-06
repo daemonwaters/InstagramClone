@@ -2,6 +2,7 @@ import type { StoryObj, Meta } from "@storybook/react";
 import InboxRowContainer from "./InboxRowContainer";
 import InboxRow from "../InboxRow/InboxRow";
 import MockAvatar from "../../../../assets/svgs/avatarmock.svg";
+import { withRedux } from "../../../../helpers/decorators/withRedux";
 
 const meta: Meta<typeof InboxRowContainer> = {
   title: "Components/InboxRowContainer",
@@ -19,6 +20,7 @@ const meta: Meta<typeof InboxRowContainer> = {
       description: "An array of inbox rows",
     },
   },
+  decorators: [withRedux],
 };
 
 export default meta;

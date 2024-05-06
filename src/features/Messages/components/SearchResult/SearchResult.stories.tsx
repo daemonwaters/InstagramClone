@@ -3,6 +3,7 @@ import SearchResult from "./SearchResult";
 import MockAvatar from "../../../../assets/svgs/avatarmock.svg";
 import Avatar, { Variants } from "../../../../components/Avatar/Avatar";
 import styles from "./SearchResult.module.scss";
+import { withRedux } from "../../../../helpers/decorators/withRedux";
 
 const meta: Meta<typeof SearchResult> = {
   title: "Components/SearchResult",
@@ -10,6 +11,7 @@ const meta: Meta<typeof SearchResult> = {
   parameters: {
     layout: "padded",
   },
+  decorators: [withRedux],
 };
 
 export default meta;

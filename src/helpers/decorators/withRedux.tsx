@@ -18,13 +18,15 @@ import MockPostSliceReducer from "./withPost";
 import MockPostPreviewSliceReducer from "./withPostPreview";
 import MockSuggestionSliceReducer from "./withSuggestion";
 import MockProfilePreviewSliceReducer from "./withProfilePreview";
+import MockInboxSliceReducer from "./withInbox";
+import MockFeedSliceReducer from "./withFeed";
 
 const MockPosts: Array<Post> = [
   {
     author: "david24",
     avatar: PlaceholderAvatar1,
     likes_count: 24,
-    createdAt: 1000,
+    createdAt: new Date().getTime(),
     caption: "Awesome day in the nature",
     content_url: PostPlaceholder1,
     id: "1",
@@ -39,7 +41,7 @@ const MockPosts: Array<Post> = [
     author: "tds_2002",
     avatar: PlaceholderAvatar2,
     likes_count: 90,
-    createdAt: 2000,
+    createdAt: new Date().getTime(),
     caption: "Look at this view! I love this season.",
     content_url: PostPlaceholder2,
     id: "2",
@@ -54,7 +56,7 @@ const MockPosts: Array<Post> = [
     author: "james123",
     avatar: PlaceholderAvatar3,
     likes_count: 43,
-    createdAt: 3000,
+    createdAt: new Date().getTime(),
     caption: "Check out my fav car! One day i will buy it.",
     content_url: PostPlaceholder3,
     id: "3",
@@ -69,7 +71,7 @@ const MockPosts: Array<Post> = [
     author: "somedude34",
     avatar: PlaceholderAvatar4,
     likes_count: 12,
-    createdAt: 4000,
+    createdAt: new Date().getTime(),
     caption: "Amazing view of Toronto!",
     content_url: PostPlaceholder4,
     id: "4",
@@ -84,7 +86,7 @@ const MockPosts: Array<Post> = [
     author: "jalenx12y",
     avatar: PlaceholderAvatar5,
     likes_count: 200,
-    createdAt: 1000,
+    createdAt: new Date().getTime(),
     caption: "No Caption , just beauty!",
     content_url: PostPlaceholder5,
     id: "5",
@@ -99,9 +101,9 @@ const MockPosts: Array<Post> = [
 
 const MockInitialState = {
   error: null,
-  username: "",
+  username: "user1",
   avatar_url: PlaceholderAvatar1,
-  bio: "",
+  bio: "hello im using instagram!",
   posts: MockPosts,
   following: [],
   followers: [],
@@ -135,6 +137,8 @@ const MockStore = configureStore({
     postPreview: MockPostPreviewSliceReducer,
     suggestion: MockSuggestionSliceReducer,
     preview: MockProfilePreviewSliceReducer,
+    inbox: MockInboxSliceReducer,
+    feed: MockFeedSliceReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
 });

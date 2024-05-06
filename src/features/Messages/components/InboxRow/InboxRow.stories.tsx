@@ -4,6 +4,7 @@ import InboxRow from "./InboxRow";
 import styles from "./InboxRow.module.scss";
 import { Variants } from "../../../../components/Avatar/Avatar";
 import Avatar from "../../../../components/Avatar/Avatar";
+import { withRedux } from "../../../../helpers/decorators/withRedux";
 
 const meta: Meta<typeof InboxRow> = {
   title: "Components/InboxRow",
@@ -33,6 +34,7 @@ const meta: Meta<typeof InboxRow> = {
       description: "Unique id of the message",
     },
   },
+  decorators: [withRedux],
 };
 
 export default meta;

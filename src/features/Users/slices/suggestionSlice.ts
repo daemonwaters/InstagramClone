@@ -5,7 +5,6 @@ type SuggestedUser = {
   avatar: string;
   username: string;
   user_id: string;
-  followers: string[];
 };
 
 export type InitialState = {
@@ -36,7 +35,6 @@ const suggestionSlice = createSlice({
             avatar: doc.get("avatar_url"),
             username: doc.get("username"),
             user_id: doc.get("uid"),
-            followers: doc.get("followers"),
           })
         );
         state.suggestedUsers = suggestedUsers;

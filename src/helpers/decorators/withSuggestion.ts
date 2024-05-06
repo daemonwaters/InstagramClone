@@ -7,12 +7,12 @@ const initialState: InitialState = {
   suggestedUsers: [
     {
       avatar: MockAvatar,
-      user_id: "123",
+      user_id: "12345678",
       username: "James",
     },
     {
       avatar: MockAvatar,
-      user_id: "1234",
+      user_id: "87654321",
       username: "Luke",
     },
   ],
