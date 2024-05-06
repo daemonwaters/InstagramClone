@@ -14,9 +14,6 @@ const meta: Meta<typeof Message> = {
       description:
         "An indicator in form of number or string showing the message's author",
     },
-    current_user: {
-      description: "ID of the current user loged in",
-    },
     avatar_url: {
       description:
         "Url of the message author sent alongside other meta data of message",
@@ -24,6 +21,11 @@ const meta: Meta<typeof Message> = {
     message_text: {
       control: "text",
       description: "The text of message",
+    },
+    status: {
+      description: "String describing the current state of the message",
+      control: "select",
+      options: ["idle", "pending", "succuss", "fail"],
     },
   },
 };
@@ -34,17 +36,17 @@ type Story = StoryObj<typeof Message>;
 export const MyMessage: Story = {
   args: {
     message_author: "user1",
-    current_user: "user1",
     avatar_url: MockAvatar,
     message_text: "Hello there!",
+    status : "succuss"
   },
 };
 
 export const ContactMessage: Story = {
   args: {
     message_author: "user2",
-    current_user: "user1",
     avatar_url: MockAvatar,
     message_text: "Are you ready?",
+    status : "succuss"
   },
 };

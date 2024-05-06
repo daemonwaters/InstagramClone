@@ -38,6 +38,9 @@ const meta: Meta<typeof Button> = {
     disable: {
       description: "A boolean specifying if the button needs to be disabled",
     },
+    children: {
+      description: "Element or an array of JSX elements or react node",
+    },
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
@@ -51,7 +54,7 @@ type Story = StoryObj<typeof Button>;
 export const Primary: Story = {
   args: {
     variant: "primary",
-    title: "Button",
+    title: "button",
     onClick: fn(),
   },
 };

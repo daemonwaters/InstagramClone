@@ -24,12 +24,8 @@ const meta: Meta<typeof PreviewBlock> = {
       control: "text",
       description: "username of the user",
     },
-    name: {
-      control: "text",
-      description: "name of the user in previewblock",
-    },
   },
-  decorators : [withRouter]
+  decorators: [withRouter],
 };
 
 export default meta;
@@ -41,7 +37,6 @@ export const Profile: Story = {
     variant: "profile",
     avatar_url: AvatarMock,
     username: "username",
-    name: "name",
   },
 };
 

@@ -58,6 +58,7 @@ export const InboxDefault: Story = {
               user_avatar={MockAvatar}
               username="username"
               last_msg="Hey whats up!"
+              id="123567"
             />
           ))}
         </InboxRowContainer>
@@ -79,6 +80,7 @@ export const InboxActiveChat: Story = {
               user_avatar={MockAvatar}
               username="username"
               last_msg="Hey whats up!"
+              id="47546"
             />
           ))}
         </InboxRowContainer>
@@ -105,10 +107,10 @@ export const InboxActiveChat: Story = {
               <div className={chatStyles.messages_wrapper}>
                 {messages.map((msg) => (
                   <Message
-                    current_user={msg.current_user!}
                     avatar_url={msg.avatar_url!}
                     message_author={msg.message_author!}
                     message_text={msg.message_text!}
+                    status={msg.status!}
                   />
                 ))}
                 <div className={chatStyles.input_wrapper}>
@@ -143,6 +145,7 @@ export const TestCase: Story = {
                 user_avatar={MockAvatar}
                 username="username"
                 last_msg="Hey whats up!"
+                id="3456"
               />
             </div>
           ))}
@@ -171,10 +174,10 @@ export const TestCase: Story = {
                 {messages.map((msg) => (
                   <div data-testid="message">
                     <Message
-                      current_user={msg.current_user!}
                       avatar_url={msg.avatar_url!}
                       message_author={msg.message_author!}
                       message_text={msg.message_text!}
+                      status={msg.status!}
                     />
                   </div>
                 ))}

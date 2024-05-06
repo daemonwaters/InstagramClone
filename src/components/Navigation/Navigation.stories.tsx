@@ -12,7 +12,7 @@ const meta: Meta<typeof Navigation> = {
     variant: {
       control: "inline-radio",
       description:
-        "Specifies the variant of the Navigation component either full-width or decreased",
+        "Specifies the variant of the navigation component either full-width or decreased",
     },
   },
   decorators: [withRedux, withRouter],

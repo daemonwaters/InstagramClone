@@ -31,6 +31,9 @@ const meta: Meta<typeof Input> = {
       description:
         "A function passed down to component handling the change event",
     },
+    isValid: {
+      description: "Piece of state specifying if the input is valid",
+    },
   },
 };
 

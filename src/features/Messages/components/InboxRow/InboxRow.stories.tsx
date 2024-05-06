@@ -29,6 +29,9 @@ const meta: Meta<typeof InboxRow> = {
       control: "text",
       description: "last message sent by the user",
     },
+    id: {
+      description: "Unique id of the message",
+    },
   },
 };
 

@@ -33,6 +33,13 @@ const meta: Meta<typeof ListItem> = {
     hasAvatar: {
       description: "Specifies if the list item has an Avatar instead of icon",
     },
+    id: {
+      description: "unique id of the listItem , optional",
+    },
+    onClick: {
+      description:
+        "A function passed down to component for controlling click event",
+    },
   },
   parameters: {
     layout: "padded",

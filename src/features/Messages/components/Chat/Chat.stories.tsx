@@ -25,7 +25,7 @@ const meta: Meta<typeof Chat> = {
   title: "Components/Chat",
   component: Chat,
   tags: ["autodocs"],
-  excludeStories : ['MockMessages'],
+  excludeStories: ["MockMessages"],
   argTypes: {
     activeChat: {
       description:
@@ -71,10 +71,10 @@ export const ChatActive: Story = {
           <div className={styles.messages_wrapper}>
             {MockMessages.map((msg) => (
               <Message
-                current_user={msg.current_user!}
                 avatar_url={msg.avatar_url!}
                 message_author={msg.message_author!}
                 message_text={msg.message_text!}
+                status={msg.status!}
               />
             ))}
 

@@ -31,10 +31,10 @@ export const withResults: Story = {
           <input type="text" placeholder="Search..." />
         </div>
         <div className={styles.list}>
-          <SearchResult username="Johnny" avatar={MockAvatar} />
-          <SearchResult username="Jack" avatar={MockAvatar} />
-          <SearchResult username="Alex" avatar={MockAvatar} />
-          <SearchResult username="Mark" avatar={MockAvatar} />
+          <SearchResult id="466" username="Johnny" avatar={MockAvatar} />
+          <SearchResult id="246" username="Jack" avatar={MockAvatar} />
+          <SearchResult id="456" username="Alex" avatar={MockAvatar} />
+          <SearchResult id="123" username="Mark" avatar={MockAvatar} />
         </div>
         <footer>
           <Button title="Chat" variant="primary" type="button" />

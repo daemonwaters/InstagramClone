@@ -84,7 +84,6 @@ function Home() {
           variant="profile"
           avatar_url={avatar_url}
           username={username}
-          name={username}
         />
         {suggestedUsers.length !== 0 ? (
           <div className={styles.suggestions}>
@@ -107,8 +106,6 @@ function Home() {
                       variant="suggestion"
                       username={user.username}
                       avatar_url={user.avatar}
-                      name={"dd"}
-                      followers={user.followers}
                     />
                   );
                 })}

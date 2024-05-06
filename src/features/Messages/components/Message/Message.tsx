@@ -9,7 +9,7 @@ export type MessageProps = {
   message_author: string;
   avatar_url: string;
   message_text: string;
-  status: string;
+  status: "idle" | "pending" | "succuss" | "fail";
 };
 
 function Message(props: MessageProps) {

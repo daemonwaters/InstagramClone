@@ -44,14 +44,16 @@ export const Default: Story = {
             ))}
           </StoryContainer>
           <Post
-            user_avatar_url={AvatarMock}
-            username="username"
-            date={100}
+            avatar={AvatarMock}
+            author="username"
+            createdAt={100}
             likes_count={340}
             caption="Wow are components are coming together!"
-            post_img_url={MockPostImg}
+            content_url={MockPostImg}
             editValue={{ filter: "", customClass: {} }}
             authorId="345577"
+            likedBy={[]}
+            id="1234566"
           />
         </main>
         <div className={styles.suggestion_section}>
@@ -59,7 +61,6 @@ export const Default: Story = {
             variant="profile"
             avatar_url={AvatarMock}
             username="username"
-            name="somename"
           />
           <div className={styles.suggestions}>
             <header>
@@ -78,7 +79,6 @@ export const Default: Story = {
                   variant="suggestion"
                   avatar_url={AvatarMock}
                   username="username"
-                  name="somename"
                 />
               ))}
             </div>

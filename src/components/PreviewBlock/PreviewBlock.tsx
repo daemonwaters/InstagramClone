@@ -6,16 +6,12 @@ type PreviewBlockProps = {
   variant: "profile" | "suggestion";
   avatar_url: string;
   username: string;
-  name: string;
-  followers?: string[];
 };
 
 function PreviewBlock({
   variant,
   avatar_url,
   username,
-  name,
-  followers,
 }: PreviewBlockProps) {
   const navigate = useNavigate();
 
@@ -27,11 +23,6 @@ function PreviewBlock({
       <Avatar src={avatar_url} variant={Variants.userPreview} />
       <div className={styles.user_meta}>
         <span className={styles.username}>{username}</span>
-        {variant == "profile" ? (
-          <span className={styles.name}>{name}</span>
-        ) : (
-          <span className={styles.name}>{/*change later*/}</span>
-        )}
       </div>
       {variant == "profile" ? (
         <Button type="button" variant="ghost" title="Switch" />

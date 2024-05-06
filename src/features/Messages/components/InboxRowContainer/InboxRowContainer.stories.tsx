@@ -32,6 +32,7 @@ export const Default: Story = {
           user_avatar={MockAvatar}
           username="username"
           last_msg="Hello there!"
+          id="123"
         />
       ))}
     </InboxRowContainer>
