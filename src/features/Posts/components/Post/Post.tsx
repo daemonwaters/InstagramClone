@@ -12,7 +12,6 @@ type PostProps = {
   avatar: string;
   author: string;
   createdAt: number;
-  //change later to string
   content_url: string;
   likes_count: number;
   likedBy: string[];
@@ -73,7 +72,7 @@ function Post(props: PostProps) {
       <Header
         user_avatar_url={avatar}
         username={author}
-        date={`${HowLongAgo(createdAt)}`}
+        date={HowLongAgo(createdAt)}
       />
       <div className={styles.img_wrapper}>
         <img

@@ -13,6 +13,8 @@ import { GetSuggestions } from "../../features/Users/services/GetSuggestions";
 import { GetFeedPosts } from "../../features/Posts/services/GetFeedPosts";
 import FeedLoading from "../../features/Posts/components/FeedLoading/FeedLoading";
 import FeedNoPosts from "../../features/Posts/components/FeedNoPosts/FeedNoPosts";
+import { MockStories } from "../../features/Story/utils/MockStories";
+import Story from "../../features/Story/components/Story/Story";
 
 function Home() {
   const dispatch = useAppDispatch();
@@ -76,7 +78,11 @@ function Home() {
     <div className={styles.home}>
       <Navigation variant="full-width" />
       <main className={styles.main_section}>
-        <StoryContainer>{/* this is where stories go */}</StoryContainer>
+        <StoryContainer>
+          {MockStories.map((story) => (
+            <Story avatar_url={story.avatar} username={story.username} />
+          ))}
+        </StoryContainer>
         {handleFeedState()}
       </main>
       <div className={styles.suggestion_section}>
