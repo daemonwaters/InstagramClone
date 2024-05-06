@@ -10,11 +10,14 @@ import Heart from "../../../../assets/svgs/heart.svg";
 import Preview from "../../../../assets/svgs/chat-preview.svg";
 import Placeholder from "../../../../assets/imgs/profile-placeholder.jpeg";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
-import { ChangeEventHandler, KeyboardEventHandler } from "react";
+import { ChangeEventHandler, KeyboardEventHandler, useState } from "react";
 import { SendMessage } from "../../services/SendMessage";
 import { setCurrentMessage } from "../../slices/inboxSlice";
 import Message from "../Message/Message";
+import Picker from "emoji-picker-react";
 import { v4 } from "uuid";
+import { MouseDownEvent } from "emoji-picker-react/dist/config/config";
+
 type ChatProps = {
   activeChat: boolean;
 };
@@ -22,6 +25,7 @@ type ChatProps = {
 function Chat({ activeChat }: ChatProps) {
   const dispatch = useAppDispatch();
   const { accessId } = useAppSelector((state) => state.auth);
+  const [isEmoji, setIsEmoji] = useState(false);
   const { uid: currentUserId, username } = useAppSelector(
     (state) => state.currentUser
   );
@@ -34,6 +38,19 @@ function Chat({ activeChat }: ChatProps) {
     (state) => state.inbox.currentMessage
   );
   const currentRoom = useAppSelector((state) => state.inbox.currentRoom);
+
+  const EmojiHandler: MouseDownEvent = (emojiObject) => {
+    dispatch(
+      setCurrentMessage({
+        content: content + emojiObject.emoji,
+        sender: username,
+        senderId: accessId!,
+        status: "idle",
+        messageId: v4(),
+      })
+    );
+    setIsEmoji(false);
+  };
 
   const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     dispatch(
@@ -105,7 +122,22 @@ function Chat({ activeChat }: ChatProps) {
               <></>
             )}
             <div className={styles.input_wrapper}>
-              <img src={Emoji} alt="emoji" />
+              <img
+                onClick={() => setIsEmoji(!isEmoji)}
+                src={Emoji}
+                alt="emoji"
+              />
+              <div className={styles.emoji_wrapper}>
+                {isEmoji ? (
+                  <Picker
+                    skinTonesDisabled
+                    lazyLoadEmojis
+                    onEmojiClick={EmojiHandler}
+                  />
+                ) : (
+                  <></>
+                )}
+              </div>
               <input
                 onKeyDown={handleKeyDown}
                 onChange={handleChange}
