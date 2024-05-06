@@ -57,13 +57,14 @@ function Home() {
       .reverse()
       .map((post) => (
         <Post
+          id={post.id}
           key={post.id}
-          user_avatar_url={post.avatar}
-          username={post.author}
-          date={post.createdAt}
+          avatar={post.avatar}
+          author={post.author}
+          createdAt={post.createdAt}
           likes_count={post.likes_count}
           caption={post.caption}
-          post_img_url={post.content_url}
+          content_url={post.content_url}
           editValue={post.editValue}
           authorId={post.authorId}
           likedBy={post.likedBy}

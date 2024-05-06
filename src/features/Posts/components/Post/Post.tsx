@@ -4,18 +4,21 @@ import Actions from "../Actions/Actions";
 import FilterClasses from "../Step/Edit/Filters.module.scss";
 import { ActiveFilter, CustomClass } from "../../slices/editSlice";
 import { HowLongAgo } from "../../utils/HowLongAgo";
-import { useAppSelector } from "../../../../hooks/reduxHooks";
+import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
+import { LikePostInFeed } from "../../services/LikePstInFeed";
+import { UnlikePostInFeed } from "../../services/UnlikePostInFeed";
 
 type PostProps = {
-  user_avatar_url: string;
-  username: string;
-  date: number;
+  avatar: string;
+  author: string;
+  createdAt: number;
   //change later to string
-  post_img_url: string;
+  content_url: string;
   likes_count: number;
   likedBy: string[];
   caption: string;
   authorId: string;
+  id: string;
   editValue: {
     filter: ActiveFilter;
     customClass: CustomClass;
@@ -24,43 +27,71 @@ type PostProps = {
 
 function Post(props: PostProps) {
   const {
-    user_avatar_url,
-    username,
-    date,
-    post_img_url,
+    avatar,
+    author,
+    createdAt,
+    content_url,
     likes_count,
     caption,
     editValue,
     authorId,
     likedBy,
+    id,
   } = props;
+  const dispatch = useAppDispatch();
+  const currentUserId = useAppSelector((state) => state.auth.accessId)!;
+  const posts = useAppSelector((state) => state.feed.posts);
 
-  const currentUserId = useAppSelector((state) => state.auth.accessId);
+  const LikePost = () => {
+    dispatch(
+      LikePostInFeed({
+        authorId,
+        currentUserId,
+        postToUpdate: {
+          ...props,
+        },
+        posts,
+      })
+    );
+  };
+
+  const UnlikePost = () => {
+    dispatch(
+      UnlikePostInFeed({
+        authorId,
+        currentUserId,
+        postToUpdate: {
+          ...props,
+        },
+        posts,
+      })
+    );
+  };
 
   return (
     <div className={styles.post}>
       <Header
-        user_avatar_url={user_avatar_url}
-        username={username}
-        date={`${HowLongAgo(date)}`}
+        user_avatar_url={avatar}
+        username={author}
+        date={`${HowLongAgo(createdAt)}`}
       />
       <div className={styles.img_wrapper}>
         <img
           id={FilterClasses[editValue.filter]}
           style={editValue.customClass}
-          src={post_img_url}
+          src={content_url}
           alt="Image"
         />
       </div>
       <Actions
-        likeHandler={() => {}}
-        unlikeHandler={() => {}}
+        likeHandler={LikePost}
+        unlikeHandler={UnlikePost}
         didLike={likedBy.includes(currentUserId!)}
       />
       <div className={styles.meta}>
         <span className={styles.likes}> {likes_count} Likes</span>
         <div className={styles.user_caption}>
-          <span>{username} </span>
+          <span>{author} </span>
           {caption}
         </div>
       </div>
