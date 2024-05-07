@@ -10,7 +10,6 @@ type MessageParams = Omit<Message, "status"> & {
 export const SendMessage = createAsyncThunk(
   "inbox/sendMessage",
   async (params: MessageParams, { rejectWithValue }) => {
-    console.log("params " + params.sender);
     const { roomId, sender, senderId, content, messageId } = params;
     const roomRef = doc(databse, "rooms", roomId);
     try {
