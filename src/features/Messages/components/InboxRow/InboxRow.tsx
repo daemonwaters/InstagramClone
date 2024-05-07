@@ -1,11 +1,15 @@
 import styles from "./InboxRow.module.scss";
 import Avatar, { Variants } from "../../../../components/Avatar/Avatar";
 import { useAppDispatch, useAppSelector } from "../../../../hooks/reduxHooks";
-import { setChatActivity, setCurrentRoom } from "../../slices/inboxSlice";
+import {
+  Message,
+  setChatActivity,
+  setCurrentRoom,
+} from "../../slices/inboxSlice";
 export type InboxRowProps = {
   user_avatar: string;
   username: string;
-  last_msg: string;
+  last_msg: Message;
   id: string;
 };
 
@@ -28,7 +32,7 @@ function InboxRow({ user_avatar, username, last_msg, id }: InboxRowProps) {
         <span>{username}</span>
         {last_msg ? (
           <p>
-            {username}: {last_msg}
+            {last_msg.sender}: {last_msg.content}
           </p>
         ) : (
           <></>

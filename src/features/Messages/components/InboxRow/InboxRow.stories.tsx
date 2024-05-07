@@ -27,8 +27,7 @@ const meta: Meta<typeof InboxRow> = {
       description: "A string containing the username",
     },
     last_msg: {
-      control: "text",
-      description: "last message sent by the user",
+      description: "An object containing the info of last message in chat",
     },
     id: {
       description: "Unique id of the message",
@@ -45,7 +44,13 @@ export const Default: Story = {
   args: {
     user_avatar: AvatarMock,
     username: "username",
-    last_msg: "hello there!",
+    last_msg: {
+      sender: "username",
+      senderId: "username123",
+      content: "hey",
+      status: "succuss",
+      messageId: "heyId",
+    },
   },
 };
 
@@ -59,7 +64,7 @@ export const HoverState: Story = {
       <div className={styles.inboxmeta}>
         <span>{args.username}</span>
         <p>
-          {args.username}: {args.last_msg}
+          {args.last_msg.sender}: {args.last_msg.content}
         </p>
       </div>
     </div>

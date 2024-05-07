@@ -37,7 +37,7 @@ function Inbox() {
                 key={targetUser.id}
                 user_avatar={targetUser.avatar}
                 username={targetUser.username}
-                last_msg={room.messages[room.messages.length - 1]?.content}
+                last_msg={room.messages[room.messages.length - 1]}
                 id={room.roomId}
               />
             );
