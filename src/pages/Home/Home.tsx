@@ -56,7 +56,7 @@ function Home() {
       return <FeedLoading />;
     }
     return feedPosts
-      .reverse()
+      .sort((a, b) => b.createdAt - a.createdAt)
       .map((post) => (
         <Post
           id={post.id}

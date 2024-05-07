@@ -32,6 +32,7 @@ const meta: Meta<typeof Home> = {
 export default meta;
 type Story = StoryObj<typeof Home>;
 
+//rewrite to work with redux and decorators
 export const Default: Story = {
   render: () => {
     return (

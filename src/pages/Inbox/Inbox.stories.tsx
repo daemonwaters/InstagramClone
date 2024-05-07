@@ -45,6 +45,7 @@ const meta: Meta<typeof Inbox> = {
 export default meta;
 type Story = StoryObj<typeof Inbox>;
 
+//rewrite to work with redux and decorators
 export const InboxDefault: Story = {
   render: () => {
     const [activeChat] = useState(false);
@@ -129,6 +130,7 @@ export const InboxActiveChat: Story = {
   },
 };
 
+//rewrite to work with redux and decorators
 export const TestCase: Story = {
   render: () => {
     const [activeChat, setActiveChat] = useState(false);

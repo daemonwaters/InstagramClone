@@ -34,6 +34,7 @@ const meta: Meta<typeof Profile> = {
 export default meta;
 type Story = StoryObj<typeof Profile>;
 
+//rewrite to work with redux and decorators
 export const Default: Story = {
   render: () => {
     return (
